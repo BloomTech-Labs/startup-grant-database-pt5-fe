@@ -1,46 +1,19 @@
-import React from 'react';
-import * as firebaseui from 'firebaseui';
+import React, { useEffect, useState } from 'react';
+import { firebase } from '../helpers/index';
 
+const Login = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(false);
+    firebase();
+  }, []);
 
+  return (
+    <div>
+      <div id="firebaseui-auth-container"></div>
+      <div id="loader"></div>
+    </div>
+  );
+};
 
-
-class Login extends React.Component {
-    constructor(){
-        super()
-        this.state ={
-            credentials: {
-                username: '',
-                password: '',
-            }
-        }
-    }
-
-    render(){
-        return(
-            <div>
-                <Form>
-                    <Input
-                    type ="text"
-                    placeholder = "User Name"
-                    name="username"
-                    />
-
-
-
-                <Input
-                type="password"
-                placeholder="Password"
-                name="password"
-                />
-
-                </Form>
-            </div>
-
-        
-        )
-    }
-
-
-
-
-}
+export default Login;
