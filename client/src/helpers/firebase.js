@@ -8,8 +8,8 @@ const firebaseConfig = {
   databaseURL: 'https://startup-grant-database.firebaseio.com',
   projectId: 'startup-grant-database',
   storageBucket: 'startup-grant-database.appspot.com',
-  messagingSenderId: '340541938572',
-  appId: '1:340541938572:web:f199cff64da00843b714a9',
+  messagingSenderId: process.env.REACT_APP_MESSAGIN_SENDER_ID,
+  appId: process.env.REACT_APP__APP_ID,
   measurementId: 'G-7MW7HY093F'
 };
 
