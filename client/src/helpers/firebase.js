@@ -1,6 +1,7 @@
 const firebase = require('firebase');
 const firebaseui = require('firebaseui');
 
+// Web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: 'startup-grant-database.firebaseapp.com',
@@ -12,10 +13,12 @@ const firebaseConfig = {
   measurementId: 'G-7MW7HY093F'
 };
 
+// Initialize the FirebaseUI Widget using Firebase.
 firebase.initializeApp(firebaseConfig);
-
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
+//Specify the FirebaseUI configuration
+//(providers supported and UI customizations as well as success callbacks, etc).
 var uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function(authResult, redirectUrl) {
@@ -48,8 +51,26 @@ var uiConfig = {
   privacyPolicyUrl: '<your-privacy-policy-url>'
 };
 
+//Render the FirebaseUI Auth interface:
+// The start method will wait until the DOM is loaded.
 function wrappedStart() {
   ui.start('#firebaseui-auth-container', uiConfig);
 }
+
+//Manage Users below after sign in/sign up
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    console.log('Display name: ', user.displayName);
+    console.log('Email: ', user.email);
+    console.log('JW Token: ', user.ma);
+    //set token to headers for backend to decode
+    const token = user.ma;
+    localStorage.setItem('authorization', token);
+  } else {
+    // No user is signed in.
+    console.log('Please sign');
+  }
+});
 
 export default wrappedStart;
