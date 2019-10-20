@@ -14,7 +14,7 @@ function App() {
       <br />
       <Link to="/dashboard">DashBoard (Private)</Link>
       <br />
-      <p>Hello world</p>
+      <h1>Hello world</h1>
       <Route path="/login" component={Login} />
 
       {/* protected routes */}

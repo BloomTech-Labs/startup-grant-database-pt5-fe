@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+const firebaseUser = require('firebase');
+
 //Import firebase for sign out button
 const firebase = require('firebase');
 
 const DashBoard = props => {
-  console.log(firebase.auth());
+  //setting state for displaying username and loading
+  const [currentUser, setCurrentUser] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  firebaseUser.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      setCurrentUser(user.displayName);
+      setIsLoading(false);
+    }
+  });
+
   return (
     <div>
-      <h1>You've been authenticated !</h1>
-      <button
-        onClick={e => {
-          props.history.push('/login');
-          firebase.auth().signOut();
-        }}
-      >
-        Sign Out
-      </button>
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div>
+          <h1>Welcome {currentUser}!</h1>
+          <button
+            onClick={e => {
+              props.history.push('/login');
+              firebase.auth().signOut();
+            }}
+          >
+            Sign Out
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -57,23 +57,23 @@ function wrappedStart() {
   ui.start('#firebaseui-auth-container', uiConfig);
 }
 
-//Manage Users below after sign in/sign up but it was moved to the
-//login component to send the request to api using hooks
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    //Get token to pass to headers for PrivateRoute to authenticate user
-    console.log('You are currently logged in!');
-    user.getIdToken().then(token => {
-      //   console.log(token);
-      localStorage.setItem('authorization', token);
-    });
-  } else {
-    // No user is signed in.
-    console.log('You are currently logged out');
+// //Manage Users below after sign in/sign up but it was moved to the
+// //login component to send the request to api using hooks
+// firebase.auth().onAuthStateChanged(function(user) {
+//   if (user) {
+//     // User is signed in.
+//     //Get token to pass to headers for PrivateRoute to authenticate user
+//     console.log('You are currently logged in!');
+//     user.getIdToken().then(token => {
+//       //   console.log(token);
+//       localStorage.setItem('authorization', token);
+//     });
+//   } else {
+//     // No user is signed in.
+//     console.log('You are currently logged out');
 
-    localStorage.removeItem('authorization');
-  }
-});
+//     localStorage.removeItem('authorization');
+//   }
+// });
 
 export default wrappedStart;
