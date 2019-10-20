@@ -9,7 +9,7 @@ const firebaseConfig = {
   projectId: 'startup-grant-database',
   storageBucket: 'startup-grant-database.appspot.com',
   messagingSenderId: process.env.REACT_APP_MESSAGIN_SENDER_ID,
-  appId: process.env.REACT_APP__APP_ID,
+  appId: process.env.REACT_APP_APP_ID,
   measurementId: 'G-7MW7HY093F'
 };
 
@@ -35,7 +35,7 @@ var uiConfig = {
   },
   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
   signInFlow: 'popup',
-  signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInSuccessUrl: '/dashboard',
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -57,19 +57,22 @@ function wrappedStart() {
   ui.start('#firebaseui-auth-container', uiConfig);
 }
 
-//Manage Users below after sign in/sign up
+//Manage Users below after sign in/sign up but it was moved to the
+//login component to send the request to api using hooks
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-    console.log('Display name: ', user.displayName);
-    console.log('Email: ', user.email);
-    console.log('JW Token: ', user.ma);
-    //set token to headers for backend to decode
-    const token = user.ma;
-    localStorage.setItem('authorization', token);
+    //Get token to pass to headers for PrivateRoute to authenticate user
+    console.log('You are currently logged in!');
+    user.getIdToken().then(token => {
+      //   console.log(token);
+      localStorage.setItem('authorization', token);
+    });
   } else {
     // No user is signed in.
-    console.log('Please sign');
+    console.log('You are currently logged out');
+
+    localStorage.removeItem('authorization');
   }
 });
 

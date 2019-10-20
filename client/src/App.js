@@ -1,13 +1,24 @@
 import React from 'react';
 import './App.css';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import Login from './Authentication/Login';
+import DashBoard from './components/DashBoard';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
     <div className="App">
+      <Link to="/">Home</Link>
+      <br />
+      <Link to="/login">Login</Link>
+      <br />
+      <Link to="/dashboard">DashBoard (Private)</Link>
+      <br />
       <p>Hello world</p>
       <Route path="/login" component={Login} />
+
+      {/* protected routes */}
+      <PrivateRoute path="/dashboard" component={DashBoard} />
     </div>
   );
 }
