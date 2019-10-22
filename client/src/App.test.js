@@ -1,9 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import * as rtl from "react-testing-library";
+import "jest-dom/extend-expect";
+import App from "./App";
+import { wrap } from "module";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it("renders 'Hello world' to the DOM", () => {
+  const wrapper = rtl.render(<App />);
+  const smokeScreen = wrapper.queryByText(/hello world/i);
+  expect(smokeScreen).toBeInTheDocument();
 });
