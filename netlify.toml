@@ -1,6 +1,6 @@
 [build]
     base = "client/"
-    publish = "/build/"
+    publish = "build/"
     command = "npm build"
 
 [[redirects]]
@@ -9,4 +9,4 @@
     status = 200
 
 [context.production]
-    command = "npm build"
+    command = "npm run build"
