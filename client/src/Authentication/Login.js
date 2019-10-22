@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import useGlobal from '../store';
+// import useGlobal from '../store';
 import { firebase } from '../helpers/index';
 
 const firebaseUser = require('firebase');
 
 const Login = () => {
   //to use the  action for passing the user data to the api
-  const [globalState, globalActions] = useGlobal();
+//   const [globalState, globalActions] = useGlobal();
 
   useEffect(() => {
     firebase();
