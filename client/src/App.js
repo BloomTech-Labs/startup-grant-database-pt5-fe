@@ -1,9 +1,10 @@
-import React from 'react';
-import './App.css';
-import { Route, Link } from 'react-router-dom';
-import Login from './Authentication/Login';
-import DashBoard from './components/DashBoard';
-import PrivateRoute from './components/PrivateRoute';
+import React from "react";
+import "./App.css";
+import { Route, Link } from "react-router-dom";
+import Login from "./Authentication/Login";
+import DashBoard from "./components/DashBoard";
+import PrivateRoute from "./components/PrivateRoute";
+import UserList from "./components/userList_test";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
       {/* protected routes */}
       <PrivateRoute path="/dashboard" component={DashBoard} />
+      <UserList />
     </div>
   );
 }
