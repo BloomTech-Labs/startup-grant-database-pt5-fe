@@ -25,8 +25,17 @@ const DashBoard = props => {
           <h1>Welcome {currentUser}!</h1>
           <button
             onClick={e => {
-              props.history.push('/login');
-              firebase.auth().signOut();
+              firebase
+                .auth()
+                .signOut()
+                .then(function() {
+                  // Sign-out successful.
+                  props.history.push('/login');
+                })
+                .catch(function(error) {
+                  // An error happened.
+                  console.log('There was an issue while signing out!');
+                });
             }}
           >
             Sign Out
