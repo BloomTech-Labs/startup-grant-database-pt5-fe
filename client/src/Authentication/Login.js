@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 // import useGlobal from '../store';
 import { firebase } from '../helpers/index';
 //importing axios for http request to api
 import axios from 'axios';
 
-const firebaseUser = require('firebase');
+//Requiring only the packages
+const firebaseUser = require('firebase/app');
+require('firebase/auth');
 
 const Login = props => {
-  //State
-  const [isUnauthorized, setIsUnauthorized] = useState(false);
-
   useEffect(() => {
     firebase();
     //HTTP request to API
@@ -25,14 +24,13 @@ const Login = props => {
               .post(`http://localhost:3000/api/login`, token)
               .then(res => {
                 //Succesful login
-                console.log('Successful login', res.status);
+                // console.log('Successful login', res.status);
                 localStorage.setItem('authorization', idToken);
                 props.history.push('/dashboard');
               })
               .catch(err => {
                 //Invalid token
                 console.log('Invalid Token', err);
-                setIsUnauthorized(true);
               });
           })
           .catch(function(error) {
@@ -47,13 +45,13 @@ const Login = props => {
         localStorage.removeItem('firebaseui::rememberedAccounts');
       }
     });
-  }, []);
+  }, [props]);
 
   return (
     <div>
       <div id="firebaseui-auth-container"></div>
       <div id="loader"></div>
-      {isUnauthorized && <h3 className="alert">Unauthorized, try again!</h3>}
+      {/* {isUnauthorized && <h3 className="alert">Unauthorized, try again!</h3>} */}
     </div>
   );
 };
