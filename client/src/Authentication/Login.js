@@ -1,38 +1,60 @@
 import React, { useEffect, useState } from 'react';
 // import useGlobal from '../store';
 import { firebase } from '../helpers/index';
+//importing axios for http request to api
+import axios from 'axios';
 
+//Requiring only the packages
 const firebaseUser = require('firebase');
 
-const Login = () => {
-  //to use the  action for passing the user data to the api
-//   const [globalState, globalActions] = useGlobal();
+const Login = props => {
+  const [requestError, setRequestError] = useState('');
 
   useEffect(() => {
     firebase();
-    //Manage Users below after sign in/sign up but it was moved to the
-    //login component to send the request to api using hooks
-    firebaseUser.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        //Get token to pass to headers for PrivateRoute to authenticate user
-        console.log('You are currently logged in!');
-        user.getIdToken().then(token => {
-          //   console.log(token);
-          localStorage.setItem('authorization', token);
-          //passing the user info to server
-          // globalActions.Login(user);
-        });
+    //HTTP request to API
+    firebaseUser.auth().onAuthStateChanged(function(currentUser) {
+      if (currentUser) {
+        currentUser
+          .getIdToken(/* forceRefresh */ false)
+          .then(function(idToken) {
+            // console.log(idToken);
+            const token = { idToken: idToken };
+            // ...TODO: Update URL after testing
+            axios
+              .post(`${process.env.REACT_APP_API}/api/login`, token)
+              .then(res => {
+                //Succesful login
+                // console.log('Successful login', res.status);
+                localStorage.setItem('authorization', idToken);
+                props.history.push('/dashboard');
+              })
+              .catch(err => {
+                //Invalid token
+                console.log('Invalid Token or DB currently down', err);
+                setRequestError(err.response.status);
+              });
+          })
+          .catch(function(error) {
+            // Handle error
+            console.log('Error occur during last catch http request', error);
+            setRequestError(error.response.status);
+          });
       } else {
-        // No user is signed in.
+        //User is currently logged out.
         console.log('You are currently logged out');
+        //Remove token from headers
         localStorage.removeItem('authorization');
+        localStorage.removeItem('firebaseui::rememberedAccounts');
       }
     });
-  }, []);
+  }, [props]);
 
   return (
     <div>
+      {requestError === 400 && (
+        <h4 className="alert">Unauthorized, try again later.</h4>
+      )}
       <div id="firebaseui-auth-container"></div>
       <div id="loader"></div>
     </div>
