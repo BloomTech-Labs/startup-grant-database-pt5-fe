@@ -1,4 +1,6 @@
-const firebase = require('firebase');
+const firebase = require('firebase/app');
+require('firebase/auth');
+
 const firebaseui = require('firebaseui');
 
 // Web app's Firebase configuration
@@ -25,7 +27,7 @@ var uiConfig = {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
-      return true;
+      return false;
     },
     uiShown: function() {
       // The widget is rendered.
@@ -56,24 +58,5 @@ var uiConfig = {
 function wrappedStart() {
   ui.start('#firebaseui-auth-container', uiConfig);
 }
-
-// //Manage Users below after sign in/sign up but it was moved to the
-// //login component to send the request to api using hooks
-// firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     // User is signed in.
-//     //Get token to pass to headers for PrivateRoute to authenticate user
-//     console.log('You are currently logged in!');
-//     user.getIdToken().then(token => {
-//       //   console.log(token);
-//       localStorage.setItem('authorization', token);
-//     });
-//   } else {
-//     // No user is signed in.
-//     console.log('You are currently logged out');
-
-//     localStorage.removeItem('authorization');
-//   }
-// });
 
 export default wrappedStart;
