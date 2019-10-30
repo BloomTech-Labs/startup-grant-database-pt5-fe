@@ -5,8 +5,7 @@ import { firebase } from '../helpers/index';
 import axios from 'axios';
 
 //Requiring only the packages
-const firebaseUser = require('firebase/app');
-require('firebase/auth');
+const firebaseUser = require('firebase');
 
 const Login = props => {
   const [requestError, setRequestError] = useState('');

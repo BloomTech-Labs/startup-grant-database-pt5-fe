@@ -1,5 +1,4 @@
-const firebase = require('firebase/app');
-require('firebase/auth');
+const firebase = require('firebase');
 
 const firebaseui = require('firebaseui');
 
