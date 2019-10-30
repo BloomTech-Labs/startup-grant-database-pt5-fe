@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // import useGlobal from '../store';
 import { firebase } from '../helpers/index';
 //importing axios for http request to api
@@ -9,6 +9,8 @@ const firebaseUser = require('firebase/app');
 require('firebase/auth');
 
 const Login = props => {
+  const [requestError, setRequestError] = useState('');
+
   useEffect(() => {
     firebase();
     //HTTP request to API
@@ -21,7 +23,7 @@ const Login = props => {
             const token = { idToken: idToken };
             // ...TODO: Update URL after testing
             axios
-              .post(`http://localhost:3000/api/login`, token)
+              .post(`${process.env.REACT_APP_API}/api/login`, token)
               .then(res => {
                 //Succesful login
                 // console.log('Successful login', res.status);
@@ -30,12 +32,14 @@ const Login = props => {
               })
               .catch(err => {
                 //Invalid token
-                console.log('Invalid Token', err);
+                console.log('Invalid Token or DB currently down', err);
+                setRequestError(err.response.status);
               });
           })
           .catch(function(error) {
             // Handle error
             console.log('Error occur during last catch http request', error);
+            setRequestError(error.response.status);
           });
       } else {
         //User is currently logged out.
@@ -49,9 +53,11 @@ const Login = props => {
 
   return (
     <div>
+      {requestError === 400 && (
+        <h4 className="alert">Unauthorized, try again later.</h4>
+      )}
       <div id="firebaseui-auth-container"></div>
       <div id="loader"></div>
-      {/* {isUnauthorized && <h3 className="alert">Unauthorized, try again!</h3>} */}
     </div>
   );
 };
