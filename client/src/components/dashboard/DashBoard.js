@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
+// import SideBar from "./SideBar";
 
 //Import firebase
 const firebase = require("firebase/app");

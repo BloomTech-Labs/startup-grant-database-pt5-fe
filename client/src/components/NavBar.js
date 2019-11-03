@@ -2,7 +2,6 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { Route, Link } from "react-router-dom";
 import Login from "../Authentication/Login";
-import DashBoard from "../components/DashBoard";
 
 const firebase = require("firebase/app");
 require("firebase/auth");

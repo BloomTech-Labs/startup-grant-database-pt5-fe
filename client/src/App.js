@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import DashBoard from "./components/DashBoard";
+import DashBoard from "./components/dashboard/DashBoard";
 // import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
