@@ -14,8 +14,8 @@ import {
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
-    width: "70%",
-    marginLeft: "20%"
+    width: "50%",
+    margin: "0 2%"
   }
 }));
 
