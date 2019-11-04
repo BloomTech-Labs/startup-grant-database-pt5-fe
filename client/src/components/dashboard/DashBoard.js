@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import Button from "@material-ui/core/Button";
-// import SideBar from "./SideBar";
+import SideBar from "./SideBar";
 
 //Import firebase
 const firebase = require("firebase/app");
@@ -25,6 +25,7 @@ const DashBoard = props => {
       ) : (
         <div>
           <h1>Welcome {currentUser}!</h1>
+          <SideBar />
         </div>
       )}
     </div>

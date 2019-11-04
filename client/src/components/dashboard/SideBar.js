@@ -1,59 +1,121 @@
 import React from "react";
-import clsx from "clsx";
-import { Divider, Drawer } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Drawer } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { makeStyles } from "@material-ui/styles";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 
-import SidebarNav from "./SideBarNav";
+const drawerWidth = 240;
 
-const useStyles = makeStyles({
-  drawer: {
-    width: 240
-  },
+const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: "#000000",
-    display: "flex",
-    flexDirection: "column",
-    height: "100%"
+    display: "flex"
   },
-  divider: {
-    margin: "5px"
+  appBar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth
   },
-  nav: {
-    marginBottom: "10px"
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0
+  },
+  drawerPaper: {
+    width: drawerWidth
+  },
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3)
   }
-});
+}));
 
-const SideBar = props => {
-  const { open, variant, onClose, className, ...rest } = props;
+const pages = [
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: <DashboardIcon />
+  },
+  {
+    title: "Settings",
+    href: "/settings",
+    icon: <SettingsIcon />
+  }
+];
+
+function ListItemLink(props) {
+  return <ListItem button component="a" {...props} />;
+}
+
+const SideBar = () => {
   const classes = useStyles();
-  const pages = [
-    {
-      title: "Dashboard",
-      href: "/dashboard",
-      icon: <DashboardIcon />
-    },
-    {
-      title: "Settings",
-      href: "/settings",
-      icon: <SettingsIcon />
-    }
-  ];
 
   return (
-    <Drawer
-      anchor="left"
-      classes={{ paper: classes.drawer }}
-      onClose={onClose}
-      open={open}
-      variant={variant}
-    >
-      <div {...rest} className={clsx(classes.root, className)}>
-        <Divider className={classes.divider} />
-        <SidebarNav className={classes.nav} pages={pages} />
-      </div>
-    </Drawer>
+    <div className={classes.root}>
+      <CssBaseline />
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper
+        }}
+        anchor="left"
+      >
+        <div className={classes.toolbar} />
+        <Divider />
+        <List>
+          {pages.map(page => (
+            <ListItemLink button key={page.title} href={page.href}>
+              <ListItemIcon>{page.icon}</ListItemIcon>
+              <ListItemText primary={page.title} />
+            </ListItemLink>
+          ))}
+        </List>
+        <Divider />
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Typography paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
+          dolor purus non enim praesent elementum facilisis leo vel. Risus at
+          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
+          quisque non tellus. Convallis convallis tellus id interdum velit
+          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
+          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
+          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
+          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
+          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
+          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
+          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
+          faucibus et molestie ac.
+        </Typography>
+        <Typography paragraph>
+          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
+          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
+          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
+          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
+          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
+          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
+          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
+          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
+          morbi tristique senectus et. Adipiscing elit duis tristique
+          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
+          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
+          posuere sollicitudin aliquam ultrices sagittis orci a.
+        </Typography>
+      </main>
+    </div>
   );
 };
 
