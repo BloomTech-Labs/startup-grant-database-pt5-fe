@@ -1,11 +1,12 @@
 import React from "react";
 import SideBar from "./SideBar";
+import AccountDetails from "./AccountDetails";
 
 const Settings = props => {
   return (
     <div>
       <SideBar />
-      <h2>This is the settings page</h2>
+      <AccountDetails />
     </div>
   );
 };
