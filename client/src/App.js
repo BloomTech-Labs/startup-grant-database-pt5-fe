@@ -19,6 +19,9 @@ function App() {
 
       {/* protected routes */}
       <PrivateRoute path="/dashboard" component={DashBoard} />
+
+      {/*Exeception trigger*/} 
+      <button onClick={methodDoesNotExist}>Break the world</button>
     </div>
   );
 }
