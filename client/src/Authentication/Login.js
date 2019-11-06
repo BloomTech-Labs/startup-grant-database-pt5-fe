@@ -23,7 +23,7 @@ const Login = props => {
             const token = { idToken: idToken };
             // ...TODO: Update URL after testing
             axios
-              .post(`${process.env.REACT_APP_API}/api/login`, token)
+              .post(`${process.env.REACT_APP_API}/api/users/login`, token)
               .then(res => {
                 //Succesful login
                 // console.log('Successful login', res.status);

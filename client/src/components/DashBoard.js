@@ -30,7 +30,7 @@ const DashBoard = props => {
                 .signOut()
                 .then(function() {
                   // Sign-out successful.
-                  props.history.push('/login');
+                  window.location.href = '/login';
                 })
                 .catch(function(error) {
                   // An error happened.
