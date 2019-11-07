@@ -1,23 +1,18 @@
-import React from 'react';
-import './App.css';
-import { Route, Link } from 'react-router-dom';
-import Login from './Authentication/Login';
-import DashBoard from './components/DashBoard';
-import PrivateRoute from './components/PrivateRoute';
+import React from "react";
+import "./App.css";
+import { Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import DashBoard from "./components/dashboard/DashBoard";
+import Settings from "./components/dashboard/Settings";
+// import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
     <div className="App">
-      <Link to="/">Home</Link>
-      <br />
-      <Link to="/login">Login</Link>
-      <br />
-      <Link to="/dashboard">DashBoard (Private)</Link>
-      <br />
+      <NavBar />
       <h1>Hello world</h1>
-      <Route path="/login" component={Login} />
-
       {/* protected routes */}
+      <Route path="/settings" component={Settings} />
       <PrivateRoute path="/dashboard" component={DashBoard} />
 
       {/*Exeception trigger*/} 
