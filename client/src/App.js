@@ -5,23 +5,16 @@ import Login from './Authentication/Login';
 import DashBoard from './components/DashBoard';
 import PrivateRoute from './components/PrivateRoute';
 
+import TopBar from './components/scafolding/topbar/topbar.js';
+import PlayArea from '../src/components/scafolding/playarea/playarea.js';
+
+import SearchHolder from './components/PrivateRoute';
+
 function App() {
   return (
     <div className="App">
-      <Link to="/">Home</Link>
-      <br />
-      <Link to="/login">Login</Link>
-      <br />
-      <Link to="/dashboard">DashBoard (Private)</Link>
-      <br />
-      <h1>Hello world</h1>
-      <Route path="/login" component={Login} />
-
-      {/* protected routes */}
-      <PrivateRoute path="/dashboard" component={DashBoard} />
-
-      {/*Exeception trigger*/} 
-      <button onClick={methodDoesNotExist}>Break the world</button>
+      <TopBar />
+      <PlayArea/>
     </div>
   );
 }
