@@ -12,8 +12,11 @@ function App() {
       <NavBar />
       <h1>Hello world</h1>
       {/* protected routes */}
-      <Route path="/dashboard" component={DashBoard} />
       <Route path="/settings" component={Settings} />
+      <PrivateRoute path="/dashboard" component={DashBoard} />
+
+      {/*Exeception trigger*/} 
+      <button onClick={methodDoesNotExist}>Break the world</button>
     </div>
   );
 }
