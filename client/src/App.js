@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import DashBoard from "./components/dashboard/DashBoard";
 import Settings from "./components/dashboard/Settings";
-// import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <PrivateRoute path="/dashboard" component={DashBoard} />
 
       {/*Exeception trigger*/} 
-      <button onClick={methodDoesNotExist}>Break the world</button>
+      {/* <button onClick={methodDoesNotExist}>Break the world</button> */}
     </div>
   );
 }
