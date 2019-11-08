@@ -1,6 +1,9 @@
 import React from "react";
 import "./App.css";
-import { Route } from "react-router-dom";
+
+import { Route, Link } from "react-router-dom";
+import Login from "./Authentication/Login";
+import UserList from "./components/userList_test";
 import NavBar from "./components/NavBar";
 import DashBoard from "./components/dashboard/DashBoard";
 import Settings from "./components/dashboard/Settings";
@@ -14,9 +17,8 @@ function App() {
       {/* protected routes */}
       <Route path="/settings" component={Settings} />
       <PrivateRoute path="/dashboard" component={DashBoard} />
+      <UserList />
 
-      {/*Exeception trigger*/} 
-      {/* <button onClick={methodDoesNotExist}>Break the world</button> */}
     </div>
   );
 }
