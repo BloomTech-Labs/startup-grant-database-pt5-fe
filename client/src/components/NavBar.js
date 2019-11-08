@@ -1,38 +1,48 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import { Route, Link } from "react-router-dom";
-import Login from "../Authentication/Login";
+import React, { useEffect, useState } from 'react';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
-const firebase = require("firebase/app");
-require("firebase/auth");
+const firebase = require('firebase/app');
+require('firebase/auth');
 
 const NavBar = props => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        setIsLogin(true);
+      }
+    });
+  }, []);
+
   return (
     <div>
       <Link to="/">Home</Link>
       <br />
-      <Link to="/login">Login</Link>
-      <br />
       <Link to="/dashboard">DashBoard (Private)</Link>
       <br />
-      <Route path="/login" component={Login} />
-      <Button
-        onClick={e => {
-          firebase
-            .auth()
-            .signOut()
-            .then(function() {
-              // Sign-out successful.
-              props.history.push("/login");
-            })
-            .catch(function(error) {
-              // An error happened.
-              console.log("There was an issue while signing out!");
-            });
-        }}
-      >
-        Sign Out
-      </Button>
+      {isLogin ? (
+        <Button
+          onClick={e => {
+            firebase
+              .auth()
+              .signOut()
+              .then(function() {
+                // Sign-out successful.
+                window.location.href = '/login';
+              })
+              .catch(error => {
+                // An error happened.
+                console.log('There was an issue while signing out!', error);
+              });
+          }}
+        >
+          Sign Out
+        </Button>
+      ) : (
+        <Link to="/login">Login</Link>
+      )}
     </div>
   );
 };
