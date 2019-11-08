@@ -1,0 +1,28 @@
+/* App Top Bar */
+/* @font-face {
+    font-family: 'Lato';
+    src: local('MyFont'), url(./../../.) format('woff');
+  } */
+
+
+.top-bar {
+    display: flex;
+    flex-direction: row;
+    height: 15vh;
+    background-color: #FFFFFF;
+    margin: 0px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+      display: flex;
+      flex-direction: row;
+      margin-right: 10%;
+  }
+
+  .nav-links a {
+      text-decoration: none;
+      margin:0px 10%;
+      color: #000000;
+  }

@@ -1,6 +1,20 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width:100%;
+  /* height: 100vh; */
   text-align: center;
+  margin: 0px;
+  padding: 0px;
 }
+
+
+
+
+
+
 
 .App-logo {
   height: 40vmin;
@@ -24,3 +38,6 @@
 .alert {
   color: red
 }
+
+/* Main page scafolding here */
+
