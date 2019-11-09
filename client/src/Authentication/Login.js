@@ -26,8 +26,8 @@ const Login = props => {
                // console.log(‘User ID’, id);
                localStorage.setItem('id', id);
                // SAVE TOKEN TO LOCAL STORAGE FOR PRIVATE ROUTE
-               localStorage.setItem(‘authorization’, idToken);
-               props.history.push(‘/dashboard’);
+               localStorage.setItem('authorization', idToken);
+               props.history.push('/dashboard');
              })
              .catch(err => {
                //Invalid token
@@ -37,16 +37,16 @@ const Login = props => {
          })
          .catch(function(error) {
            // Handle error
-           console.log(‘Error occur during last catch http request’, error);
+           console.log('Error occur during last catch http request', error);
            setRequestError(error.response.status);
          });
      } else {
        //User is currently logged out.
-       console.log(‘You are currently logged out’);
+       console.log('You are currently logged out');
        //Remove token, firebase and id from local storage after sign out
-       localStorage.removeItem(‘authorization’);
-       localStorage.removeItem(‘firebaseui::rememberedAccounts’);
-       localStorage.removeItem(‘id’);
+       localStorage.removeItem('authorization');
+       localStorage.removeItem('firebaseui::rememberedAccounts');
+       localStorage.removeItem('id');
      }
    });
  }, [props]);
