@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Link } from 'react-router-dom';
-import Login from './Authentication/Login';
-import DashBoard from './components/DashBoard';
-import PrivateRoute from './components/PrivateRoute';
+import './components/search/search.css';
 
 import TopBar from './components/scafolding/topbar/topbar.js';
 import PlayArea from '../src/components/scafolding/playarea/playarea.js';
