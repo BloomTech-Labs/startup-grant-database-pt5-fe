@@ -2,7 +2,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import Login from '../../../Authentication/Login'
 import PrivateRoute from './../../PrivateRoute'
-import DashBoard from './../../DashBoard.js'
+//import DashBoard from './../../DashBoard.js'
 
 
 import './playarea.css'
