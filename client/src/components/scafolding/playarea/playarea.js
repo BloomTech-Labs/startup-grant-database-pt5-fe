@@ -1,22 +1,27 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Login from '../../../Authentication/Login';
 import PrivateRoute from './../../PrivateRoute';
 import Search from './../../search/search.js';
-//import DashBoard from './../../DashBoard.js'
+import DashBoard from '../../dashboard/DashBoard';
+import LandingPage from '../../LandingPage';
+import Settings from '../../dashboard/Settings';
 
-
-import './playarea.css'
+import './playarea.css';
 
 const PlayArea = () => {
-    return (
-        <div className="play-area">
-           <Route path="/login" component={Login} />
-           <Route path="/search" component={Search} />
-      {/* protected routes */}
-      {/* <PrivateRoute path="/dashboard" component={DashBoard} /> */}
-        </div>
-    )
-}
+  return (
+    <div className="play-area">
+      {/* ALL ROUTES */}
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/login" component={Login} />
+      <Route path="/search" component={Search} />
+
+      {/* PROTECTED ROUTES */}
+      <Route path="/settings" component={Settings} />
+      <PrivateRoute path="/dashboard" component={DashBoard} />
+    </div>
+  );
+};
 
 export default PlayArea;
