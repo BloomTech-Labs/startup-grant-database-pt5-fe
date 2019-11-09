@@ -31,18 +31,18 @@ const Login = props => {
              })
              .catch(err => {
                //Invalid token
-               console.log(‘Invalid Token or DB currently down’, err);
+               console.log("Invalid Token or DB currently down", err);
                setRequestError(err.response);
              });
          })
          .catch(function(error) {
            // Handle error
-           console.log('Error occur during last catch http request', error);
+           console.log("Error occur during last catch http request", error);
            setRequestError(error.response.status);
          });
      } else {
        //User is currently logged out.
-       console.log('You are currently logged out');
+       console.log("You are currently logged out");
        //Remove token, firebase and id from local storage after sign out
        localStorage.removeItem('authorization');
        localStorage.removeItem('firebaseui::rememberedAccounts');
