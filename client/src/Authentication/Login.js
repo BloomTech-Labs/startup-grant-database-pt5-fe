@@ -53,7 +53,7 @@ const Login = props => {
  return (
    <div>
      {requestError === 400 && (
-       <h4 className=“alert”>Unauthorized, try again later.</h4>
+       <h4>Unauthorized, try again later.</h4>
      )}
      <div id=“firebaseui-auth-container”></div>
      <div id=“loader”></div>
