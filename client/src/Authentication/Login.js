@@ -24,7 +24,7 @@ const Login = props => {
                //SAVE USER ID TO LOCAL STORAGE
                const id = res.data.id;
                // console.log(‘User ID’, id);
-               localStorage.setItem(‘id’, id);
+               localStorage.setItem('id', id);
                // SAVE TOKEN TO LOCAL STORAGE FOR PRIVATE ROUTE
                localStorage.setItem(‘authorization’, idToken);
                props.history.push(‘/dashboard’);
