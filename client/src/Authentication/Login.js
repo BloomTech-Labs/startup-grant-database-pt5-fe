@@ -19,7 +19,7 @@ const Login = props => {
         currentUser
           .getIdToken(/* forceRefresh */ false)
           .then(function(idToken) {
-            console.log('Token: ', idToken);
+            // console.log('Token: ', idToken);
             const token = { idToken: idToken };
             axios
               .post(`${process.env.REACT_APP_API}/api/users/login`, token)

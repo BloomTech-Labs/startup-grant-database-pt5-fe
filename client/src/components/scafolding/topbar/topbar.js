@@ -6,13 +6,12 @@ import './topbar.css';
 const firebase = require('firebase/app');
 require('firebase/auth');
 
-const TopBar = () => {
+const TopBar = props => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log('Current user', user === true);
         setIsLogin(true);
       }
     });
@@ -39,6 +38,7 @@ const TopBar = () => {
                 .then(function() {
                   // Sign-out successful.
                   console.log('Successful Loged out!');
+                  setIsLogin(false);
                 })
                 .catch(error => {
                   // An error happened.
