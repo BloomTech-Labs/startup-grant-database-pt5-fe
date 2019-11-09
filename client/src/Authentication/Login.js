@@ -5,6 +5,7 @@ import axios from 'axios';
 //Requiring only the packages
 const firebaseUser = require('firebase/app');
 require('firebase/auth');
+
 const Login = props => {
  const [requestError, setRequestError] = useState('');
  useEffect(() => {
@@ -18,7 +19,7 @@ const Login = props => {
            // console.log(‘Token: ’, idToken);
            const token = { idToken: idToken };
            axios
-             .post(`${process.env.REACT_APP_API}`/api/users/login, token)
+             .post(`${process.env.REACT_APP_API}/api/users/login`, token)
              .then(res => {
                //Succesful login
                //SAVE USER ID TO LOCAL STORAGE
@@ -52,11 +53,12 @@ const Login = props => {
  }, [props]);
  return (
    <div>
-     {requestError === 400 && (
+     {(requestError === 400) && (
        <h4>Unauthorized, try again later.</h4>
      )}
-     <div id=“firebaseui-auth-container”></div>
-     <div id=“loader”></div>
+
+     <div id='firebaseui-auth-container'></div>
+     <div id='loader'></div>
    </div>
  );
 };
