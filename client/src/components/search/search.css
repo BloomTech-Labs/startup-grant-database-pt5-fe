@@ -1,0 +1,23 @@
+.searchholder {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height: auto;
+}
+
+.filters {
+    width: 353px;
+    height: auto;
+}
+
+.results {
+    width: 1336px;
+    height: 1142px; 
+}
+
+.filters .results {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 5px 10px #00A8A829;
+    border-radius: 10px;
+    opacity: 1;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './components/search/search.css';
 
 import { Route, Link } from 'react-router-dom';
 import NavBar from './components/NavBar';
@@ -9,7 +10,7 @@ import LandingPage from './components/LandingPage';
 import Login from './Authentication/Login';
 import PrivateRoute from './components/PrivateRoute';
 import UserList from "./components/userList_test";
- 
+
 import TopBar from './components/scafolding/topbar/topbar.js';
 import PlayArea from '../src/components/scafolding/playarea/playarea.js';
 

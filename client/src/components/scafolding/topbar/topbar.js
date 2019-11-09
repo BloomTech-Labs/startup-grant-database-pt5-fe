@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import './Grantify.png';
-import './topbar.css'
+import './topbar.css';
 
 const TopBar = () => {
     return (
