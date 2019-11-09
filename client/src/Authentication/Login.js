@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from ‘react’;
-// import useGlobal from ‘../store’;
-import { firebase } from ‘../helpers/index’;
+import React, { useEffect, useState } from 'react';
+import { firebase } from '../helpers/index';
 //importing axios for http request to api
-import axios from ‘axios’;
+import axios from 'axios';
 //Requiring only the packages
-const firebaseUser = require(‘firebase/app’);
-require(‘firebase/auth’);
+const firebaseUser = require('firebase/app');
+require('firebase/auth');
 const Login = props => {
- const [requestError, setRequestError] = useState(‘’);
+ const [requestError, setRequestError] = useState('');
  useEffect(() => {
    firebase();
    //HTTP request to API
