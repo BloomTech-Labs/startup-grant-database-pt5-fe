@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import Login from '../../../Authentication/Login';
-// import PrivateRoute from './../../PrivateRoute';
 import Search from './../../search/search.js';
 import ResultCard from './../../search/resultcard.js'
 
