@@ -22,7 +22,7 @@ const PlayArea = () => {
 
       {/* PROTECTED ROUTES */}
       <Route path="/settings" component={Settings} />
-      <PrivateRoute path="/dashboard" component={DashBoard} />
+      <Route path="/dashboard" component={DashBoard} />
     </div>
   );
 };
