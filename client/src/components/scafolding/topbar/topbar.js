@@ -7,7 +7,6 @@ const TopBar = () => {
     return (
         <div className="top-bar">
             <div className="logo">
-
                 <img alt="Grantlify" src={require('./Grantify.png')}/>
             </div>
             <div className="nav-links">
