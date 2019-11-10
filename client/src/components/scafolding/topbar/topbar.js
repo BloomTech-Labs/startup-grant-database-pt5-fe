@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+
 import './Grantify.png';
 import './topbar.css';
 
 const firebase = require('firebase/app');
 require('firebase/auth');
+              
 
 const TopBar = props => {
-  const [isLogin, setIsLogin] = useState(false);
+const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -23,9 +25,7 @@ const TopBar = props => {
         <img src={require('./Grantify.png')} />
       </div>
       <div className="nav-links">
-        <NavLink exact to="/">
-          Home
-        </NavLink>
+        <NavLink exact to="/">Home</NavLink>
         <br />
         <NavLink to="/search">Search</NavLink>
         <br />

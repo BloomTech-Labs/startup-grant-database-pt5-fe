@@ -1,15 +1,18 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Login from '../../../Authentication/Login';
-import PrivateRoute from './../../PrivateRoute';
 import Search from './../../search/search.js';
+import ResultCard from './../../search/resultcard.js'
+
 import DashBoard from '../../dashboard/DashBoard';
 import LandingPage from '../../LandingPage';
 import Settings from '../../dashboard/Settings';
 
+
 import './playarea.css';
 
 const PlayArea = () => {
+
   return (
     <div className="play-area">
       {/* ALL ROUTES */}
@@ -19,9 +22,8 @@ const PlayArea = () => {
 
       {/* PROTECTED ROUTES */}
       <Route path="/settings" component={Settings} />
-      <PrivateRoute path="/dashboard" component={DashBoard} />
+      <Route path="/dashboard" component={DashBoard} />
     </div>
   );
 };
-
 export default PlayArea;
