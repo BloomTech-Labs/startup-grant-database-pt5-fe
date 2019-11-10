@@ -5,8 +5,6 @@ import './components/search/search.css';
 import TopBar from './components/scafolding/topbar/topbar.js';
 import PlayArea from '../src/components/scafolding/playarea/playarea.js';
 
-import SearchHolder from './components/PrivateRoute';
-
 function App() {
   return (
     <div className="App">

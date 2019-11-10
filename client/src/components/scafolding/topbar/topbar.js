@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Grantify.png';
 import './topbar.css';
 
@@ -8,7 +8,7 @@ const TopBar = () => {
         <div className="top-bar">
             <div className="logo">
 
-                <img src={require('./Grantify.png')}/>
+                <img alt="Grantlify" src={require('./Grantify.png')}/>
             </div>
             <div className="nav-links">
                 <NavLink exact to="/">Home</NavLink>
