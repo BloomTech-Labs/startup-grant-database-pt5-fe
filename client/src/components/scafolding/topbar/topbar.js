@@ -6,25 +6,10 @@ import './topbar.css';
 
 const firebase = require('firebase/app');
 require('firebase/auth');
-                <img alt="Grantlify" src={require('./Grantify.png')}/>
-            </div>
-            <div className="nav-links">
-                <NavLink exact to="/">Home</NavLink>
-                <br />
-                <NavLink to="/search">Search</NavLink>
-                <br/>
-                <NavLink to="/login">Login</NavLink>
-                <br />
-                {/* <NavLink to="/dashboard">DashBoard (Private)</NavLink> */}
-                <br />
-            </div>
-        </div>
-    )    
-}
+              
 
 const TopBar = props => {
-  const [isLogin, setIsLogin] = useState(false);
-
+const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -40,9 +25,7 @@ const TopBar = props => {
         <img src={require('./Grantify.png')} />
       </div>
       <div className="nav-links">
-        <NavLink exact to="/">
-          Home
-        </NavLink>
+        <NavLink exact to="/">Home</NavLink>
         <br />
         <NavLink to="/search">Search</NavLink>
         <br />
