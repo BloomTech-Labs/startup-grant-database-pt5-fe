@@ -4,7 +4,7 @@ import { firebase } from "../helpers/index";
 
 const firebaseUser = require("firebase");
 
-const Login = () => {
+const Login = props => {
   //to use the  action for passing the user data to the api
   //   const [globalState, globalActions] = useGlobal();
 
@@ -29,10 +29,13 @@ const Login = () => {
         localStorage.removeItem("authorization");
       }
     });
-  }, []);
+  }, [props]);
 
   return (
     <div>
+      {/* {requestError === 400 && (
+        <h4 className="alert">Unauthorized, try again later.</h4>
+      )} */}
       <div id="firebaseui-auth-container"></div>
       <div id="loader"></div>
     </div>

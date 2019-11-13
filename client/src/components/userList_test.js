@@ -6,7 +6,7 @@ export default function UserList() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/users`)
+      .get(`${process.env.REACT_APP_API}/api/users`)
       .then(response => {
         console.log(response.data);
         setUser(response.data);
