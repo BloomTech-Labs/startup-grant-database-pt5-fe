@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from 'react';
-// import Button from "@material-ui/core/Button";
-// import SideBar from './SideBar';
+import React, { useState, useEffect } from "react";
+import SideBar from "./SideBar";
 
 //Import firebase
-const firebase = require('firebase/app');
-require('firebase/auth');
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 const DashBoard = props => {
   //setting state for displaying username and loading
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // console.log('User data: ', user);
-        setCurrentUser(user.displayName);
-        setIsLoading(false);
-      }
-    });
-  }, []);
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      setCurrentUser(user.displayName);
+      setIsLoading(false);
+    }
+  });
 
   return (
     <div>
@@ -28,7 +24,7 @@ const DashBoard = props => {
       ) : (
         <div>
           <h1>Welcome {currentUser}!</h1>
-          {/* <SideBar /> */}
+          <SideBar />
         </div>
       )}
     </div>
