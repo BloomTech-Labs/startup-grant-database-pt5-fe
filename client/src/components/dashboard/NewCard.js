@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card } from "@material-ui/core";
 
-const SavedCard = props => {
+const NewCard = props => {
   return (
     <Card>
       <h3>{props.grant.name}</h3>
@@ -17,4 +17,4 @@ const SavedCard = props => {
   );
 };
 
-export default SavedCard;
+export default NewCard;

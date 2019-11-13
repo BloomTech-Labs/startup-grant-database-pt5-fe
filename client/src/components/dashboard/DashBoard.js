@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SideBar from "./SideBar";
 import Saved from "./Saved";
+import New from "./New";
 
 //Import firebase
 const firebase = require("firebase/app");
@@ -23,10 +24,19 @@ const DashBoard = props => {
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
-        <div>
+        <div style={{ height: "100%" }}>
           <h1>Welcome {currentUser}!</h1>
           <SideBar />
-          <Saved />
+          <div
+            style={{
+              display: "flex",
+              width: "80%",
+              marginLeft: "20%"
+            }}
+          >
+            <Saved />
+            <New />
+          </div>
         </div>
       )}
     </div>
