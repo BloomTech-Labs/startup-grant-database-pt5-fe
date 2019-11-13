@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
+import axios from 'axios';
 
 import ResultCard from './resultcard.js';
 
 const Search = () => {
+
+    const getCategories = async () => {
+        return await axios('');
+    }
+
+    const getElegibility = async () => {
+        return await axios('');
+    }
 
  const resultcard = [
        {id: 1,

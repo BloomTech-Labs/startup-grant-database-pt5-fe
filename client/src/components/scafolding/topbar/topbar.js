@@ -45,10 +45,7 @@ const [isLogin, setIsLogin] = useState(false);
                   console.log('There was an issue while signing out!', error);
                 });
             }}
-            to="/login"
-          >
-            Sign Out
-          </NavLink>
+            to="/login" className='logout'>Log Out</NavLink>
         ) : (
           <NavLink to="/login">Login</NavLink>
         )}
