@@ -26,8 +26,10 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3)
+    backgroundColor: theme.palette.background.default
+  },
+  listitems: {
+    zIndex: 2
   }
 }));
 
@@ -66,7 +68,12 @@ const SideBar = () => {
         <Divider />
         <List>
           {pages.map(page => (
-            <ListItemLink button key={page.title} href={page.href}>
+            <ListItemLink
+              button
+              classes={classes.listitems}
+              key={page.title}
+              href={page.href}
+            >
               <ListItemIcon>{page.icon}</ListItemIcon>
               <ListItemText primary={page.title} />
             </ListItemLink>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SideBar from "./SideBar";
+import Saved from "./Saved";
 
 //Import firebase
 const firebase = require("firebase/app");
@@ -25,6 +26,7 @@ const DashBoard = props => {
         <div>
           <h1>Welcome {currentUser}!</h1>
           <SideBar />
+          <Saved />
         </div>
       )}
     </div>
