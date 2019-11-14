@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {TextField} from '@material-ui/core';
+import {TextField, Button} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(1),
         width: 200,
       },
+      
 }));
 
 const BasicTextFields = event => {
@@ -45,6 +46,43 @@ const BasicTextFields = event => {
           variant="outlined"
         />
       </div>
+      <div>
+        <TextField
+          id="address"
+          className={classes.textField}
+          label="Address"
+          margin="normal"
+          variant="outlined"
+        />
+      </div>
+      <div>
+        <TextField
+          id="city"
+          className={classes.textField}
+          label="City"
+          margin="normal"
+          variant="outlined"
+        />
+      </div>
+      <div>
+        <TextField
+          id="state"
+          className={classes.textField}
+          label="State"
+          margin="normal"
+          variant="outlined"
+        />
+      </div>
+      <div>
+      <Button 
+            variant="contained" 
+            className={classes.button}
+            color = ""
+        >
+        Update
+        </Button>
+      </div>
+   
     </form>
   );
 }
