@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 
-import './Grantify.png';
-import './topbar.css';
+import "./Grantify.png";
+import "./topbar.css";
 
-const firebase = require('firebase/app');
-require('firebase/auth');
-              
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 const TopBar = props => {
-const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -22,10 +21,14 @@ const [isLogin, setIsLogin] = useState(false);
   return (
     <div className="top-bar">
       <div className="logo">
-        <img src={require('./Grantify.png')} />
+        <img src={require("./Grantify.png")} />
       </div>
       <div className="nav-links">
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/">
+          Home
+        </NavLink>
+        <br />
+        <NavLink to="/welcome">Welcome </NavLink>
         <br />
         <NavLink to="/search">Search</NavLink>
         <br />
@@ -37,15 +40,19 @@ const [isLogin, setIsLogin] = useState(false);
                 .signOut()
                 .then(function() {
                   // Sign-out successful.
-                  console.log('Successful Loged out!');
+                  console.log("Successful Loged out!");
                   setIsLogin(false);
                 })
                 .catch(error => {
                   // An error happened.
-                  console.log('There was an issue while signing out!', error);
+                  console.log("There was an issue while signing out!", error);
                 });
             }}
-            to="/login" className='logout'>Log Out</NavLink>
+            to="/login"
+            className="logout"
+          >
+            Log Out
+          </NavLink>
         ) : (
           <NavLink to="/login">Login</NavLink>
         )}
