@@ -7,7 +7,7 @@ const firebaseUser = require('firebase/app');
 require('firebase/auth');
 
 const Login = props => {
-  const [requestError, setRequestError] = useState('');
+  const [isError, setRequestError] = useState(null);
   useEffect(() => {
     firebase();
     //HTTP request to API
@@ -28,33 +28,35 @@ const Login = props => {
                 localStorage.setItem('id', id);
                 // SAVE TOKEN TO LOCAL STORAGE FOR PRIVATE ROUTE
                 localStorage.setItem('authorization', idToken);
-                props.history.push('/dashboard');
+                props.history.push('/welcome');
               })
               .catch(err => {
-                //Invalid token
-                console.log('Invalid Token or DB currently down', err);
-                setRequestError(err.response);
+                //Invalid token or connection issue
+                console.log(
+                  'Cannot connect to server or local server not running '
+                );
+                //If our server cannot be reach sign out user from firebase side
+                setRequestError(500);
+                firebaseUser.auth().signOut();
               });
           })
           .catch(function(error) {
             // Handle error
-            console.log('Error occur during last catch http request', error);
-            setRequestError(error.response.status);
+            console.log('Firebase login error', error);
+            setRequestError(401);
           });
       } else {
         //User is currently logged out.
         console.log('You are currently logged out');
-        //Remove token, firebase and id from local storage after sign out
-        localStorage.removeItem('authorization');
-        localStorage.removeItem('firebaseui::rememberedAccounts');
-        localStorage.removeItem('id');
+        //Clear local storage after sign out
+        localStorage.clear();
       }
     });
   }, [props]);
   return (
     <div>
-      {requestError === 400 && <h4>Unauthorized, try again later.</h4>}
-
+      {isError === 401 && <h4>Unauthorized, try again later.</h4>}
+      {isError === 500 && <h4>Server connection error, try again later.</h4>}
       <div id="firebaseui-auth-container"></div>
       <div id="loader"></div>
     </div>
