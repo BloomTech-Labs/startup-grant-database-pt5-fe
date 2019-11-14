@@ -1,0 +1,26 @@
+body{
+    background-color: #c0f0f7;
+}
+
+ .paper {
+     border: solid .5px grey;
+     width: 70%;
+     margin:auto;
+     height: 500px;
+     margin-top:100px;
+  }
+
+ .container {
+     border: 2px solid lightgrey;
+     width: 80%;
+     margin:auto;
+     margin-top:100px;
+     display:flex;
+     flex-direction: column;
+     align-items: center;
+
+ }
+
+ .textField {
+     border: 2px solid red;
+ }  
