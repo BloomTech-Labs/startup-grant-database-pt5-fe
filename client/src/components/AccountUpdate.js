@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
       
 }));
 
-const BasicTextFields = event => {
+
+const ContactInfo = event => {
   const classes = useStyles();
 
   return (
@@ -86,3 +87,5 @@ const BasicTextFields = event => {
     </form>
   );
 }
+
+export default ContactInfo;
