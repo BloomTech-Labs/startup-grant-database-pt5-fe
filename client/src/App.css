@@ -10,12 +10,6 @@
   padding: 0px;
 }
 
-
-
-
-
-
-
 .App-logo {
   height: 40vmin;
 }
@@ -36,7 +30,7 @@
 }
 
 .alert {
-  color: red
+  color: red;
 }
 
 /* Main page scafolding here */
