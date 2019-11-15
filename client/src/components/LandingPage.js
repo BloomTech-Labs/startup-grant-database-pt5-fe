@@ -1,10 +1,14 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Card, CardContent } from "@material-ui/core";
 
 const LandingPage = () => {
   return (
-    <div>
-      <h1>Hello world</h1>
-    </div>
+    <Card>
+      <CardContent>
+        <Link to="/search">Get Granted</Link>
+      </CardContent>
+    </Card>
   );
 };
 
