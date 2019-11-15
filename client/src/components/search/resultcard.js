@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const ResultCard = (props) => {
-    console.log(props)
     return (
         <div className="card-holder">
             <h3 className="title">{props.resultcard.title}</h3>
@@ -22,7 +20,7 @@ const ResultCard = (props) => {
             <div className="categories">
                 <label className="category-label">Categories: </label>
                 {props.resultcard.categories.map((categories, i) => {
-                    return <p key={i} className="category-tags"><span>{categories}</span></p>
+                    return <p key={i} className="category-tags"><span className="span-class">{categories}</span></p>
                 })}
             </div>
         </div>    

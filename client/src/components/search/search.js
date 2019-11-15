@@ -1,19 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 import axios from 'axios';
-
+import './../search/search.css'
 import ResultCard from './resultcard.js';
+import StateComponent from './dropdowns/states_component.js';
+import CountiesComponent from './dropdowns/counties_component.js';
+import AmountComponent from './dropdowns/amount_component.js';
+import ElegibilityComponent from "./dropdowns/elegibility_component.js";
 
 const Search = () => {
+    //Set required hooks
+    const [state, setStates] = useState([]);
+    const [elegibility, setElegibility] = useState([]);
 
-    const getCategories = async () => {
-        return await axios('');
-    }
+    //Use Effect to load initial data for the dropdowns 
+    useEffect(() => {
+        const fetchAll = async () => {
+            //Fetch States
+            const stateResult = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/states',
+              );  
+              //Fetch Elegibility
+              const elegibilityResult = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/elegibility' 
+              );
+              
+            setStates(stateResult.data);
+            setElegibility(elegibilityResult.data);
+        }; 
+        fetchAll()
+    }, []);
 
-    const getElegibility = async () => {
-        return await axios('');
-    }
+
+
+
+    // const counties = async (state) => {
+    //     const id = state;
+    //     return await axios(`https://startup-grant-database-staging.herokuapp.com/api/counties/${id}`);
+    // };
+
+    
+    // const getCategories = async () => {
+    //     return await axios('https://startup-grant-database-staging.herokuapp.com/api/categories');
+    // };
 
  const resultcard = [
        {id: 1,
@@ -33,26 +62,39 @@ const Search = () => {
         elegibility: ["Student" , "Women", "Veterans", "African Americans"],
         categories: ["Example 1" , "Example 2", "Example 3", "Example 4"]}
  ]
-
+        
     return (  
+        
         <div className='searchholder'>
             <div className='filters'>
                 <h2>Filters</h2>
-                Something here
+
+              <StateComponent states={state}/>
+              <br/>
+              <br/>
+              <CountiesComponent states={'test'}/>
+              <br/>
+              <br/>
+              <AmountComponent states={'test'}/>
+              <br/>
+              <br/>
+              <ElegibilityComponent elegibility={elegibility}/>
+              
             </div>
             <div className='results'>
                 <h2>Results</h2>          
-                    {resultcard.map(items => {
+                    {resultcard.map((items, i) => {
                            return (
-                                <Link style={{ textDecoration: 'none', color: '#000000'}}to={`/search/${items.id}`}>
-                                    <ResultCard key={items.id} resultcard={items}/> 
-                                </Link>
+                            // <Link style={{ textDecoration: 'none', color: '#000000'}}to={`/search/${items.id}`}>
+                                <ResultCard key={i} resultcard={items}/> 
+                            // </Link>
                            )   
                     })}
               
             </div>
         </div>
     )
+
 }
 
 export default Search

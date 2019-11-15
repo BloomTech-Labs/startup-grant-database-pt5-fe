@@ -2,12 +2,10 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Login from '../../../Authentication/Login';
 import Search from './../../search/search.js';
-import ResultCard from './../../search/resultcard.js'
 
 import DashBoard from '../../dashboard/DashBoard';
 import LandingPage from '../../LandingPage';
 import Settings from '../../dashboard/Settings';
-
 
 import './playarea.css';
 
