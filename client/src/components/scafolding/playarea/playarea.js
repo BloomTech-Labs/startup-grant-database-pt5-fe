@@ -10,6 +10,9 @@ import Settings from "../../dashboard/Settings";
 
 import "./playarea.css";
 
+import InitialSignupForm from "../../onboarding/Welcome";
+import Choose_Tags from "../../onboarding/Choose_Tags";
+
 const PlayArea = () => {
   return (
     <div className="play-area">
@@ -17,6 +20,8 @@ const PlayArea = () => {
       <Route exact path="/" component={LandingPage} />
       <Route path="/login" component={Login} />
       <Route path="/search" component={Search} />
+      <Route path="/welcome" component={InitialSignupForm} />
+      <Route path="/Choose_Tags" component={Choose_Tags} />
 
       {/* PROTECTED ROUTES */}
       <Route path="/settings" component={Settings} />
