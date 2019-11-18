@@ -63,7 +63,7 @@ const AccountProfile = props => {
               color="textSecondary"
               variant="body1"
             >
-              {user.state}, {user.country}
+              {user.city}, {user.country}
             </Typography>
             <Typography
               className={classes.dateText}
