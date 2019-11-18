@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './Grantify.png';
 import './topbar.css';
 
 const firebase = require('firebase/app');
 require('firebase/auth');
-              
 
-const TopBar = props => {
-const [isLogin, setIsLogin] = useState(false);
+const TopBar = () => {
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setIsLogin(true);
+      } else {
+        setIsLogin(false);
       }
     });
-  }, []);
+  }, [isLogin]);
 
   return (
     <div className="top-bar">
@@ -25,7 +26,11 @@ const [isLogin, setIsLogin] = useState(false);
         <img src={require('./Grantify.png')} />
       </div>
       <div className="nav-links">
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/">
+          Home
+        </NavLink>
+        <br />
+        <NavLink to="/welcome">Welcome </NavLink>
         <br />
         <NavLink to="/search">Search</NavLink>
         <br />
@@ -46,8 +51,9 @@ const [isLogin, setIsLogin] = useState(false);
                 });
             }}
             to="/login"
+            className="logout"
           >
-            Sign Out
+            Log Out
           </NavLink>
         ) : (
           <NavLink to="/login">Login</NavLink>
