@@ -56,7 +56,7 @@ const AccountProfile = props => {
         <div className={classes.details}>
           <div>
             <Typography gutterBottom variant="h2">
-              Claire Sinozich
+              Claire Sinozichs
             </Typography>
             <Typography
               className={classes.locationText}
