@@ -9,11 +9,8 @@ import LandingPage from "../../LandingPage";
 import Settings from "../../dashboard/Settings";
 
 import "./playarea.css";
-<<<<<<< HEAD
-=======
 import InitialSignupForm from "../../onboarding/Welcome";
 import Choose_Tags from "../../onboarding/Choose_Tags";
->>>>>>> f504726bace69c81e5e3712c2ce9b50ea5937f59
 
 const PlayArea = () => {
   return (
