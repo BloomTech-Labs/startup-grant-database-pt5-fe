@@ -1,20 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
-  cardContainer: {
+  pageContainer: {
     display: "flex",
-    flexFlow: "row no wrap"
+    flexFlow: "row wrap",
+    justifyContent: "space-evenly"
+  },
+  bannerContainer: {
+    display: "flex",
+    flexFlow: "row no wrap",
+    justifyContent: "space-evenly",
+    width: "100%"
+  },
+  banner: {
+    display: "flex",
+    flexFlow: "row no wrap",
+    marginLeft: "20%"
+  },
+  cardsContainer: {
+    display: "flex",
+    flexFlow: "row wrap",
+    width: "100%",
+    justifyContent: "center"
   },
   card: {
-    width: "32%",
-    margin: "0 0 3% 0"
-    // marginBottom: "3%"
+    width: "51%",
+    marginBottom: "3%"
   },
-  cardDetails: {
-    border: "1px solid dark blue"
-  },
+  cardDetails: {},
   linkStyling: {
     textDecoration: "none"
   }
@@ -23,35 +39,36 @@ const useStyles = makeStyles(() => ({
 const LandingPage = () => {
   const classes = useStyles();
   return (
-    <div name="main-container" classname={classes.cardContainer}>
-      <div name="banner-container" className={classes.card}>
-        <div name="banner" classname={classes.cardDetails}>
+    <div name="main-container" classname={classes.pageContainer}>
+      <Box className={classes.bannerContainer}>
+        <Box name="banner" classname={classes.banner}>
           <h2>Welcome to Grantlify!</h2>
-        </div>
-      </div>
-      {/*  */}
-      <div name="body-container" className={classes.card}>
-        <div name="company-goal-container" classname={classes.cardDetails}>
+          <p>We know how hard it is to get help for your startup.</p>
+          <p>We're here to help.</p>
+        </Box>
+      </Box>
+      <Box name="cards-container" className={classes.cardsContainer}>
+        <Box className={classes.card}>
           <h3>Our Goal</h3>
           <p>
             Hundreds and thousands of dollars worth of unused grant money is
             thrown away annually. Our Goal is to take all of the grants that are
             somehow overlooked and put them in one central location... for you.
           </p>
-        </div>
-        <div name="steps-container">
+        </Box>
+        <Box className={classes.card}>
           <h3>How It Works</h3>
-          <div name="list-steps">
-            <div name="step-1">step one</div>
-            <div name="step-2">step two</div>
-            <div name="step-3">step three</div>
-            <div name="step-4">step four</div>
-          </div>
-        </div>
-      </div>
-      <div name="sign-up">
-        <Link to="/signup">Sign Up!</Link>
-      </div>
+          <ul name="list-steps">
+            <li name="step-1">step one</li>
+            <li name="step-2">step two</li>
+            <li name="step-3">step three</li>
+            <li name="step-4">step four</li>
+          </ul>
+        </Box>
+      </Box>
+      <Box name="sign-up">
+        <Link to="#">Sign Up!</Link>
+      </Box>
     </div>
   );
 };
