@@ -8,8 +8,7 @@ import {
   Avatar,
   Typography,
   Divider,
-  Button,
-  LinearProgress
+  Button
 } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
@@ -34,6 +33,11 @@ const useStyles = makeStyles(() => ({
   },
   uploadButton: {
     marginRight: "10px"
+  },
+  actions: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around"
   }
 }));
 
@@ -56,14 +60,14 @@ const AccountProfile = props => {
         <div className={classes.details}>
           <div>
             <Typography gutterBottom variant="h2">
-              Claire Sinozichs
+              {user.name}
             </Typography>
             <Typography
               className={classes.locationText}
               color="textSecondary"
               variant="body1"
             >
-              {user.city}, {user.country}
+              {user.state}, {user.country}
             </Typography>
             <Typography
               className={classes.dateText}
@@ -75,14 +79,10 @@ const AccountProfile = props => {
           </div>
           <Avatar className={classes.avatar} src={user.avatar} />
         </div>
-        <div className={classes.progress}>
-          <Typography variant="body1">Profile Completeness: 70%</Typography>
-          <LinearProgress value={70} variant="determinate" />
-        </div>
       </CardContent>
       <Divider />
-      <CardActions>
-        <Button className={classes.uploadButton} color="primary" variant="text">
+      <CardActions className={classes.actions}>
+        <Button className={classes.uploadButton} variant="text">
           Upload picture
         </Button>
         <Button variant="text">Remove picture</Button>

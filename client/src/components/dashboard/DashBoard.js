@@ -11,7 +11,7 @@ require("firebase/auth");
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100vw",
-    height: "80vh"
+    height: "82vh"
   },
   welcome: {
     paddingLeft: "10vw"
