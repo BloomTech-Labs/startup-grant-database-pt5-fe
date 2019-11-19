@@ -11,7 +11,7 @@ import PlayArea from "../src/components/scafolding/playarea/playarea.js";
 function App() {
   return (
     <div className="App">
-      <TopBar />
+      <TopBar style={{ zIndex: 10 }} />
       <PlayArea />
       {/* <UserList /> */}
     </div>

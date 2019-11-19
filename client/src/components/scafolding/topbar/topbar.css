@@ -4,46 +4,49 @@
     src: local('MyFont'), url(./../../.) format('woff');
   } */
 
-
 .top-bar {
-    display: flex;
-    flex-direction: row;
-    height: 15vh;
-    background-color: #FFFFFF;
-    margin: 0px;
-    align-items: center;
-    justify-content: space-between;
-  }
+  display: flex;
+  flex-direction: row;
+  height: 15vh;
+  background-color: #ffffff;
+  margin: 0px;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .nav-links {
-      display: flex;
-      flex-direction: row;
-      width: auto;
-      margin-right: 5%;
-      align-content: center;
-  }
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  padding-right: 5%;
+  align-content: center;
+  justify-content: space-around;
+}
 
-  .nav-links a {
-      text-decoration: none;
-      margin:0px 2%;
-      color: #000000;
-      width:25%;
-      font-size: 20px;
-      vertical-align: middle;
-      align-items: center;
-      height: auto;
-      padding: 10px;
-  }
+.nav-links a {
+  text-decoration: none;
+  margin: 0px 2%;
+  color: #000000;
+  width: 30%;
+  font-size: 16px;
+  vertical-align: middle;
+  align-items: center;
+  height: auto;
+  padding: 10px;
+}
 
-  /* .logout {
-    border: 1px solid #2A87AF;
-    border-radius: 5px;
-    height: 40px;
-    
-  } */
+.nav-links a:hover {
+  color: #2a87af;
+}
 
-  a.logout {
-    color: #00A8A8;
-    width: 250px;
-    text-decoration: underline;
-  }
+.logout {
+  border: 1px solid #2a87af;
+  border-radius: 5px;
+  height: 30px;
+  width: 40px;
+}
+
+a.logout {
+  color: #00a8a8;
+  text-decoration: none;
+}
