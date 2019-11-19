@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
@@ -24,59 +23,34 @@ const useStyles = makeStyles(() => ({
 const LandingPage = () => {
   const classes = useStyles();
   return (
-    <div>
-      {/* added an extra div below to test spacing */}
-      <div classname={classes.cardContainer}>
-        <Card className={classes.card}>
-          <CardContent classname={classes.cardDetails}>
-            <h3>Welcome to Grantlify!</h3>
-          </CardContent>
-        </Card>
-        {/*  */}
-        <Card className={classes.card}>
-          <CardContent classname={classes.cardDetails}>
-            <h3>Our Goal</h3>
-            <p>
-              Hundreds and thousands of dollars worth of unused grant money is
-              thrown away annually. Our Goal is to take all of the grants that
-              are somehow overlooked and put them in one central location... for
-              you.
-            </p>
-          </CardContent>
-        </Card>
-        {/*  */}
-        <Card className={classes.card}>
-          <CardContent classname={classes.cardDetails}>
-            <h3>How It Works</h3>
-            <p></p>
-          </CardContent>
-        </Card>
-        {/*  */}
-        <Card className={classes.card}>
-          <CardContent classname={classes.cardDetails}>
-            <h3>Finding Your Grants</h3>
-            <p></p>
-          </CardContent>
-        </Card>
-        {/*  */}
-        <Card className={classes.card}>
-          <CardContent classname={classes.cardDetails}>
-            <h3>What's the Catch?</h3>
-            <p></p>
-          </CardContent>
-        </Card>
-        {/*  */}
-        <Card className={classes.card}>
-          <CardContent classname={classes.cardDetails}>
-            <p>If you like what you see...</p>
-            <Link to="/search" className={classes.linkStyling}>
-              Get Granted
-            </Link>
-          </CardContent>
-        </Card>
-        {/*  */}
-
-        {/*  */}
+    <div name="main-container" classname={classes.cardContainer}>
+      <div name="banner-container" className={classes.card}>
+        <div name="banner" classname={classes.cardDetails}>
+          <h2>Welcome to Grantlify!</h2>
+        </div>
+      </div>
+      {/*  */}
+      <div name="body-container" className={classes.card}>
+        <div name="company-goal-container" classname={classes.cardDetails}>
+          <h3>Our Goal</h3>
+          <p>
+            Hundreds and thousands of dollars worth of unused grant money is
+            thrown away annually. Our Goal is to take all of the grants that are
+            somehow overlooked and put them in one central location... for you.
+          </p>
+        </div>
+        <div name="steps-container">
+          <h3>How It Works</h3>
+          <div name="list-steps">
+            <div name="step-1">step one</div>
+            <div name="step-2">step two</div>
+            <div name="step-3">step three</div>
+            <div name="step-4">step four</div>
+          </div>
+        </div>
+      </div>
+      <div name="sign-up">
+        <Link to="/signup">Sign Up!</Link>
       </div>
     </div>
   );
