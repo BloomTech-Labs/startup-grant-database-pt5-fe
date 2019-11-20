@@ -22,8 +22,6 @@ const amounts = [
   ];
 
 const AmountComponent = (props) => {
-  console.log('step 2 this props',props)
-  
     return (
         <Autocomplete
         multiple

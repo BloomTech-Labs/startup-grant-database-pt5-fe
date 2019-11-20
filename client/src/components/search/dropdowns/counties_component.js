@@ -21,8 +21,6 @@ const states = [
 
 
 const CountiesComponent = (props) => {
-  console.log('step 2 this props',props)
-  
     return (
         <Autocomplete
         multiple

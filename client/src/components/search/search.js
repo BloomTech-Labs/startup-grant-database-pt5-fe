@@ -3,15 +3,42 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './../search/search.css'
 import ResultCard from './resultcard.js';
+
+//Dropdown with checkboxes built in components.
 import StateComponent from './dropdowns/states_component.js';
 import CountiesComponent from './dropdowns/counties_component.js';
 import AmountComponent from './dropdowns/amount_component.js';
 import ElegibilityComponent from "./dropdowns/elegibility_component.js";
+import CategoryComponent from "./dropdowns/category_component.js";
+
+//Hooks to store checked values from filters
+function useProcessStates(e) {
+    const [checkedStates, setCheckedStates] = useState([]);
+    const stateObject =[];
+    let isChecked = e.target.value
+    
+    setCheckedStates([...stateObject, isChecked]);
+    console.log(checkedStates)
+    return checkedStates;
+};
+
+// const [checkedStates, setCheckedStates] = setCheckedStates([]);
+function useProcessQuery (state='' , counties='', ammount='', elegibility='', category='') {
+    
+    alert('Hello');
+    console.log('my states', state)
+    console.log('my states', counties)
+    console.log('my states', ammount)
+    console.log('my states', elegibility)
+    console.log('my states', category)
+}
 
 const Search = () => {
-    //Set required hooks
+    // Hooks to render the filters.
     const [state, setStates] = useState([]);
     const [elegibility, setElegibility] = useState([]);
+    const [category, setCategory] = useState([]);
+    const [grants, setGrants] = useState([]);
 
     //Use Effect to load initial data for the dropdowns 
     useEffect(() => {
@@ -24,26 +51,29 @@ const Search = () => {
               const elegibilityResult = await axios(
                 'https://startup-grant-database-staging.herokuapp.com/api/elegibility' 
               );
+              //Fetch Categories
+              const categoryResult = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/categories' 
+              );
+              //Fetch Grants
+                const params = {
+                    states: [1, 2],
+
+                }
+
+              var grantResults = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/grants'
+              )
               
             setStates(stateResult.data);
             setElegibility(elegibilityResult.data);
+            setCategory(categoryResult.data);
+            setGrants(grantResults.data);
+            
         }; 
         fetchAll()
     }, []);
-
-
-
-
-    // const counties = async (state) => {
-    //     const id = state;
-    //     return await axios(`https://startup-grant-database-staging.herokuapp.com/api/counties/${id}`);
-    // };
-
-    
-    // const getCategories = async () => {
-    //     return await axios('https://startup-grant-database-staging.herokuapp.com/api/categories');
-    // };
-
+   
  const resultcard = [
        {id: 1,
         title: "This is my grant title",
@@ -62,28 +92,29 @@ const Search = () => {
         elegibility: ["Student" , "Women", "Veterans", "African Americans"],
         categories: ["Example 1" , "Example 2", "Example 3", "Example 4"]}
  ]
-        
+      
     return (  
-        
         <div className='searchholder'>
+            
             <div className='filters'>
                 <h2>Filters</h2>
-
-              <StateComponent states={state}/>
-              <br/>
-              <br/>
-              <CountiesComponent states={'test'}/>
-              <br/>
-              <br/>
-              <AmountComponent states={'test'}/>
-              <br/>
-              <br/>
-              <ElegibilityComponent elegibility={elegibility}/>
-              
+                    <StateComponent states={state} processState={useProcessStates}/>
+                    <br/>
+                    <br/>
+                    <CountiesComponent states={'test'}/>
+                    <br/>
+                    <br/>
+                    <AmountComponent/>
+                    <br/>
+                    <br/>
+                    <ElegibilityComponent elegibility={elegibility}/>
+                    <br/>
+                    <br/>
+                    <CategoryComponent category={category}/>
             </div>
             <div className='results'>
                 <h2>Results</h2>          
-                    {resultcard.map((items, i) => {
+                    {grants.map((items, i) => {
                            return (
                             // <Link style={{ textDecoration: 'none', color: '#000000'}}to={`/search/${items.id}`}>
                                 <ResultCard key={i} resultcard={items}/> 
