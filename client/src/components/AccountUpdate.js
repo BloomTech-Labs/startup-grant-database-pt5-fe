@@ -30,27 +30,41 @@ const ContactInfo = props => {
   
 
   //Form Changes
-  function handleChange(event) {
+  const handleChange = e => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [e.target.name]: e.target.value
     });
-  }
+  };
+
+ 
 
   //Handle submit 
-  function handleSubmit(event) {
-    event.preventDefault();
-    setSubmitting(true);
+ const handleSubmit = e => {
+      e.preventDefault();
   }
-
 
   
   return (
    
-    <form {...rest} className={classes.container} noValidate autoComplete="off" component="div" style={{ backgroundColor: '#cfe8fc'}}>
-       <Typography className={classes.title} color="#000000" fontWeight="fontWeightBold" gutterBottom>
+    <form 
+      {...rest} 
+      className={classes.container} 
+      noValidate 
+      autoComplete="off" 
+      component="div" 
+      style={{ backgroundColor: '#cfe8fc'}}
+      onsubmit= {this.handleSubmit}
+      >
+
+  <Typography 
+    className={classes.title} 
+    color="#000000" 
+    fontWeight="fontWeightBold" 
+    gutterBottom>
           Edit Profile Information 
-        </Typography>
+    </Typography>
+
       <div>
         <TextField
           id="fullName"
@@ -58,7 +72,8 @@ const ContactInfo = props => {
           label="Full Name"
           margin="normal"
           variant="outlined"
-          handleChange = {handleChange}
+          value={this.state.value} 
+          onChange={this.handleChange} 
           
         />
       </div>
@@ -69,7 +84,8 @@ const ContactInfo = props => {
           label="Company Name"
           margin="normal"
           variant="outlined"
-          handleChange = {handleChange}
+          value={this.state.value} 
+          onChange={this.handleChange} 
         />
       </div>
       <div>
@@ -79,7 +95,8 @@ const ContactInfo = props => {
           label="Email Address"
           margin="normal"
           variant="outlined"
-          handleChange = {handleChange}
+          value={this.state.value} 
+          onChange={this.handleChange} 
         />
       </div>
       <div>
@@ -89,7 +106,8 @@ const ContactInfo = props => {
           label="Address"
           margin="normal"
           variant="outlined"
-          handleChange = {handleChange}
+          value={this.state.value} 
+          onChange={this.handleChange} 
         />
       </div>
       <div>
@@ -99,7 +117,8 @@ const ContactInfo = props => {
           label="City"
           margin="normal"
           variant="outlined"
-          handleChange = {handleChange}
+          value={this.state.value} 
+          onChange={this.handleChange} 
         />
       </div>
       <div>
@@ -109,7 +128,8 @@ const ContactInfo = props => {
           label="State"
           margin="normal"
           variant="outlined"
-          handleChange = {handleChange}
+          value={this.state.value} 
+          onChange={this.handleChange} 
         />
       </div>
       <div>
@@ -117,7 +137,7 @@ const ContactInfo = props => {
             variant="contained" 
             className={classes.button}
             color = ""
-            handleSubmit={handleSubmit}
+            type="submit" value="Submit"
         >
         Update
         </Button>
