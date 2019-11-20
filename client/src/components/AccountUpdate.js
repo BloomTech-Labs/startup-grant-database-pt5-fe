@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {TextField, Button} from '@material-ui/core';
+import {
+  TextField, 
+  Button,
+  Typography,
+} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -8,25 +12,54 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
       },
       textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 200,
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(1)
       },
       
 }));
 
 
-const ContactInfo = event => {
+const ContactInfo = props => {
+  //Styles
   const classes = useStyles();
 
+  //Setting up state
+  const { className, ...rest } = props;
+  const [values, setValues] = React.useState();
+  const [setSubmitting] = React.useState(false);
+  
+
+  //Form Changes
+  function handleChange(event) {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    });
+  }
+
+  //Handle submit 
+  function handleSubmit(event) {
+    event.preventDefault();
+    setSubmitting(true);
+  }
+
+
+  
   return (
-    <form className={classes.container} noValidate autoComplete="off">
+   
+    <form {...rest} className={classes.container} noValidate autoComplete="off" component="div" style={{ backgroundColor: '#cfe8fc'}}>
+       <Typography className={classes.title} color="#000000" fontWeight="fontWeightBold" gutterBottom>
+          Edit Profile Information 
+        </Typography>
       <div>
         <TextField
           id="fullName"
           className={classes.textField}
           label="Full Name"
-          margin="outlined"
+          margin="normal"
+          variant="outlined"
+          handleChange = {handleChange}
+          
         />
       </div>
       <div>
@@ -36,6 +69,7 @@ const ContactInfo = event => {
           label="Company Name"
           margin="normal"
           variant="outlined"
+          handleChange = {handleChange}
         />
       </div>
       <div>
@@ -45,6 +79,7 @@ const ContactInfo = event => {
           label="Email Address"
           margin="normal"
           variant="outlined"
+          handleChange = {handleChange}
         />
       </div>
       <div>
@@ -54,6 +89,7 @@ const ContactInfo = event => {
           label="Address"
           margin="normal"
           variant="outlined"
+          handleChange = {handleChange}
         />
       </div>
       <div>
@@ -63,6 +99,7 @@ const ContactInfo = event => {
           label="City"
           margin="normal"
           variant="outlined"
+          handleChange = {handleChange}
         />
       </div>
       <div>
@@ -72,6 +109,7 @@ const ContactInfo = event => {
           label="State"
           margin="normal"
           variant="outlined"
+          handleChange = {handleChange}
         />
       </div>
       <div>
@@ -79,11 +117,11 @@ const ContactInfo = event => {
             variant="contained" 
             className={classes.button}
             color = ""
+            handleSubmit={handleSubmit}
         >
         Update
         </Button>
-      </div>
-   
+      </div>   
     </form>
   );
 }
