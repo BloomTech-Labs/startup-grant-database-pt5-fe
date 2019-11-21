@@ -42,7 +42,7 @@ export default class DropZone extends Component {
           showPreviews={true}
           maxFileSize={5000000}
           onClose={this.handleClose.bind(this)}
-          file={this.files}
+          file={this.state.files}
         />
       </div>
     );

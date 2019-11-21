@@ -10,7 +10,7 @@ import {
   Divider,
   Button
 } from "@material-ui/core";
-import DropZone from "./DropZone";
+// import DropZone from "./DropZone";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -83,7 +83,7 @@ const AccountProfile = props => {
       </CardContent>
       <Divider />
       <CardActions className={classes.actions}>
-        <DropZone />
+        // <DropZone />
         <Button variant="text">Remove picture</Button>
       </CardActions>
     </Card>
