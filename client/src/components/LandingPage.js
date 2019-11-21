@@ -2,26 +2,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+// import grantlifyLogo from "../../public/images/logo/grantlifyLogo.png";
 
 const useStyles = makeStyles(() => ({
-  pageContainer: {
-    display: "flex",
-    flexFlow: "row wrap",
-    justifyContent: "center"
-  },
+  // pageContainer: {
+  //   display: "flex",
+  //   flexFlow: "row wrap",
+  //   justifyContent: "center"
+  // },
   anyContainer: {
     marginBottom: "3%",
     justifyContent: "center"
   },
-  bannerContainer: {
+  banner: {
     display: "flex",
     flexFlow: "row no wrap",
     justifyContent: "center",
-    width: "100%"
+    margin: "auto",
+    width: "51%"
   },
-  banner: {
-    display: "flex",
-    flexFlow: "row no wrap"
+  bannerImg: {
+    width: "20%"
+  },
+  bannerText: {
+    width: "80%",
+    marginBottom: "3%"
   },
   cardsContainer: {
     display: "flex",
@@ -32,9 +37,15 @@ const useStyles = makeStyles(() => ({
   card: {
     width: "51%",
     margin: "auto",
-    // marginBottom: "3%",
+    marginBottom: "2%",
+    boxSizing: "border-box",
+    padding: "1.5%",
     backgroundColor: "white"
   },
+  cardDetails: {
+    padding: "3.5%"
+  },
+  step: {},
   link: {
     textDecoration: "none",
     textDecorationLine: "underline",
@@ -46,22 +57,30 @@ const useStyles = makeStyles(() => ({
 
 const LandingPage = () => {
   const classes = useStyles();
+
   return (
-    <div classname={classes.pageContainer}>
-      <Box className={classes.bannerContainer}>
-        <Box name="banner" classname={classes.banner}>
+    <div className={classes.pageContainer}>
+      <Box className={classes.banner}>
+        {/* IMAGE BELOW */}
+        <Box className={classes.bannerImg}>
+          <img
+            alt="logo"
+            src="../../public/images/logo/grantlifyLogo.png"
+          ></img>
+        </Box>
+        {/* IMAGE ABOVE */}
+        <Box className={classes.bannerText}>
           <h2>Welcome to Grantlify!</h2>
           <p>We know how hard it is to get help for your startup.</p>
           <p>We're here to help.</p>
-          <Link to="/search" className={classes.link}>
-            Start Searching
-          </Link>
         </Box>
+
+        <Link to="/search" className={classes.link}>
+          Start Searching
+        </Link>
       </Box>
-      <Box
-        name="cards-container"
-        className={classes.cardsContainer && classes.anyContainer}
-      >
+
+      <Box className={classes.cardsContainer && classes.anyContainer}>
         <Box className={classes.card}>
           <h3>Our Goal</h3>
           <p>
