@@ -10,6 +10,7 @@ import {
   Divider,
   Button
 } from "@material-ui/core";
+import DropZone from "./DropZone";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -42,7 +43,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const AccountProfile = props => {
-  const { className, ...rest } = props;
+  const { className, files, ...rest } = props;
 
   const classes = useStyles();
 
@@ -77,14 +78,12 @@ const AccountProfile = props => {
               {moment().format("hh:mm A")} ({user.timezone})
             </Typography>
           </div>
-          <Avatar className={classes.avatar} src={user.avatar} />
+          <Avatar className={classes.avatar} src={props.files} />
         </div>
       </CardContent>
       <Divider />
       <CardActions className={classes.actions}>
-        <Button className={classes.uploadButton} variant="text">
-          Upload picture
-        </Button>
+        <DropZone />
         <Button variant="text">Remove picture</Button>
       </CardActions>
     </Card>
