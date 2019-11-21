@@ -83,7 +83,7 @@ const AccountProfile = props => {
       </CardContent>
       <Divider />
       <CardActions className={classes.actions}>
-        // <DropZone />
+        <Button variant="text">Upload picture</Button>
         <Button variant="text">Remove picture</Button>
       </CardActions>
     </Card>
