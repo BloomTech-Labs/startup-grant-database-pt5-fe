@@ -3,12 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Drawer } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import SettingsIcon from "@material-ui/icons/Settings";
+import ProfileBox from "./ProfileBox";
 
 const drawerWidth = 240;
 
@@ -21,13 +21,14 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    zIndex: 1,
+    marginTop: "15vh",
+    height: "85vh",
+    border: "none",
+    backgroundColor: "#c0f0f7"
   },
   toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default
-  },
   listitems: {
     zIndex: 2
   }
@@ -64,8 +65,8 @@ const SideBar = () => {
         }}
         anchor="left"
       >
+        <ProfileBox />
         <div className={classes.toolbar} />
-        <Divider />
         <List>
           {pages.map(page => (
             <ListItemLink
@@ -79,7 +80,6 @@ const SideBar = () => {
             </ListItemLink>
           ))}
         </List>
-        <Divider />
       </Drawer>
     </div>
   );

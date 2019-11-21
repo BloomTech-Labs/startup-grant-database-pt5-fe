@@ -16,6 +16,11 @@ const useStyles = makeStyles(() => ({
   card: {
     width: "50%",
     margin: "0 2%"
+  },
+  actions: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around"
   }
 }));
 
@@ -28,6 +33,7 @@ const AccountDetails = props => {
     firstName: "Claire",
     lastName: "Sinozich",
     email: "claire@claire.com",
+    company: "the company",
     phone: "",
     state: "Colorado",
     country: "USA"
@@ -314,12 +320,11 @@ const AccountDetails = props => {
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Phone Number"
+                label="Company"
                 margin="dense"
-                name="phone"
+                name="company"
                 onChange={handleChange}
-                type="number"
-                value={values.phone}
+                value={values.company}
                 variant="outlined"
               />
             </Grid>
@@ -359,8 +364,11 @@ const AccountDetails = props => {
           </Grid>
         </CardContent>
         <Divider />
-        <CardActions>
-          <Button color="primary" variant="contained">
+        <CardActions className={classes.actions}>
+          <Button
+            style={{ backgroundColor: "#2a87af", color: "#FFF" }}
+            variant="contained"
+          >
             Save details
           </Button>
         </CardActions>
