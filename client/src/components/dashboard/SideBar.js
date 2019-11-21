@@ -8,6 +8,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import SettingsIcon from "@material-ui/icons/Settings";
+import ProfileBox from "./ProfileBox";
 
 const drawerWidth = 240;
 
@@ -64,6 +65,7 @@ const SideBar = () => {
         }}
         anchor="left"
       >
+        <ProfileBox />
         <div className={classes.toolbar} />
         <List>
           {pages.map(page => (
