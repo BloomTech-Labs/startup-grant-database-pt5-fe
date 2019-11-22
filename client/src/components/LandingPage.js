@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-// import grantlifyLogo from "../../public/images/logo/grantlifyLogo.png";
 
 const useStyles = makeStyles(() => ({
   // pageContainer: {
@@ -19,19 +18,28 @@ const useStyles = makeStyles(() => ({
     flexFlow: "row no wrap",
     justifyContent: "center",
     margin: "auto",
-    width: "51%"
+    width: "51%",
+    maxHeight: "200px"
   },
   bannerImg: {
-    width: "20%"
+    width: "20%",
+    height: "inherit"
+  },
+  img: {
+    // cannot use 'inherit' value for some reason. 100% of the parent div resolves
+    // the height issue
+    height: "100%"
   },
   bannerText: {
     width: "80%",
+    height: "inherit",
     marginBottom: "3%"
   },
   cardsContainer: {
     display: "flex",
     flexFlow: "row wrap",
     width: "100%",
+    // maxHeight: "10px",
     justifyContent: "center"
   },
   card: {
@@ -45,7 +53,36 @@ const useStyles = makeStyles(() => ({
   cardDetails: {
     padding: "3.5%"
   },
-  step: {},
+  subtitle: {
+    width: "100%"
+  },
+  stepsContainer: {
+    width: "51%",
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "space between",
+    margin: "auto",
+    backgroundColor: "white"
+  },
+  stepsImgContainer: {
+    display: "flex",
+    flexFlow: "row wrap",
+    width: "35%",
+    height: "inherit"
+  },
+  stepsImg: {
+    height: "100%",
+    width: "100%"
+  },
+  listSteps: {
+    display: "flex",
+    flexFlow: "row wrap",
+    width: "64%"
+    // justifyContent: "center"
+  },
+  step: {
+    width: "100%"
+  },
   link: {
     textDecoration: "none",
     textDecorationLine: "underline",
@@ -54,6 +91,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#00A8A8"
   }
 }));
+// style={classes.paperContainer}
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -65,7 +103,8 @@ const LandingPage = () => {
         <Box className={classes.bannerImg}>
           <img
             alt="logo"
-            src="../../public/images/logo/grantlifyLogo.png"
+            src="/images/logo/grantlifyLogo.png"
+            className={classes.img}
           ></img>
         </Box>
         {/* IMAGE ABOVE */}
@@ -89,19 +128,26 @@ const LandingPage = () => {
             somehow overlooked and put them in one central location... for you.
           </p>
         </Box>
-        <Box className={classes.card}>
-          <h3>How It Works</h3>
-          <Box className="list-steps">
-            <Box className="step">
+        <Box className={classes.stepsContainer}>
+          <h3 className={classes.subtitle}>How It Works</h3>
+          <Box className={classes.stepsImgContainer}>
+            <img
+              alt="steps"
+              src="/images/logo/grantlifySteps.png"
+              className={classes.stepsImg}
+            />
+          </Box>
+          <Box className={classes.listSteps}>
+            <Box className={classes.step}>
               <p>step one</p>
             </Box>
-            <Box className="step">
+            <Box className={classes.step}>
               <p>step two</p>
             </Box>
-            <Box className="step">
+            <Box className={classes.step}>
               <p>step three</p>
             </Box>
-            <Box className="step">
+            <Box className={classes.step}>
               <p>step four</p>
             </Box>
           </Box>
