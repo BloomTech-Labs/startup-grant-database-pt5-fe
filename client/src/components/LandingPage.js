@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+// import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   // pageContainer: {
-  //   display: "flex",
-  //   flexFlow: "row wrap",
-  //   justifyContent: "center"
+  //   [theme.breakpoints.down("md")]: {
+  //     backgroundColor: "black"
+  //   }
   // },
   anyContainer: {
     marginBottom: "3%",
@@ -19,7 +21,11 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     margin: "auto",
     width: "51%",
-    maxHeight: "200px"
+    maxHeight: "200px",
+    [theme.breakpoints.down("md")]: {
+      width: "75%",
+      justifyContent: "space evenly"
+    }
   },
   bannerImg: {
     width: "20%",
@@ -39,7 +45,6 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexFlow: "row wrap",
     width: "100%",
-    // maxHeight: "10px",
     justifyContent: "center"
   },
   card: {
@@ -48,7 +53,10 @@ const useStyles = makeStyles(() => ({
     marginBottom: "2%",
     boxSizing: "border-box",
     padding: "1.5%",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    [theme.breakpoints.down("md")]: {
+      width: "70%"
+    }
   },
   cardDetails: {
     padding: "3.5%"
@@ -139,16 +147,22 @@ const LandingPage = () => {
           </Box>
           <Box className={classes.listSteps}>
             <Box className={classes.step}>
-              <p>step one</p>
+              <p>Create your account</p>
             </Box>
             <Box className={classes.step}>
-              <p>step two</p>
+              <p>
+                Complete short survey about your startup company and its
+                founders
+              </p>
             </Box>
             <Box className={classes.step}>
-              <p>step three</p>
+              <p>
+                Receive personalized recommendations and apply infinitely to
+                grants
+              </p>
             </Box>
             <Box className={classes.step}>
-              <p>step four</p>
+              <p>Get funded!</p>
             </Box>
           </Box>
         </Box>
