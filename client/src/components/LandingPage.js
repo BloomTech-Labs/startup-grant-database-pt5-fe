@@ -80,7 +80,12 @@ const useStyles = makeStyles(theme => ({
   },
   stepsImg: {
     height: "100%",
-    width: "100%"
+    width: "100%",
+    [theme.breakpoints.down("md")]: {},
+    [theme.breakpoints.down("sm")]: {
+      // backgroundColor: "black"
+      display: "none"
+    }
   },
   listSteps: {
     display: "flex",
@@ -91,15 +96,27 @@ const useStyles = makeStyles(theme => ({
   step: {
     width: "100%"
   },
-  link: {
+  signupLink: {
     textDecoration: "none",
     textDecorationLine: "underline",
     padding: "1.5% 2.5% 1.5% 2.5%",
     color: "white",
     backgroundColor: "#00A8A8"
+  },
+  searchLinkContainer: {
+    display: "flex",
+    flexFlow: "column wrap",
+    justifyContent: "center",
+    textDecoration: "none",
+    backgroundColor: "#f0fdfd"
+  },
+  searchLink: {
+    backgroundColor: "#00A8A8",
+    color: "white",
+    textDecorationLine: "underline",
+    padding: "8%"
   }
 }));
-// style={classes.paperContainer}
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -122,8 +139,8 @@ const LandingPage = () => {
           <p>We're here to help.</p>
         </Box>
 
-        <Link to="/search" className={classes.link}>
-          Start Searching
+        <Link to="/search" className={classes.searchLinkContainer}>
+          <div className={classes.searchLink}>Start Searching</div>
         </Link>
       </Box>
 
@@ -136,39 +153,43 @@ const LandingPage = () => {
             somehow overlooked and put them in one central location... for you.
           </p>
         </Box>
-        <Box className={classes.stepsContainer}>
-          <h3 className={classes.subtitle}>How It Works</h3>
-          <Box className={classes.stepsImgContainer}>
-            <img
-              alt="steps"
-              src="/images/logo/grantlifySteps.png"
-              className={classes.stepsImg}
-            />
+        <div>
+          <Box className={classes.stepsContainer}>
+            <h3 className={classes.subtitle}>How It Works</h3>
+
+            <Box className={classes.stepsImgContainer}>
+              <img
+                alt="steps"
+                src="/images/logo/grantlifySteps.png"
+                className={classes.stepsImg}
+              />
+            </Box>
+
+            <Box className={classes.listSteps}>
+              <Box className={classes.step}>
+                <p>Create your account</p>
+              </Box>
+              <Box className={classes.step}>
+                <p>
+                  Complete short survey about your startup company and its
+                  founders
+                </p>
+              </Box>
+              <Box className={classes.step}>
+                <p>
+                  Receive personalized recommendations and apply infinitely to
+                  grants
+                </p>
+              </Box>
+              <Box className={classes.step}>
+                <p>Get funded!</p>
+              </Box>
+            </Box>
           </Box>
-          <Box className={classes.listSteps}>
-            <Box className={classes.step}>
-              <p>Create your account</p>
-            </Box>
-            <Box className={classes.step}>
-              <p>
-                Complete short survey about your startup company and its
-                founders
-              </p>
-            </Box>
-            <Box className={classes.step}>
-              <p>
-                Receive personalized recommendations and apply infinitely to
-                grants
-              </p>
-            </Box>
-            <Box className={classes.step}>
-              <p>Get funded!</p>
-            </Box>
-          </Box>
-        </Box>
+        </div>
       </Box>
       <Box name="sign-up">
-        <Link to="#" className={classes.link}>
+        <Link to="/welcome" className={classes.signupLink}>
           Sign Up!
         </Link>
       </Box>
