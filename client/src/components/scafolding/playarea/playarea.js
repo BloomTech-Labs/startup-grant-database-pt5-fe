@@ -3,11 +3,9 @@ import { Route } from "react-router-dom";
 import Login from "../../../Authentication/Login";
 import Search from "./../../search/search.js";
 import ResultCard from "./../../search/resultcard.js";
-
 import DashBoard from "../../dashboard/DashBoard";
 import LandingPage from "../../LandingPage";
 import Settings from "../../dashboard/Settings";
-
 import "./playarea.css";
 import InitialSignupForm from "../../onboarding/Welcome";
 import Choose_Tags from "../../onboarding/Choose_Tags";

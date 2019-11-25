@@ -8,6 +8,13 @@
   text-align: center;
   margin: 0px;
   padding: 0px;
+  font-family: "Lato", sans-serif;
 }
 
+h1 {
+  font-family: "Montserrat", sans-serif;
+}
 
+h2 {
+  font-family: "Montserrat", sans-serif;
+}
