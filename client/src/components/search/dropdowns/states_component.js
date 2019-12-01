@@ -35,7 +35,7 @@ const StateComponent = (props) => {
     return (
       <Autocomplete
       multiple
-      id="checkboxes-states"
+      id="checkboxes-state"
       options={props.states}
       disableCloseOnSelect
       getOptionLabel={option => option.state_name}

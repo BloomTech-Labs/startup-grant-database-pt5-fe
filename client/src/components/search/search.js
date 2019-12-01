@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 //import './../search/search.css'
+
 import ResultCard from "./resultcard.js";
 import "./search.css";
 
@@ -23,6 +24,8 @@ function useProcessStates(e) {
   return checkedStates;
 }
 
+
+
 // const [checkedStates, setCheckedStates] = setCheckedStates([]);
 function useProcessQuery(
   state = "",
@@ -40,74 +43,90 @@ function useProcessQuery(
 }
 
 const Search = () => {
-  // Hooks to render the filters.
-  const [state, setStates] = useState([]);
-  const [elegibility, setElegibility] = useState([]);
-  const [category, setCategory] = useState([]);
-  const [grants, setGrants] = useState([]);
+    // Hooks to render the filters.
+    const [state, setStates] = useState([]);
+    const [elegibility, setElegibility] = useState([]);
+    const [category, setCategory] = useState([]);
+    const [grants, setGrants] = useState([]);
 
-  //Use Effect to load initial data for the dropdowns
-  useEffect(() => {
-    const fetchAll = async () => {
-      //Fetch States
-      const stateResult = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/states"
-      );
-      //Fetch Elegibility
-      const elegibilityResult = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/elegibility"
-      );
-      //Fetch Categories
-      const categoryResult = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/categories"
-      );
-      //Fetch Grants
-      const params = {
-        states: [1, 2]
-      };
+    const [filters, setFilters] = useState({
+        states:[],
+        counties:[],
+        amount:[],
+        elegibility:[],
+        category:[]
+    });
 
-      var grantResults = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/grants"
-      );
+    //Use Effect to load initial data for the dropdowns 
+    useEffect(() => {
+        const fetchAll = async () => {
+            //Fetch States
+            const stateResult = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/states',
+              );  
+              //Fetch Counties
+              const countyResult = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/counties',
+              );                
+              //Fetch Elegibility
+              const elegibilityResult = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/elegibility' 
+              );
+              //Fetch Categories
+              const categoryResult = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/categories' 
+              );
 
-      setStates(stateResult.data);
-      setElegibility(elegibilityResult.data);
-      setCategory(categoryResult.data);
-      setGrants(grantResults.data);
-    };
-    fetchAll();
-  }, []);
+              //Fetch Grants
+                const params = {
+                    filters
+                }
 
-  return (
-    <div className="searchholder">
-      <div className="filters">
-        <h2>Filters</h2>
-        <StateComponent states={state} processState={useProcessStates} />
-        <br />
-        <br />
-        <CountiesComponent states={"test"} />
-        <br />
-        <br />
-        <AmountComponent />
-        <br />
-        <br />
-        <ElegibilityComponent elegibility={elegibility} />
-        <br />
-        <br />
-        <CategoryComponent category={category} />
-      </div>
-      <div className="results">
-        <h2>Results</h2>
-        {grants.map((items, i) => {
-          return (
-            // <Link style={{ textDecoration: 'none', color: '#000000'}}to={`/search/${items.id}`}>
-            <ResultCard key={i} resultcard={items} />
-            // </Link>
-          );
-        })}
-      </div>
-    </div>
-  );
+            //   var grantResults = await axios(
+            //     'https://startup-grant-database-staging.herokuapp.com/api/grants/search', {params}
+            //   )
+              
+            setStates(stateResult.data);
+            setElegibility(elegibilityResult.data);
+            setCategory(categoryResult.data);
+            //setGrants(grantResults.data);
+        }; 
+        fetchAll()
+    }, []);
+   
+      
+    return (  
+        <div className='searchholder'>
+            
+            <div className='filters'>
+                <h2>Filters</h2>
+                    <StateComponent states={state} processState={useProcessStates} />
+                    <br/>
+                    <br/>
+                    <CountiesComponent filters={filters} setFilters={setFilters}/>
+                    <br/>
+                    <br/>
+                    <AmountComponent/>
+                    <br/>
+                    <br/>
+                    <ElegibilityComponent elegibility={elegibility} />
+                    <br/>
+                    <br/>
+                    <CategoryComponent category={category} />
+            </div>
+            <div className='results'>
+                <h2>Results</h2>          
+                    {grants.map((items, i) => {
+                           return (
+                            // <Link style={{ textDecoration: 'none', color: '#000000'}}to={`/search/${items.id}`}>
+                                <ResultCard key={i} resultcard={items}/> 
+                            // </Link>
+                           )   
+                    })}
+              
+            </div>
+        </div>
+    )
 };
 
 export default Search;

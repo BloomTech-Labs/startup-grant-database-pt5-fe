@@ -25,7 +25,7 @@ const AmountComponent = (props) => {
     return (
         <Autocomplete
         multiple
-        id="checkboxes-tags-demo"
+        id="checkboxes-amount"
         options={amounts}
         disableCloseOnSelect
         getOptionLabel={option => option.amount}
