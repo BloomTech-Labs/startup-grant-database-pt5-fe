@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 //Material UI components
 import Checkbox from '@material-ui/core/Checkbox';
@@ -11,23 +12,32 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const states = [
-    { state: 'Alabama' },
-    { state: 'Florida' },
-    { state: 'Texas'},
-    { state: 'California'},
-    { state: 'Colorado'}
-  ];
-
-
 const CountiesComponent = (props) => {
+  console.log('counties props',props)
+      const [counties, setCounty] = useState([]);
+      const {statesFilter} = props.filters.states;
+      //Use Effect to load initial data for the dropdowns 
+    //   useEffect(() => {
+    //     const fetchCounties = async () => {
+    //           //Fetch Counties
+    //           const json = JSON.stringify(statesFilter);
+    //           const params = {states: json};
+    //           console.log('my params', params)
+    //           const countyResult = await axios(
+    //             'https://startup-grant-database-staging.herokuapp.com/api/counties', params 
+    //           );                
+    //         setCounty(countyResult.data);
+    //     }; 
+    //     fetchCounties()
+    // }, []);
+
     return (
         <Autocomplete
         multiple
-        id="checkboxes-tags-demo"
-        options={states}
+        id="checkboxes-county"
+        options={counties}
         disableCloseOnSelect
-        getOptionLabel={option => option.state}
+        getOptionLabel={option => option.county_name}
         renderOption={(option, { selected }) => (
           <React.Fragment>
             <Checkbox
@@ -36,7 +46,7 @@ const CountiesComponent = (props) => {
               style={{ marginRight: 8 }}
               checked={selected}
             />
-            {option.state}
+            {option.county_name}
           </React.Fragment>
         )}
         style={{ width: '85%', alignContent: 'center' }}

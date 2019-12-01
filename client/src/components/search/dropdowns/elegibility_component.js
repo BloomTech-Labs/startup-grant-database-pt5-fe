@@ -16,7 +16,7 @@ const ElegibilityComponent = (props) => {
     return (
       <Autocomplete
       multiple
-      id="checkboxes-tags-demo"
+      id="checkboxes-eligibility"
       options={props.elegibility}
       disableCloseOnSelect
       getOptionLabel={option => option.elegibility_name}
