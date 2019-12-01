@@ -1,14 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
-import { Container, Card } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 import SavedCard from "./SavedCard";
 
-const useStyles = makeStyles(() => ({}));
+const useStyles = makeStyles(theme => ({
+  link: {
+    textDecoration: "none",
+    color: "#000000"
+  }
+}));
 
 const Saved = props => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
   const classes = useStyles();
 
@@ -29,12 +34,10 @@ const Saved = props => {
 
   return (
     <Container>
+      <h2>Saved Grants</h2>
       {grant.map(items => {
         return (
-          <Link
-            style={{ textDecoration: "none", color: "#000000" }}
-            to={`/search/${items.id}`}
-          >
+          <Link className={classes.link} to={`/search/${items.id}`}>
             <SavedCard key={items.id} grant={items} />
           </Link>
         );

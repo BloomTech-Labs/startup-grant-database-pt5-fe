@@ -1,40 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 //import './../search/search.css'
-import ResultCard from './resultcard.js';
+
+import ResultCard from "./resultcard.js";
 import "./search.css";
 
-
 //Dropdown with checkboxes built in components.
-import StateComponent from './dropdowns/states_component.js';
-import CountiesComponent from './dropdowns/counties_component.js';
-import AmountComponent from './dropdowns/amount_component.js';
+import StateComponent from "./dropdowns/states_component.js";
+import CountiesComponent from "./dropdowns/counties_component.js";
+import AmountComponent from "./dropdowns/amount_component.js";
 import ElegibilityComponent from "./dropdowns/elegibility_component.js";
 import CategoryComponent from "./dropdowns/category_component.js";
 
 //Hooks to store checked values from filters
 function useProcessStates(e) {
-    const [checkedStates, setCheckedStates] = useState([]);
-    const stateObject =[];
-    let isChecked = e.target.value
-    
-    setCheckedStates([...stateObject, isChecked]);
-    console.log(checkedStates)
-    return checkedStates;
-};
+  const [checkedStates, setCheckedStates] = useState([]);
+  const stateObject = [];
+  let isChecked = e.target.value;
+
+  setCheckedStates([...stateObject, isChecked]);
+  console.log(checkedStates);
+  return checkedStates;
+}
 
 
 
 // const [checkedStates, setCheckedStates] = setCheckedStates([]);
-function useProcessQuery (state='' , counties='', ammount='', elegibility='', category='') {
-    
-    alert('Hello');
-    console.log('my states', state)
-    console.log('my states', counties)
-    console.log('my states', ammount)
-    console.log('my states', elegibility)
-    console.log('my states', category)
+function useProcessQuery(
+  state = "",
+  counties = "",
+  ammount = "",
+  elegibility = "",
+  category = ""
+) {
+  alert("Hello");
+  console.log("my states", state);
+  console.log("my states", counties);
+  console.log("my states", ammount);
+  console.log("my states", elegibility);
+  console.log("my states", category);
 }
 
 const Search = () => {
@@ -122,8 +127,6 @@ const Search = () => {
             </div>
         </div>
     )
+};
 
-}
-
-export default Search
-
+export default Search;

@@ -29,6 +29,7 @@ const New = props => {
 
   return (
     <Container style={{ backgroundColor: "#F0FDFE", height: "100%" }}>
+      <h2>New Grants for You</h2>
       {grant.map(items => {
         return (
           <Link

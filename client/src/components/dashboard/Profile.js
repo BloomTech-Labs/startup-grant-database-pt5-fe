@@ -8,9 +8,9 @@ import {
   Avatar,
   Typography,
   Divider,
-  Button,
-  LinearProgress
+  Button
 } from "@material-ui/core";
+// import DropZone from "./DropZone";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -34,11 +34,16 @@ const useStyles = makeStyles(() => ({
   },
   uploadButton: {
     marginRight: "10px"
+  },
+  actions: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around"
   }
 }));
 
 const AccountProfile = props => {
-  const { className, ...rest } = props;
+  const { className, files, ...rest } = props;
 
   const classes = useStyles();
 
@@ -56,14 +61,14 @@ const AccountProfile = props => {
         <div className={classes.details}>
           <div>
             <Typography gutterBottom variant="h2">
-              Claire Sinozichs
+              {user.name}
             </Typography>
             <Typography
               className={classes.locationText}
               color="textSecondary"
               variant="body1"
             >
-              {user.city}, {user.country}
+              {user.state}, {user.country}
             </Typography>
             <Typography
               className={classes.dateText}
@@ -73,18 +78,12 @@ const AccountProfile = props => {
               {moment().format("hh:mm A")} ({user.timezone})
             </Typography>
           </div>
-          <Avatar className={classes.avatar} src={user.avatar} />
-        </div>
-        <div className={classes.progress}>
-          <Typography variant="body1">Profile Completeness: 70%</Typography>
-          <LinearProgress value={70} variant="determinate" />
+          <Avatar className={classes.avatar} src={props.files} />
         </div>
       </CardContent>
       <Divider />
-      <CardActions>
-        <Button className={classes.uploadButton} color="primary" variant="text">
-          Upload picture
-        </Button>
+      <CardActions className={classes.actions}>
+        <Button variant="text">Upload picture</Button>
         <Button variant="text">Remove picture</Button>
       </CardActions>
     </Card>
