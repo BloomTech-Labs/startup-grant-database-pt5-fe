@@ -11,6 +11,8 @@ import {
   TextField
 } from "@material-ui/core";
 
+import axios from "axios";
+
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
@@ -28,6 +30,20 @@ const AccountDetails = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
+
+  axios
+    .get("https://startup-grant-database.herokuapp.com/api/users", options)
+    .then(res => {
+      this.setState({
+        loggedIn: true,
+        user: res.data
+      });
+    })
+    .catch(error => {
+      this.setState({
+        loggedIn: false
+      });
+    });
 
   const [values, setValues] = useState({
     firstName: "Claire",
@@ -289,7 +305,7 @@ const AccountDetails = props => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={user.firstName}
                 variant="outlined"
               />
             </Grid>
@@ -301,7 +317,7 @@ const AccountDetails = props => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={user.lastName}
                 variant="outlined"
               />
             </Grid>
@@ -313,7 +329,7 @@ const AccountDetails = props => {
                 name="email"
                 onChange={handleChange}
                 required
-                value={values.email}
+                value={user.email}
                 variant="outlined"
               />
             </Grid>
@@ -324,7 +340,7 @@ const AccountDetails = props => {
                 margin="dense"
                 name="company"
                 onChange={handleChange}
-                value={values.company}
+                value={user.company}
                 variant="outlined"
               />
             </Grid>
@@ -339,7 +355,7 @@ const AccountDetails = props => {
                 select
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
-                value={values.state}
+                value={user.state}
                 variant="outlined"
               >
                 {states.map(option => (
@@ -357,7 +373,7 @@ const AccountDetails = props => {
                 name="country"
                 onChange={handleChange}
                 required
-                value={values.country}
+                value={user.country}
                 variant="outlined"
               />
             </Grid>
