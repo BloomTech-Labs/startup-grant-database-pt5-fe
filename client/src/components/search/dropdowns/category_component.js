@@ -16,7 +16,7 @@ const CategoryComponent = (props) => {
     return (
       <Autocomplete
       multiple
-      id="checkboxes-tags-demo"
+      id="checkboxes-category"
       options={props.category}
       disableCloseOnSelect
       getOptionLabel={option => option.category_name}
