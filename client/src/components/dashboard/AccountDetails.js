@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -29,30 +29,20 @@ const useStyles = makeStyles(() => ({
 const AccountDetails = props => {
   const { className, ...rest } = props;
 
+  const [values, setValues] = useState([]);
+
   const classes = useStyles();
 
-  axios
-    .get("https://startup-grant-database.herokuapp.com/api/users", options)
-    .then(res => {
-      this.setState({
-        loggedIn: true,
-        user: res.data
+  useEffect(() => {
+    axios
+      .get("https://startup-grant-database.herokuapp.com/api/users/1")
+      .then(res => {
+        console.log(res);
+        setValues(res.data);
+      })
+      .catch(err => {
+        console.error(err.message);
       });
-    })
-    .catch(error => {
-      this.setState({
-        loggedIn: false
-      });
-    });
-
-  const [values, setValues] = useState({
-    firstName: "Claire",
-    lastName: "Sinozich",
-    email: "claire@claire.com",
-    company: "the company",
-    phone: "",
-    state: "Colorado",
-    country: "USA"
   });
 
   const handleChange = event => {
@@ -61,6 +51,8 @@ const AccountDetails = props => {
       [event.target.name]: event.target.value
     });
   };
+
+  //onBlur
 
   const states = [
     {
@@ -305,7 +297,7 @@ const AccountDetails = props => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={user.firstName}
+                value={values.firstName}
                 variant="outlined"
               />
             </Grid>
@@ -317,7 +309,7 @@ const AccountDetails = props => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={user.lastName}
+                value={values.lastName}
                 variant="outlined"
               />
             </Grid>
@@ -329,7 +321,7 @@ const AccountDetails = props => {
                 name="email"
                 onChange={handleChange}
                 required
-                value={user.email}
+                value={values.email}
                 variant="outlined"
               />
             </Grid>
@@ -340,7 +332,7 @@ const AccountDetails = props => {
                 margin="dense"
                 name="company"
                 onChange={handleChange}
-                value={user.company}
+                value={values.company}
                 variant="outlined"
               />
             </Grid>
@@ -355,7 +347,7 @@ const AccountDetails = props => {
                 select
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
-                value={user.state}
+                value={values.state}
                 variant="outlined"
               >
                 {states.map(option => (
@@ -373,7 +365,7 @@ const AccountDetails = props => {
                 name="country"
                 onChange={handleChange}
                 required
-                value={user.country}
+                value={values.country}
                 variant="outlined"
               />
             </Grid>

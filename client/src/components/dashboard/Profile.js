@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { makeStyles } from "@material-ui/styles";
 import {
@@ -10,6 +10,8 @@ import {
   Divider,
   Button
 } from "@material-ui/core";
+
+import axios from "axios";
 // import DropZone from "./DropZone";
 
 const useStyles = makeStyles(() => ({
@@ -45,15 +47,29 @@ const useStyles = makeStyles(() => ({
 const AccountProfile = props => {
   const { className, files, ...rest } = props;
 
+  const [values, setValues] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://startup-grant-database.herokuapp.com/api/users/1")
+      .then(res => {
+        console.log(res);
+        setValues(res.data);
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  });
+
   const classes = useStyles();
 
-  const user = {
-    name: "Claire Sinozich",
-    state: "Colorado",
-    country: "USA",
-    timezone: "GTM-7",
-    avatar: "/images/avatars/headshot.jpg"
-  };
+  // const user = {
+  //   name: "Claire Sinozich",
+  //   state: "Colorado",
+  //   country: "USA",
+  //   timezone: "GTM-7",
+  //   avatar: "/images/avatars/headshot.jpg"
+  // };
 
   return (
     <Card {...rest} className={(classes.root, classes.card)}>
@@ -61,21 +77,21 @@ const AccountProfile = props => {
         <div className={classes.details}>
           <div>
             <Typography gutterBottom variant="h2">
-              {user.name}
+              {values.name}
             </Typography>
             <Typography
               className={classes.locationText}
               color="textSecondary"
               variant="body1"
             >
-              {user.state}, {user.country}
+              {values.state}, {values.country}
             </Typography>
             <Typography
               className={classes.dateText}
               color="textSecondary"
               variant="body1"
             >
-              {moment().format("hh:mm A")} ({user.timezone})
+              {moment().format("hh:mm A")}
             </Typography>
           </div>
           <Avatar className={classes.avatar} src={props.files} />
