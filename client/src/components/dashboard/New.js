@@ -16,10 +16,10 @@ const New = props => {
 
   useEffect(() => {
     axios
-      .get("https://startup-grant-database.herokuapp.com/api/users/1")
+      .get("https://startup-grant-database-staging.herokuapp.com/api/grants")
       .then(res => {
         console.log(res);
-        setNewGrants(res.savedGrants.data);
+        setNewGrants(res.data);
       })
       .catch(err => {
         console.error(err.message);
@@ -43,21 +43,25 @@ const New = props => {
   //   }
   // ];
 
-  return (
-    <Container style={{ backgroundColor: "#F0FDFE", height: "100%" }}>
-      <h2>New Grants for You</h2>
-      {newGrants.map(items => {
-        return (
-          <Link
-            style={{ textDecoration: "none", color: "#000000" }}
-            to={`/search/${items.id}`}
-          >
-            <NewCard key={items.id} grant={items} />
-          </Link>
-        );
-      })}
-    </Container>
-  );
+  if (newGrants == undefined) {
+    return <h1>Loading...</h1>;
+  } else {
+    return (
+      <Container style={{ backgroundColor: "#F0FDFE", height: "100%" }}>
+        <h2>New Grants for You</h2>
+        {newGrants.slice(0, 5).map(items => {
+          return (
+            <Link
+              style={{ textDecoration: "none", color: "#000000" }}
+              to={`/search/${items.id}`}
+            >
+              <NewCard key={items.id} grant={items} />
+            </Link>
+          );
+        })}
+      </Container>
+    );
+  }
 };
 
 export default New;
