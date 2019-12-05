@@ -49,6 +49,8 @@ const AccountProfile = props => {
 
   const [values, setValues] = useState([]);
 
+  const id = localStorage.getItem("id");
+
   useEffect(() => {
     // axios
     //   .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
@@ -63,7 +65,7 @@ const AccountProfile = props => {
     const fetchAll = async () => {
       //Fetch
       const userResult = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/users/1"
+        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
       );
       setValues(userResult.data.accountData);
     };

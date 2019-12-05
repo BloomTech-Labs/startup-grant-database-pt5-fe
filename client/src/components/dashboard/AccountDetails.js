@@ -33,9 +33,13 @@ const AccountDetails = props => {
 
   const classes = useStyles();
 
+  const id = localStorage.getItem("id");
+
   useEffect(() => {
     axios
-      .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
+      .get(
+        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
+      )
       .then(res => {
         console.log(res);
         setValues(res.data);

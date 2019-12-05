@@ -17,11 +17,15 @@ const useStyles = makeStyles(theme => ({
 const Saved = props => {
   const { className } = props;
 
+  const id = localStorage.getItem("id");
+
   const [savedGrants, setSavedGrants] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
+      .get(
+        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
+      )
       .then(res => {
         console.log(res);
         setSavedGrants(res.data.pinnedGrants);

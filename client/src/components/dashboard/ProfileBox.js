@@ -33,10 +33,12 @@ const ProfileBox = props => {
 
   const [values, setValues] = useState([]);
 
+  const id = localStorage.getItem("id");
+
   useEffect(() => {
     const fetchAll = async () => {
       const userResult = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/users/1"
+        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
       );
       setValues(userResult.data.accountData);
     };
