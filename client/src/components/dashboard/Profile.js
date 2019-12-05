@@ -50,16 +50,25 @@ const AccountProfile = props => {
   const [values, setValues] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://startup-grant-database.herokuapp.com/api/users/1")
-      .then(res => {
-        console.log(res);
-        setValues(res.data);
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
-  });
+    // axios
+    //   .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
+    //   .then(res => {
+    //     console.log(res);
+    //     setValues(res.data);
+    //   })
+    //   .catch(err => {
+    //     console.error(err.message);
+    //   });
+
+    const fetchAll = async () => {
+      //Fetch
+      const userResult = await axios(
+        "https://startup-grant-database-staging.herokuapp.com/api/users/1"
+      );
+      setValues(userResult.data.accountData);
+    };
+    fetchAll();
+  }, []);
 
   const classes = useStyles();
 
@@ -71,39 +80,53 @@ const AccountProfile = props => {
   //   avatar: "/images/avatars/headshot.jpg"
   // };
 
-  return (
-    <Card {...rest} className={(classes.root, classes.card)}>
-      <CardContent>
-        <div className={classes.details}>
-          <div>
-            <Typography gutterBottom variant="h2">
-              {values.name}
-            </Typography>
-            <Typography
-              className={classes.locationText}
-              color="textSecondary"
-              variant="body1"
-            >
-              {values.state}, {values.country}
-            </Typography>
-            <Typography
-              className={classes.dateText}
-              color="textSecondary"
-              variant="body1"
-            >
-              {moment().format("hh:mm A")}
-            </Typography>
+  console.log("user", values[0]);
+
+  const first = values[0];
+
+  console.log("first", first);
+
+  if (first === undefined) {
+    return <h1>Loading...</h1>;
+  } else {
+    return (
+      <Card {...rest} className={(classes.root, classes.card)}>
+        <CardContent>
+          <div className={classes.details}>
+            <div>
+              <Typography gutterBottom variant="h2">
+                {first.first_name} {first.last_name}
+              </Typography>
+              <Typography
+                className={classes.locationText}
+                color="textSecondary"
+                variant="body1"
+              >
+                {first.address_one}
+                <br />
+                {first.address_two}
+                <br />
+                {first.zip_code}
+              </Typography>
+              <Typography
+                className={classes.dateText}
+                color="textSecondary"
+                variant="body1"
+              >
+                {moment().format("hh:mm A")}
+              </Typography>
+            </div>
+            <Avatar className={classes.avatar} src={props.files} />
           </div>
-          <Avatar className={classes.avatar} src={props.files} />
-        </div>
-      </CardContent>
-      <Divider />
-      <CardActions className={classes.actions}>
-        <Button variant="text">Upload picture</Button>
-        <Button variant="text">Remove picture</Button>
-      </CardActions>
-    </Card>
-  );
+        </CardContent>
+        <Divider />
+        <CardActions className={classes.actions}>
+          <Button variant="text">Upload picture</Button>
+          <Button variant="text">Remove picture</Button>
+        </CardActions>
+      </Card>
+    );
+  }
 };
 
 export default AccountProfile;

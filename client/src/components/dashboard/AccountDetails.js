@@ -35,7 +35,7 @@ const AccountDetails = props => {
 
   useEffect(() => {
     axios
-      .get("https://startup-grant-database.herokuapp.com/api/users/1")
+      .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
       .then(res => {
         console.log(res);
         setValues(res.data);
@@ -43,7 +43,7 @@ const AccountDetails = props => {
       .catch(err => {
         console.error(err.message);
       });
-  });
+  }, []);
 
   const handleChange = event => {
     setValues({
@@ -297,7 +297,7 @@ const AccountDetails = props => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.first_name}
                 variant="outlined"
               />
             </Grid>
@@ -309,7 +309,7 @@ const AccountDetails = props => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.last_name}
                 variant="outlined"
               />
             </Grid>
@@ -332,7 +332,7 @@ const AccountDetails = props => {
                 margin="dense"
                 name="company"
                 onChange={handleChange}
-                value={values.company}
+                value={values.organization_name}
                 variant="outlined"
               />
             </Grid>
