@@ -78,7 +78,6 @@ const Choose_Tags = () => {
   return (
     <Paper className="paper">
       <h1>Choose Tags that apply to your founders</h1>
-
       {founderTags.map(data => {
         return (
           <SingleTag
@@ -91,7 +90,12 @@ const Choose_Tags = () => {
         );
       })}
       <Link to="/category-tags">
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
           Next
         </Button>
       </Link>

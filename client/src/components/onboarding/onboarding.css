@@ -2,12 +2,11 @@ body {
     background-color: #c0f0f7;
 }
 
-/* Tags styling */
+/* Tags stlystylinging */
 .paper {
     border: solid .5px grey;
     width: 70%;
-    margin: auto;
-    margin: 100px;
+    margin: 70px auto;
     padding: 30px;
 }
 
