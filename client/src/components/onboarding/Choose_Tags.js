@@ -21,41 +21,36 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const initialFounderTags = [
-  { key: 0, label: 'Black', selected: false },
-  { key: 1, label: 'LBGTQ', selected: false },
-  { key: 2, label: 'Asian', selected: false },
-  { key: 3, label: 'Women', selected: false },
-  { key: 4, label: 'Veteran', selected: false },
-  { key: 5, label: 'Student', selected: false },
-  { key: 6, label: 'Native American', selected: false }
-];
+// const initialFounderTags = [
+//   { key: 0, label: 'Black', selected: false },
+//   { key: 1, label: 'LBGTQ', selected: false },
+//   { key: 2, label: 'Asian', selected: false },
+//   { key: 3, label: 'Women', selected: false },
+//   { key: 4, label: 'Veteran', selected: false },
+//   { key: 5, label: 'Student', selected: false },
+//   { key: 6, label: 'Native American', selected: false }
+// ];
 
 //Hooks
 const Choose_Tags = () => {
   const classes = useStyles();
-  const [founderTags, setFounderTags] = useState(initialFounderTags);
+  const [companyTags, setCompanyTags] = useState([]);
 
-  //Use Effect to load initial data for the dropdowns
-  // useEffect(() => {
-  //   const fetchAll = async () => {
-  //     //Fetch Elegibility
-  //     const elegibilityResult = await axios(
-  //       'https://startup-grant-database-staging.herokuapp.com/api/elegibility'
-  //     );
-  //     //Fetch Categories
-  //     const categoryResult = await axios(
-  //       'https://startup-grant-database-staging.herokuapp.com/api/categories'
-  //     );
-  //     setFounderTags(elegibilityResult.data);
-  //     setCompanyTags(categoryResult.data);
-  //   };
-  //   fetchAll();
-  // }, []);
+  // Use Effect to load initial data for the dropdowns
+  useEffect(() => {
+    const fetchAll = async () => {
+      //Fetch Categories
+      const categoryResult = await axios(
+        'https://startup-grant-database-staging.herokuapp.com/api/categories'
+      );
+      setCompanyTags(categoryResult.data);
+    };
+    fetchAll();
+  }, []);
 
   //Handle selected tags
   const handleSelected = chipToSelect => () => {
-    setFounderTags(founderTags =>
+    setCompanyTags(founderTags =>
       founderTags.map(chip => {
         if (chip.key === chipToSelect.key) {
           let style = chipToSelect.style == 'secondary' ? '' : 'secondary';
@@ -71,19 +66,21 @@ const Choose_Tags = () => {
   };
 
   const handleSubmit = () => {
-    const result = [...founderTags.filter(chip => chip.selected === true)];
+    const result = [...companyTags.filter(chip => chip.selected === true)];
     console.log(result);
   };
+
+  //TODO: Fix issue with the selected key in the JSON array
 
   return (
     <Paper className="paper">
       <h1>Choose Tags that apply to your founders</h1>
-      {founderTags.map(data => {
+      {companyTags.map(data => {
         return (
           <SingleTag
-            key={data.key}
-            {...data}
-            data={data}
+            key={data.id}
+            {...data.category_name}
+            data={data.category_name}
             classes={classes}
             handleSelected={handleSelected}
           />
