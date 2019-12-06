@@ -2,6 +2,7 @@ body {
     background-color: #c0f0f7;
 }
 
+/* Tags styling */
 .paper {
     border: solid .5px grey;
     width: 70%;
@@ -9,6 +10,18 @@ body {
     margin: 100px;
     padding: 30px;
 }
+
+.paper h1 {
+    padding: 40px;
+}
+
+.paper button {
+    margin: auto;
+    display: block;
+    margin-top: 50px;
+}
+
+/* End of Tags styling */
 
 .container {
     border: 2px solid lightgrey;

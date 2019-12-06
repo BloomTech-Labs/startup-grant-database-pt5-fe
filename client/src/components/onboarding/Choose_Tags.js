@@ -4,9 +4,8 @@ import Button from '@material-ui/core/Button';
 import '../onboarding/onboarding.css';
 import Paper from '@material-ui/core/Paper';
 import SingleTag from '../onboarding/SingleTag';
-import CategoryTags from '../onboarding/CategoryTags';
 
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 //Styles
@@ -32,25 +31,10 @@ const initialFounderTags = [
   { key: 6, label: 'Native American', selected: false }
 ];
 
-const initialCompanyTags = [
-  { key: 7, label: 'Social Mission', selected: false },
-  { key: 8, label: 'Agriculture and Biotech', selected: false },
-  { key: 9, label: 'AI and Machine Learning=', selected: false },
-  { key: 10, label: 'Entertainment', selected: false },
-  { key: 11, label: 'Clean and Renewable Energy', selected: false },
-  { key: 12, label: 'Health and mental wellness', selected: false },
-  { key: 13, label: 'Food and Drink', selected: false },
-  { key: 14, label: 'Financial Serices', selected: false },
-  { key: 15, label: 'Ecommerce', selected: false },
-  { key: 16, label: 'Internet of things', selected: false },
-  { key: 17, label: 'Social and Lifestyle', selected: false }
-];
-
 //Hooks
 const Choose_Tags = () => {
   const classes = useStyles();
   const [founderTags, setFounderTags] = useState(initialFounderTags);
-  const [companyTags, setCompanyTags] = useState(initialCompanyTags);
 
   //Use Effect to load initial data for the dropdowns
   // useEffect(() => {
@@ -81,41 +65,18 @@ const Choose_Tags = () => {
             style
           };
         }
-
-        return chip;
-      })
-    );
-  };
-
-  const handleCompanySelectedtag = chipToSelect => () => {
-    setCompanyTags(companyTags =>
-      companyTags.map(chip => {
-        if (chip.key === chipToSelect.key) {
-          let style = chipToSelect.style == 'secondary' ? '' : 'secondary';
-          return {
-            ...chipToSelect,
-            selected: !chipToSelect.selected,
-            style
-          };
-        }
-
         return chip;
       })
     );
   };
 
   const handleSubmit = () => {
-    const result = [
-      ...founderTags.filter(chip => chip.selected === true),
-      ...companyTags.filter(chip => chip.selected === true)
-    ];
+    const result = [...founderTags.filter(chip => chip.selected === true)];
     console.log(result);
   };
 
   return (
     <Paper className="paper">
-      <br></br>
-      <br></br>
       <h1>Choose Tags that apply to your founders</h1>
 
       {founderTags.map(data => {
@@ -129,14 +90,11 @@ const Choose_Tags = () => {
           />
         );
       })}
-      <br></br>
-      <br></br>
       <Link to="/category-tags">
         <Button type="submit" variant="contained" color="primary">
           Next
         </Button>
       </Link>
-      <Route path="/category-tags" component={CategoryTags} exact />
     </Paper>
   );
 };

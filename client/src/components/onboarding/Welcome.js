@@ -240,7 +240,7 @@ const InitialSignupForm = props => {
               Next
             </Button>
           </Link>
-          <Route path="/Choose_Tags" component={Choose_Tags} exact />
+          <Route path="/Choose_Tags" component={Choose_Tags} />
         </form>
       </div>
     </Paper>
