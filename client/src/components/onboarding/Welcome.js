@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Choose_Tags from "../onboarding/Choose_Tags";
-import "../onboarding/onboarding.css";
-import { Route, Link } from "react-router-dom";
-import Input from "@material-ui/core/Input";
-import Paper from "@material-ui/core/Paper";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Choose_Tags from './Choose_Tags';
+import '../onboarding/onboarding.css';
+import { Route, Link } from 'react-router-dom';
+import Input from '@material-ui/core/Input';
+import Paper from '@material-ui/core/Paper';
 
 const SimpleSelect = () => {
   const useStyles = makeStyles(theme => ({
     container: {
-      display: "flex",
-      flexWrap: "wrap"
+      display: 'flex',
+      flexWrap: 'wrap'
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -26,17 +26,17 @@ const SimpleSelect = () => {
   }));
   const userTypes = [
     {
-      value: "Grant_Receiver",
-      label: "I am looking for Grants"
+      value: 'Grant_Receiver',
+      label: 'I am looking for Grants'
     },
     {
-      value: "Grant_Giver",
-      label: "I am looking to provide money to startups"
+      value: 'Grant_Giver',
+      label: 'I am looking to provide money to startups'
     }
   ];
 
   const classes = useStyles();
-  const [userType, setUserType] = useState("Grant_Receiver");
+  const [userType, setUserType] = useState('Grant_Receiver');
 
   const handleChange = event => {
     setUserType(event.target.value);
@@ -81,8 +81,8 @@ const SimpleSelect = () => {
 const Inputs = () => {
   const useStyles = makeStyles(theme => ({
     container: {
-      display: "flex",
-      flexWrap: "wrap"
+      display: 'flex',
+      flexWrap: 'wrap'
     },
     input: {
       margin: theme.spacing(1)
@@ -91,7 +91,7 @@ const Inputs = () => {
 
   const classes = useStyles();
   const [inputValue, setInputValue] = useState({
-    companyName: ""
+    companyName: ''
   });
 
   const onValueChange = event => {
@@ -125,9 +125,9 @@ const Inputs = () => {
 const StateSelect = () => {
   const useStyles = makeStyles(theme => ({
     container: {
-      display: "flex",
-      flexWrap: "wrap",
-      alignContent: "center"
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignContent: 'center'
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -141,25 +141,25 @@ const StateSelect = () => {
 
   const states = [
     {
-      value: "NY",
-      label: "NY"
+      value: 'NY',
+      label: 'NY'
     },
     {
-      value: "NJ",
-      label: "NJ"
+      value: 'NJ',
+      label: 'NJ'
     },
     {
-      value: "CA",
-      label: "CA"
+      value: 'CA',
+      label: 'CA'
     },
     {
-      value: "UT",
-      label: "UT"
+      value: 'UT',
+      label: 'UT'
     }
   ];
 
   const classes = useStyles();
-  const [userType, setUserType] = useState("NY");
+  const [userType, setUserType] = useState('NY');
 
   const handleChange = event => {
     event.preventDefault();
@@ -207,9 +207,9 @@ const StateSelect = () => {
 const InitialSignupForm = props => {
   const useStyles = makeStyles(theme => ({
     root: {
-      display: "flex",
-      justifyContent: "center",
-      flexWrap: "wrap",
+      display: 'flex',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
       padding: theme.spacing(0.5)
     },
     chip: {

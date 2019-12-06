@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import '../onboarding/onboarding.css';
 import Paper from '@material-ui/core/Paper';
 import SingleTag from '../onboarding/SingleTag';
-import CategoryTags from '../onboarding/CategoryTags';
 
-import { Route, Link } from 'react-router-dom';
-import axios from 'axios';
-
-//Styles
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -46,30 +41,11 @@ const initialCompanyTags = [
   { key: 17, label: 'Social and Lifestyle', selected: false }
 ];
 
-//Hooks
-const Choose_Tags = () => {
+const CategoryTags = () => {
   const classes = useStyles();
   const [founderTags, setFounderTags] = useState(initialFounderTags);
   const [companyTags, setCompanyTags] = useState(initialCompanyTags);
 
-  //Use Effect to load initial data for the dropdowns
-  // useEffect(() => {
-  //   const fetchAll = async () => {
-  //     //Fetch Elegibility
-  //     const elegibilityResult = await axios(
-  //       'https://startup-grant-database-staging.herokuapp.com/api/elegibility'
-  //     );
-  //     //Fetch Categories
-  //     const categoryResult = await axios(
-  //       'https://startup-grant-database-staging.herokuapp.com/api/categories'
-  //     );
-  //     setFounderTags(elegibilityResult.data);
-  //     setCompanyTags(categoryResult.data);
-  //   };
-  //   fetchAll();
-  // }, []);
-
-  //Handle selected tags
   const handleSelected = chipToSelect => () => {
     setFounderTags(founderTags =>
       founderTags.map(chip => {
@@ -116,7 +92,7 @@ const Choose_Tags = () => {
     <Paper className="paper">
       <br></br>
       <br></br>
-      <h1>Choose Tags that apply to your founders</h1>
+      {/* <h1>Choose Tags that apply to your founders</h1>
 
       {founderTags.map(data => {
         return (
@@ -130,15 +106,31 @@ const Choose_Tags = () => {
         );
       })}
       <br></br>
+      <br></br> */}
+      <h1>Choose Tags that apply to your founders</h1>
+      {companyTags.map(data => {
+        return (
+          <SingleTag
+            key={data.key}
+            {...data}
+            data={data}
+            classes={classes}
+            handleSelected={handleCompanySelectedtag}
+          />
+        );
+      })}
       <br></br>
-      <Link to="/category-tags">
-        <Button type="submit" variant="contained" color="primary">
-          Next
-        </Button>
-      </Link>
-      <Route path="/category-tags" component={CategoryTags} exact />
+      <br></br>
+      <Button
+        type="button"
+        onClick={handleSubmit}
+        variant="contained"
+        color="primary"
+      >
+        Next
+      </Button>
     </Paper>
   );
 };
 
-export default Choose_Tags;
+export default CategoryTags;
