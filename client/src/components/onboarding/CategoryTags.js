@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import '../onboarding/onboarding.css';
 import Paper from '@material-ui/core/Paper';
 import SingleTag from '../onboarding/SingleTag';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -54,12 +54,23 @@ const CategoryTags = () => {
   };
 
   const handleSubmit = () => {
-    // const result = [...elegibilityTags.filter(chip => chip.selected === true)];
-    // console.log(result);
+    const result = [
+      ...elegibilityTags.filter(chip => chip.style === 'secondary')
+    ];
+    const userId = localStorage.getItem('id');
+    result.map(selection => {
+      const data = { user_id: userId, eligibility_id: selection.id };
+      axios
+        .post(`${process.env.REACT_APP_API}/api/users/eli`, data)
+        .then(res => {
+          console.log('Success!', res);
+        })
+        .catch(err => {
+          //Invalid token or connection issue
+          console.log('Error', err);
+        });
+    });
   };
-
-  //TODO: Fix issue with the selected key in the JSON array
-  //1-Try fixing the missing selected field by selecting base on ID
 
   return (
     <Paper className="paper">
@@ -76,14 +87,16 @@ const CategoryTags = () => {
           />
         );
       })}
-      <Button
-        type="button"
-        onClick={handleSubmit}
-        variant="contained"
-        color="primary"
-      >
-        Submit
-      </Button>
+      <Link to="/dashboard">
+        <Button
+          type="button"
+          onClick={handleSubmit}
+          variant="contained"
+          color="primary"
+        >
+          Submit
+        </Button>
+      </Link>
     </Paper>
   );
 };
