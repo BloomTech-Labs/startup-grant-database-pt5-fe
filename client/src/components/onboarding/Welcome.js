@@ -12,11 +12,6 @@ import '../onboarding/onboarding.css';
 import { useForm } from './useInput';
 import axios from 'axios';
 
-//TODO:
-// 1. Fix styling [x]
-// 2. If Grant provider is selected Request some info
-// 3.Pass data to server
-
 const InitialSignupForm = props => {
   //Call back for form submit must be declare before the custom hook
   const submitCallBack = values => {
@@ -40,6 +35,8 @@ const InitialSignupForm = props => {
   const [values, handleChanges, handleSubmit] = useForm(
     {
       user_type: '',
+      first_name: '',
+      last_name: '',
       telephone: '',
       department: '',
       organization_name: '',
@@ -71,6 +68,22 @@ const InitialSignupForm = props => {
               <MenuItem value="1">Grant Provider</MenuItem>
             </Select>
           </FormControl>
+          <Input
+            placeholder="First Name"
+            type="text"
+            value={values.first_name}
+            onChange={handleChanges}
+            className="input-field"
+            name="first_name"
+          />
+          <Input
+            placeholder="Last Name"
+            type="text"
+            value={values.last_name}
+            onChange={handleChanges}
+            className="input-field"
+            name="last_name"
+          />
           <Input
             placeholder="Organization"
             type="text"
