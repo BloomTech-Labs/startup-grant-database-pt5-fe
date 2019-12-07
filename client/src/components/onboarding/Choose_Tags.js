@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, CircularProgress } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import '../onboarding/onboarding.css';
-import Paper from '@material-ui/core/Paper';
+import { Paper, makeStyles, CircularProgress, Button } from '@material-ui/core';
 import SingleTag from '../onboarding/SingleTag';
+import '../onboarding/onboarding.css';
 
 import { Link } from 'react-router-dom';
 import axios from 'axios';
