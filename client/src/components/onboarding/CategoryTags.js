@@ -82,7 +82,7 @@ const CategoryTags = props => {
       {isSubmited ? (
         <div>
           <CircularProgress />
-          <h1>Summited</h1>
+          <h1>Submitted</h1>
         </div>
       ) : (
         <div>
