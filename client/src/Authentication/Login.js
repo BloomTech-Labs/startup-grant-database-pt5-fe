@@ -32,11 +32,12 @@ const Login = props => {
                 localStorage.setItem('id', id);
                 // SAVE TOKEN TO LOCAL STORAGE FOR PRIVATE ROUTE
                 localStorage.setItem('authorization', idToken);
-                if (res.data.user_type !== null) {
-                  props.history.push('/dashboard');
-                } else {
-                  props.history.push('/welcome');
-                }
+                props.history.push('/welcome');
+                // if (res.data.user_type !== null) {
+                //   props.history.push('/dashboard');
+                // } else {
+                //   props.history.push('/welcome');
+                // }
               })
               .catch(err => {
                 //Invalid token or connection issue
