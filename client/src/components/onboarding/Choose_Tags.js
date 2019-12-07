@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, CircularProgress } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import '../onboarding/onboarding.css';
 import Paper from '@material-ui/core/Paper';
@@ -25,14 +25,16 @@ const useStyles = makeStyles(theme => ({
 const Choose_Tags = () => {
   const classes = useStyles();
   const [companyTags, setCompanyTags] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Use Effect to load initial data for the dropdowns
+  // Use Effect to load initial data for the tags
   useEffect(() => {
     const fetchAll = async () => {
       //Fetch Categories
       const categoryResult = await axios(
         'https://startup-grant-database-staging.herokuapp.com/api/categories'
       );
+      setIsLoading(false);
       setCompanyTags(categoryResult.data);
     };
     fetchAll();
@@ -42,7 +44,6 @@ const Choose_Tags = () => {
   const handleSelected = chipToSelect => id => {
     setCompanyTags(founderTags =>
       founderTags.map(chip => {
-        // console.log('Selected: ', chipToSelect);
         if (chip.id === chipToSelect) {
           let style = chip.style === 'secondary' ? '' : 'secondary';
           return {
@@ -76,18 +77,22 @@ const Choose_Tags = () => {
   return (
     <Paper className="paper">
       <h1>Choose Tags that apply to your founders</h1>
-      {companyTags.map(data => {
-        return (
-          <SingleTag
-            key={data.id}
-            {...data}
-            label={data.category_name}
-            data={data}
-            classes={classes}
-            handleSelected={() => handleSelected(data.id)}
-          />
-        );
-      })}
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        companyTags.map(data => {
+          return (
+            <SingleTag
+              key={data.id}
+              {...data}
+              label={data.category_name}
+              data={data}
+              classes={classes}
+              handleSelected={() => handleSelected(data.id)}
+            />
+          );
+        })
+      )}
       <Link to="/category-tags">
         <Button
           type="submit"

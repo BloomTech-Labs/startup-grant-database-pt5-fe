@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, CircularProgress } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import '../onboarding/onboarding.css';
 import Paper from '@material-ui/core/Paper';
@@ -20,17 +20,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 //Hook to get tags from API call
-const CategoryTags = () => {
+const CategoryTags = props => {
   const classes = useStyles();
   const [elegibilityTags, setElegibilityTags] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmited, setIsSubmited] = useState(false);
 
-  // Use Effect to load initial data for the dropdowns
+  // Use Effect to load initial data for the tags
   useEffect(() => {
     const fetchAll = async () => {
       //Fetch Elegibility
       const elegibilityResult = await axios(
         'https://startup-grant-database-staging.herokuapp.com/api/elegibility'
       );
+      setIsLoading(false);
       setElegibilityTags(elegibilityResult.data);
     };
     fetchAll();
@@ -39,7 +42,6 @@ const CategoryTags = () => {
   const handleCompanySelectedtag = chipToSelect => () => {
     setElegibilityTags(companyTags =>
       elegibilityTags.map(chip => {
-        // console.log('Selected: ', chipToSelect);
         if (chip.id === chipToSelect) {
           let style = chip.style === 'secondary' ? '' : 'secondary';
           return {
@@ -53,7 +55,8 @@ const CategoryTags = () => {
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = props => {
+    setIsSubmited(true);
     const result = [
       ...elegibilityTags.filter(chip => chip.style === 'secondary')
     ];
@@ -64,6 +67,8 @@ const CategoryTags = () => {
         .post(`${process.env.REACT_APP_API}/api/users/eli`, data)
         .then(res => {
           console.log('Success!', res);
+          setIsSubmited(false);
+          props.history.push('/dashboard');
         })
         .catch(err => {
           //Invalid token or connection issue
@@ -74,29 +79,40 @@ const CategoryTags = () => {
 
   return (
     <Paper className="paper">
-      <h1>Choose Tags that apply to your founders</h1>
-      {elegibilityTags.map(data => {
-        return (
-          <SingleTag
-            key={data.id}
-            {...data}
-            label={data.elegibility_name}
-            data={data}
-            classes={classes}
-            handleSelected={handleCompanySelectedtag}
-          />
-        );
-      })}
-      <Link to="/dashboard">
-        <Button
-          type="button"
-          onClick={handleSubmit}
-          variant="contained"
-          color="primary"
-        >
-          Submit
-        </Button>
-      </Link>
+      {isSubmited ? (
+        <div>
+          <CircularProgress />
+          <h1>Summited</h1>
+        </div>
+      ) : (
+        <div>
+          <h1>Choose Tags that apply to your founders</h1>
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            elegibilityTags.map(data => {
+              return (
+                <SingleTag
+                  key={data.id}
+                  {...data}
+                  label={data.elegibility_name}
+                  data={data}
+                  classes={classes}
+                  handleSelected={handleCompanySelectedtag}
+                />
+              );
+            })
+          )}
+          <Button
+            type="button"
+            onClick={() => handleSubmit(props)}
+            variant="contained"
+            color="primary"
+          >
+            Submit
+          </Button>
+        </div>
+      )}
     </Paper>
   );
 };

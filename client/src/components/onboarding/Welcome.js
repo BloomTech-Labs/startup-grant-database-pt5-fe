@@ -9,6 +9,13 @@ import { Route, Link } from 'react-router-dom';
 import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 
+
+//TODO: 
+// 1. Fix styling
+// 2.Pass data to server
+
+
+
 const SimpleSelect = () => {
   const useStyles = makeStyles(theme => ({
     container: {
