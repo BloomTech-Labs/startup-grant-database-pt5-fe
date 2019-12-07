@@ -4,9 +4,10 @@ import Button from '@material-ui/core/Button';
 import '../onboarding/onboarding.css';
 import Paper from '@material-ui/core/Paper';
 import SingleTag from '../onboarding/SingleTag';
-
+// import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { cpus } from 'os';
 
 //Styles
 const useStyles = makeStyles(theme => ({
@@ -20,16 +21,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0.5)
   }
 }));
-
-// const initialFounderTags = [
-//   { key: 0, label: 'Black', selected: false },
-//   { key: 1, label: 'LBGTQ', selected: false },
-//   { key: 2, label: 'Asian', selected: false },
-//   { key: 3, label: 'Women', selected: false },
-//   { key: 4, label: 'Veteran', selected: false },
-//   { key: 5, label: 'Student', selected: false },
-//   { key: 6, label: 'Native American', selected: false }
-// ];
 
 //Hooks
 const Choose_Tags = () => {
@@ -49,14 +40,15 @@ const Choose_Tags = () => {
   }, []);
 
   //Handle selected tags
-  const handleSelected = chipToSelect => () => {
+  const handleSelected = chipToSelect => id => {
     setCompanyTags(founderTags =>
       founderTags.map(chip => {
-        if (chip.key === chipToSelect.key) {
-          let style = chipToSelect.style == 'secondary' ? '' : 'secondary';
+        // console.log('Selected: ', chipToSelect);
+        if (chip.id === chipToSelect) {
+          let style = chip.style === 'secondary' ? '' : 'secondary';
           return {
-            ...chipToSelect,
-            selected: !chipToSelect.selected,
+            ...chip,
+            selected: !chip,
             style
           };
         }
@@ -66,23 +58,26 @@ const Choose_Tags = () => {
   };
 
   const handleSubmit = () => {
-    const result = [...companyTags.filter(chip => chip.selected === true)];
-    console.log(result);
+    // const result = [...companyTags.filter(chip => chip.selected === true)];
+    // console.log(result);
   };
 
   //TODO: Fix issue with the selected key in the JSON array
+  //-Try fixing the missing selected field by selecting base on ID
 
   return (
     <Paper className="paper">
       <h1>Choose Tags that apply to your founders</h1>
       {companyTags.map(data => {
+        console.log('Console log: ', data);
         return (
           <SingleTag
             key={data.id}
-            {...data.category_name}
-            data={data.category_name}
+            {...data}
+            label={data.category_name}
+            data={data}
             classes={classes}
-            handleSelected={handleSelected}
+            handleSelected={() => handleSelected(data.id)}
           />
         );
       })}
