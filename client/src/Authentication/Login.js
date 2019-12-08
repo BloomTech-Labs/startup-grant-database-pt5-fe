@@ -6,6 +6,10 @@ import axios from 'axios';
 const firebaseUser = require('firebase/app');
 require('firebase/auth');
 
+//TODO:
+// 1.IF user completed the on-boarding fields then redirect to dashboard
+// 2.On the On-boarding add a field for First and Last name
+
 const Login = props => {
   const [isError, setRequestError] = useState(null);
   useEffect(() => {
@@ -29,6 +33,11 @@ const Login = props => {
                 // SAVE TOKEN TO LOCAL STORAGE FOR PRIVATE ROUTE
                 localStorage.setItem('authorization', idToken);
                 props.history.push('/welcome');
+                // if (res.data.user_type !== null) {
+                //   props.history.push('/dashboard');
+                // } else {
+                //   props.history.push('/welcome');
+                // }
               })
               .catch(err => {
                 //Invalid token or connection issue
