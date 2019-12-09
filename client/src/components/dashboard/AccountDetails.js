@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -10,6 +10,8 @@ import {
   Button,
   TextField
 } from "@material-ui/core";
+
+import axios from "axios";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -27,17 +29,25 @@ const useStyles = makeStyles(() => ({
 const AccountDetails = props => {
   const { className, ...rest } = props;
 
+  const [values, setValues] = useState([]);
+
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    firstName: "Claire",
-    lastName: "Sinozich",
-    email: "claire@claire.com",
-    company: "the company",
-    phone: "",
-    state: "Colorado",
-    country: "USA"
-  });
+  const id = localStorage.getItem("id");
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
+      )
+      .then(res => {
+        console.log(res);
+        setValues(res.data);
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  }, []);
 
   const handleChange = event => {
     setValues({
@@ -45,6 +55,8 @@ const AccountDetails = props => {
       [event.target.name]: event.target.value
     });
   };
+
+  //onBlur
 
   const states = [
     {
@@ -289,7 +301,7 @@ const AccountDetails = props => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.first_name}
                 variant="outlined"
               />
             </Grid>
@@ -301,7 +313,7 @@ const AccountDetails = props => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.last_name}
                 variant="outlined"
               />
             </Grid>
@@ -324,7 +336,7 @@ const AccountDetails = props => {
                 margin="dense"
                 name="company"
                 onChange={handleChange}
-                value={values.company}
+                value={values.organization_name}
                 variant="outlined"
               />
             </Grid>
