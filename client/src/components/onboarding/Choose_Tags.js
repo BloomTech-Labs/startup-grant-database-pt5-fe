@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import "../onboarding/onboarding.css";
-import Paper from "@material-ui/core/Paper";
-import SingleTag from "../onboarding/SingleTag";
+import React, { useState, useEffect } from 'react';
+import { Paper, makeStyles, CircularProgress, Button } from '@material-ui/core';
+import SingleTag from '../onboarding/SingleTag';
+import '../onboarding/onboarding.css';
 
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+//Styles
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
     padding: theme.spacing(0.5)
   },
   chip: {
@@ -17,118 +19,88 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const initialFounderTags = [
-  { key: 0, label: "Black", selected: false },
-  { key: 1, label: "LBGTQ", selected: false },
-  { key: 2, label: "Asian", selected: false },
-  { key: 3, label: "Women", selected: false },
-  { key: 4, label: "Veteran", selected: false },
-  { key: 5, label: "Student", selected: false },
-  { key: 6, label: "Native American", selected: false }
-];
-
-const initialCompanyTags = [
-  { key: 7, label: "Social Mission", selected: false },
-  { key: 8, label: "Agriculture and Biotech", selected: false },
-  { key: 9, label: "AI and Machine Learning=", selected: false },
-  { key: 10, label: "Entertainment", selected: false },
-  { key: 11, label: "Clean and Renewable Energy", selected: false },
-  { key: 12, label: "Health and mental wellness", selected: false },
-  { key: 13, label: "Food and Drink", selected: false },
-  { key: 14, label: "Financial Serices", selected: false },
-  { key: 15, label: "Ecommerce", selected: false },
-  { key: 16, label: "Internet of things", selected: false },
-  { key: 17, label: "Social and Lifestyle", selected: false }
-];
-
+//Hooks
 const Choose_Tags = () => {
   const classes = useStyles();
-  const [founderTags, setFounderTags] = useState(initialFounderTags);
-  const [companyTags, setCompanyTags] = useState(initialCompanyTags);
+  const [companyTags, setCompanyTags] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleSelected = chipToSelect => () => {
-    setFounderTags(founderTags =>
+  // Use Effect to load initial data for the tags
+  useEffect(() => {
+    const fetchAll = async () => {
+      //Fetch Categories
+      const categoryResult = await axios(
+        'https://startup-grant-database-staging.herokuapp.com/api/categories'
+      );
+      setIsLoading(false);
+      setCompanyTags(categoryResult.data);
+    };
+    fetchAll();
+  }, []);
+
+  //Handle selected tags
+  const handleSelected = chipToSelect => id => {
+    setCompanyTags(founderTags =>
       founderTags.map(chip => {
-        if (chip.key === chipToSelect.key) {
-          let style = chipToSelect.style == "secondary" ? "" : "secondary";
+        if (chip.id === chipToSelect) {
+          let style = chip.style === 'secondary' ? '' : 'secondary';
           return {
-            ...chipToSelect,
-            selected: !chipToSelect.selected,
+            ...chip,
+            selected: !chip,
             style
           };
         }
-
-        return chip;
-      })
-    );
-  };
-
-  const handleCompanySelectedtag = chipToSelect => () => {
-    setCompanyTags(companyTags =>
-      companyTags.map(chip => {
-        if (chip.key === chipToSelect.key) {
-          let style = chipToSelect.style == "secondary" ? "" : "secondary";
-          return {
-            ...chipToSelect,
-            selected: !chipToSelect.selected,
-            style
-          };
-        }
-
         return chip;
       })
     );
   };
 
   const handleSubmit = () => {
-    const result = [
-      ...founderTags.filter(chip => chip.selected === true),
-      ...companyTags.filter(chip => chip.selected === true)
-    ];
-    console.log(result);
+    const result = [...companyTags.filter(chip => chip.style === 'secondary')];
+    const userId = localStorage.getItem('id');
+    result.map(selection => {
+      const data = { user_id: userId, category_id: selection.id };
+      axios
+        .post(`${process.env.REACT_APP_API}/api/users/cat`, data)
+        .then(res => {
+          console.log('Success!', res);
+        })
+        .catch(err => {
+          //Invalid token or connection issue
+          console.log('Error', err);
+        });
+    });
   };
 
   return (
     <Paper className="paper">
-      <br></br>
-      <br></br>
       <h1>Choose Tags that apply to your founders</h1>
-
-      {founderTags.map(data => {
-        return (
-          <SingleTag
-            key={data.key}
-            {...data}
-            data={data}
-            classes={classes}
-            handleSelected={handleSelected}
-          />
-        );
-      })}
-      <br></br>
-      <br></br>
-      <h1>Choose Tags that apply to your founders</h1>
-      {companyTags.map(data => {
-        return (
-          <SingleTag
-            key={data.key}
-            {...data}
-            data={data}
-            classes={classes}
-            handleSelected={handleCompanySelectedtag}
-          />
-        );
-      })}
-      <br></br>
-      <br></br>
-      <Button
-        type="button"
-        onClick={handleSubmit}
-        variant="contained"
-        color="primary"
-      >
-        Next
-      </Button>
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        companyTags.map(data => {
+          return (
+            <SingleTag
+              key={data.id}
+              {...data}
+              label={data.category_name}
+              data={data}
+              classes={classes}
+              handleSelected={() => handleSelected(data.id)}
+            />
+          );
+        })
+      )}
+      <Link to="/category-tags">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
+          Next
+        </Button>
+      </Link>
     </Paper>
   );
 };

@@ -1,246 +1,146 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Choose_Tags from "../onboarding/Choose_Tags";
-import "../onboarding/onboarding.css";
-import { Route, Link } from "react-router-dom";
-import Input from "@material-ui/core/Input";
-import Paper from "@material-ui/core/Paper";
-
-const SimpleSelect = () => {
-  const useStyles = makeStyles(theme => ({
-    container: {
-      display: "flex",
-      flexWrap: "wrap"
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: 200
-    },
-    menu: {
-      width: 200
-    }
-  }));
-  const userTypes = [
-    {
-      value: "Grant_Receiver",
-      label: "I am looking for Grants"
-    },
-    {
-      value: "Grant_Giver",
-      label: "I am looking to provide money to startups"
-    }
-  ];
-
-  const classes = useStyles();
-  const [userType, setUserType] = useState("Grant_Receiver");
-
-  const handleChange = event => {
-    setUserType(event.target.value);
-  };
-
-  const handleSubmit = event => {
-    console.log(userType);
-    //post data to backend here
-  };
-
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className={classes.container}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          id="standard-select-currency"
-          select
-          label="Select Your User Type"
-          className={classes.textField}
-          value={userType}
-          onChange={handleChange}
-          //helperText="Please select your currency"
-          margin="normal"
-        >
-          {userTypes.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </div>
-    </form>
-  );
-};
-
-// text field component
-
-const Inputs = () => {
-  const useStyles = makeStyles(theme => ({
-    container: {
-      display: "flex",
-      flexWrap: "wrap"
-    },
-    input: {
-      margin: theme.spacing(1)
-    }
-  }));
-
-  const classes = useStyles();
-  const [inputValue, setInputValue] = useState({
-    companyName: ""
-  });
-
-  const onValueChange = event => {
-    setInputValue({
-      ...inputValue,
-      [event.target.name]: event.target.value
-    });
-    console.log(inputValue);
-  };
-
-  const onFormSubmit = event => {
-    event.preventDefault();
-  };
-  return (
-    <div>
-      <div>
-        <Input
-          placeholder="Company Name"
-          value={inputValue.companyName}
-          onChange={onValueChange}
-          className={classes.input}
-          name="companyName"
-        />
-      </div>
-    </div>
-  );
-};
-
-// select state
-
-const StateSelect = () => {
-  const useStyles = makeStyles(theme => ({
-    container: {
-      display: "flex",
-      flexWrap: "wrap",
-      alignContent: "center"
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: 200
-    },
-    menu: {
-      width: 200
-    }
-  }));
-
-  const states = [
-    {
-      value: "NY",
-      label: "NY"
-    },
-    {
-      value: "NJ",
-      label: "NJ"
-    },
-    {
-      value: "CA",
-      label: "CA"
-    },
-    {
-      value: "UT",
-      label: "UT"
-    }
-  ];
-
-  const classes = useStyles();
-  const [userType, setUserType] = useState("NY");
-
-  const handleChange = event => {
-    event.preventDefault();
-    setUserType(event.target.value);
-    console.log(userType);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    console.log(userType);
-    //post data to backend here
-  };
-
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className={classes.container}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          id="standard-select-currency"
-          select
-          label="Select Your State"
-          className={classes.textField}
-          value={userType}
-          onChange={handleChange}
-          //helperText="Please select your currency"
-          margin="normal"
-        >
-          {states.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </div>
-    </form>
-  );
-};
-
-// main Component
+import React from 'react';
+import {
+  Paper,
+  Button,
+  Input,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
+} from '@material-ui/core';
+import '../onboarding/onboarding.css';
+import { useForm } from './useInput';
+import axios from 'axios';
 
 const InitialSignupForm = props => {
-  const useStyles = makeStyles(theme => ({
-    root: {
-      display: "flex",
-      justifyContent: "center",
-      flexWrap: "wrap",
-      padding: theme.spacing(0.5)
+  //Call back for form submit must be declare before the custom hook
+  const submitCallBack = values => {
+    //Api call logic to send or use the form data being submited
+    // console.log('Submit clicked!', values);
+    //get user ID to pass in the URL
+    const userId = localStorage.getItem('id');
+    props.history.push('/Choose_Tags');
+    axios
+      .put(`${process.env.REACT_APP_API}/api/users/${userId}`, values)
+      .then(res => {
+        console.log('Success!', res);
+      })
+      .catch(err => {
+        //Invalid token or connection issue
+        console.log('Error', err);
+      });
+  };
+
+  //Custom hook
+  const [values, handleChanges, handleSubmit] = useForm(
+    {
+      user_type: '',
+      first_name: '',
+      last_name: '',
+      telephone: '',
+      department: '',
+      organization_name: '',
+      address_one: '',
+      address_two: '',
+      zip_code: ''
     },
-    chip: {
-      margin: theme.spacing(0.5)
-    }
-  }));
+    submitCallBack
+  );
 
   return (
     <Paper className="container">
       <div className="welcome-box">
         <h1>Welcome to Grantlify!</h1>
-        <p>
-          Alredy have an account? Sign up <a href="#">here</a>
-        </p>
-        <form>
-          <SimpleSelect />
-          <br></br>
-          <br></br>
-          <Inputs /> <br></br>
-          <br></br>
-          <br></br>
-          <StateSelect />
-          <br></br>
-          <br></br>
-          <br></br>
-          <Link to="/Choose_Tags">
-            <Button type="submit" variant="contained" color="primary">
-              Next
-            </Button>
-          </Link>
-          <Route path="/Choose_Tags" component={Choose_Tags} exact />
+        <p>Please complete registration.</p>
+        <form className="form-welcome">
+          <FormControl className="drop-down">
+            <InputLabel id="demo-simple-select-label">
+              Please select user type
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={values.user_type}
+              onChange={handleChanges}
+              name="user_type"
+            >
+              <MenuItem value="0">Applicant</MenuItem>
+              <MenuItem value="1">Grant Provider</MenuItem>
+            </Select>
+          </FormControl>
+          <Input
+            placeholder="First Name"
+            type="text"
+            value={values.first_name}
+            onChange={handleChanges}
+            className="input-field"
+            name="first_name"
+          />
+          <Input
+            placeholder="Last Name"
+            type="text"
+            value={values.last_name}
+            onChange={handleChanges}
+            className="input-field"
+            name="last_name"
+          />
+          <Input
+            placeholder="Organization"
+            type="text"
+            value={values.organization_name}
+            onChange={handleChanges}
+            className="input-field"
+            name="organization_name"
+          />
+          <Input
+            placeholder="Department"
+            type="text"
+            value={values.department}
+            onChange={handleChanges}
+            className="input-field"
+            name="department"
+          />
+          <Input
+            placeholder="Phone"
+            type="number"
+            value={values.telephone}
+            onChange={handleChanges}
+            className="input-field"
+            name="telephone"
+          />
+          <Input
+            placeholder="Address"
+            type="text"
+            value={values.address_one}
+            onChange={handleChanges}
+            className="input-field"
+            name="address_one"
+          />
+          <Input
+            placeholder="Apt (optional)"
+            type="text"
+            value={values.address_two}
+            onChange={handleChanges}
+            className="input-field"
+            name="address_two"
+          />
+          <Input
+            placeholder="Zip Code"
+            type="zip"
+            value={values.zip_code}
+            onChange={handleChanges}
+            className="input-field"
+            name="zip_code"
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+          >
+            Next
+          </Button>
         </form>
       </div>
     </Paper>
