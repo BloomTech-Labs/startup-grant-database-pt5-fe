@@ -13,23 +13,30 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const CountiesComponent = (props) => {
-  console.log('counties props',props)
+      //Creating hook to store County state  
       const [counties, setCounty] = useState([]);
-      const {statesFilter} = props.filters.states;
-      //Use Effect to load initial data for the dropdowns 
-    //   useEffect(() => {
-    //     const fetchCounties = async () => {
-    //           //Fetch Counties
-    //           const json = JSON.stringify(statesFilter);
-    //           const params = {states: json};
-    //           console.log('my params', params)
-    //           const countyResult = await axios(
-    //             'https://startup-grant-database-staging.herokuapp.com/api/counties', params 
-    //           );                
-    //         setCounty(countyResult.data);
-    //     }; 
-    //     fetchCounties()
-    // }, []);
+
+      //Use Effect to reload data for the county dropdowns based on different selected states 
+      useEffect(() => {
+        const fetchCounties = async () => {
+              //Fetch Counties
+              console.log('my state props', props.stateFilter)
+              const json = JSON.stringify(props.stateFilter);
+              const params = {states: json};
+              const countyResult = await axios(
+                'https://startup-grant-database-staging.herokuapp.com/api/counties', {
+                 params: {
+                    states: props.stateFilter
+                  },
+                //  paramsSerializer: params => {
+                //   // return Qs.stringify(params);
+                //  } 
+                }  
+              );                
+            setCounty(countyResult.data);
+        }; 
+        fetchCounties()
+    }, [props.stateFilter]);
 
     return (
         <Autocomplete

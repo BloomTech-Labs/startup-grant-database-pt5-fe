@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect} from 'react';
+import axios from 'axios';
 
 //Material UI components
 import Checkbox from '@material-ui/core/Checkbox';
@@ -10,35 +11,59 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
+var stateResult = [];
 
 const StateComponent = (props) => {
-    const [checked_states, setChecked_states] = useState({stateName:[]});
+    //Hook to control the States Autocomplete text filed
+    const [autoCompleteText, setAutoCompleteText] = useState('')
     
-    const handleStates = (event, option) => {
-    const fields =[]
+    //Hooks to store the States drop down results
+    const [state, setStates] = useState([]);
+
+    useEffect(() => {
+      const fetchAll = async () => {
+          //Fetch States
+           stateResult = await axios(
+              'https://startup-grant-database-staging.herokuapp.com/api/states',
+            );  
+          const allStates = [{id:0 , state_name: "All States"}];  
+          setStates(allStates.concat(stateResult.data));
+      }; 
+      fetchAll()
+  }, []);
+
+    //Function to handle States dropdown selection 
+    const handleStates = (event, value) => {
+
+     const checkedStateValues = value.map(({state_name})=> state_name); //event.target.getAttribute('value');
     
-    // if (event.target.checked) {
-    //   fields.push(option);
-    // } else {
-    //  fields.remove(option);
-    // }  
+      if (checkedStateValues.find(item => item === 'All States')  && checkedStateValues.length > 1) {
+        return props.handleOpen();
+      }
+      //Updating State Filter when calling updater function
+      const stateResultsData = stateResult.data;
+      console.log('States Returned',stateResultsData);
+    //   const matchingStates =[];
+    //   const stateIDs = stateResultsData.map(id => {
+    //     if (stateid.find(id =)
+        
+        
+    //     return 
+    //     stateid.state_name === [...checkedStateValues]
 
-    //console.log(fields)
+    //   console.log('My state id',stateIDs)
 
-      const value = option.state_name;
-      console.log('my value', option) 
-      setChecked_states([...checked_states, value]);
-      console.log(checked_states)
-      return checked_states;
-    }
+    //   props.updateStateFilter(checkedStateValues);
+     };
 
     return (
       <Autocomplete
       multiple
       id="checkboxes-state"
-      options={props.states}
+      options={state}
       disableCloseOnSelect
       getOptionLabel={option => option.state_name}
+      onChange={(event, value) => handleStates(event, value)}
       renderOption={(option, { selected }) => (
         <React.Fragment>
           <Checkbox
@@ -47,7 +72,6 @@ const StateComponent = (props) => {
             checkedIcon={checkedIcon}
             style={{ marginRight: 8 }}
             checked={selected}
-            onCheck={event => handleStates(event, option)}
           />
           {option.state_name}
         </React.Fragment>

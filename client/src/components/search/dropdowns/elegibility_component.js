@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState , useEffect} from 'react';
+import axios from 'axios';
 
 //Material UI components
 import Checkbox from '@material-ui/core/Checkbox';
@@ -12,12 +13,23 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const ElegibilityComponent = (props) => {
+  const [elegibility, setElegibility] = useState([]);
+  useEffect(() => {
+    const fetchAll = async () => {    
+          //Fetch Elegibility
+          const elegibilityResult = await axios(
+            'https://startup-grant-database-staging.herokuapp.com/api/elegibility' 
+          );
 
+        setElegibility(elegibilityResult.data);
+    }; 
+    fetchAll()
+}, []);
     return (
       <Autocomplete
       multiple
       id="checkboxes-eligibility"
-      options={props.elegibility}
+      options={elegibility}
       disableCloseOnSelect
       getOptionLabel={option => option.elegibility_name}
       renderOption={(option, { selected }) => (

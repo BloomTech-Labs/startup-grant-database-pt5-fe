@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState , useEffect} from 'react';
+import axios from 'axios';
 
 //Material UI components
 import Checkbox from '@material-ui/core/Checkbox';
@@ -12,12 +13,24 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const CategoryComponent = (props) => {
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    const fetchAll = async () => {
+          //Fetch Categories
+          const categoryResult = await axios(
+            'https://startup-grant-database-staging.herokuapp.com/api/categories' 
+          );
+
+          setCategory(categoryResult.data);
+    }; 
+    fetchAll()
+}, []);
 
     return (
       <Autocomplete
       multiple
       id="checkboxes-category"
-      options={props.category}
+      options={category}
       disableCloseOnSelect
       getOptionLabel={option => option.category_name}
       renderOption={(option, { selected }) => (
