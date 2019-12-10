@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 //Material UI components
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
@@ -20,17 +21,11 @@ const CountiesComponent = (props) => {
       useEffect(() => {
         const fetchCounties = async () => {
               //Fetch Counties
-              console.log('my state props', props.stateFilter)
-              const json = JSON.stringify(props.stateFilter);
-              const params = {states: json};
               const countyResult = await axios(
-                'https://startup-grant-database-staging.herokuapp.com/api/counties', {
-                 params: {
-                    states: props.stateFilter
-                  },
-                //  paramsSerializer: params => {
-                //   // return Qs.stringify(params);
-                //  } 
+                'http://localhost:9000/api/counties/states', {
+                  params: {
+                     state: props.stateFilter
+                   },
                 }  
               );                
             setCounty(countyResult.data);

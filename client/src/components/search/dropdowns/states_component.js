@@ -1,5 +1,6 @@
 import React, {useState , useEffect} from 'react';
 import axios from 'axios';
+import getDropdownId from '../getdropdownids.js';
 
 //Material UI components
 import Checkbox from '@material-ui/core/Checkbox';
@@ -34,26 +35,14 @@ const StateComponent = (props) => {
 
     //Function to handle States dropdown selection 
     const handleStates = (event, value) => {
-
      const checkedStateValues = value.map(({state_name})=> state_name); //event.target.getAttribute('value');
     
       if (checkedStateValues.find(item => item === 'All States')  && checkedStateValues.length > 1) {
         return props.handleOpen();
       }
-      //Updating State Filter when calling updater function
-      const stateResultsData = stateResult.data;
-      console.log('States Returned',stateResultsData);
-    //   const matchingStates =[];
-    //   const stateIDs = stateResultsData.map(id => {
-    //     if (stateid.find(id =)
-        
-        
-    //     return 
-    //     stateid.state_name === [...checkedStateValues]
-
-    //   console.log('My state id',stateIDs)
-
-    //   props.updateStateFilter(checkedStateValues);
+      
+      //Updating State Filter Hook 
+      props.updateStateFilter(getDropdownId(stateResult.data, checkedStateValues));
      };
 
     return (

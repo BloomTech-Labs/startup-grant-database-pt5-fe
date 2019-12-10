@@ -4,6 +4,7 @@ import axios from 'axios';
 import ResultCard from './resultcard.js';
 import AlertDialog from './AlertDialog.js';
 import "./search.css";
+import qs from 'qs';
 
 //Dropdown with checkboxes built in components.
 import StateComponent from './dropdowns/states_component.js';
@@ -29,7 +30,7 @@ const Search = () => {
   const [grants, setGrants] = useState([]);
 
   //Setting hooks for each filter
-  const [stateFilter, setStateFilter] = useState(['']);
+  const [stateFilter, setStateFilter] = useState([]);
   const [countyFilter, setCountyFilter] = useState([]);
   const [amountFilter, setAmountFilter] = useState([]);
   const [eligibilityFilter, setEligibilityFilter] = useState([]);
@@ -82,23 +83,30 @@ const Search = () => {
   useEffect(() => {
       const fetchAll = async () => {              
             //Fetch Grants
-              const params = {
-                stateFilter,
-                countyFilter,
-                amountFilter,
-                eligibilityFilter,
-                categoryFilter
+               
+            const grantResults = await axios.get(
+              'http://localhost:9000/api/grants/search', {
+                params : {
+                  state: stateFilter,
+                  // countyFilter,
+                  // amountFilter,
+                   eligibility: eligibilityFilter,
+                   category: categoryFilter
+                },
+                // paramsSerializer: params => {
+                //   console.log('my params from axios', params)
+                //   return qs.stringify(params);
+                // }
               }
-            var grantResults = await axios(
-              'https://startup-grant-database-staging.herokuapp.com/api/grants/search'//, //{params}
             )
               
             setGrants(grantResults.data);
       }; 
       fetchAll()
-  }, []);
+  },[stateFilter, eligibilityFilter, categoryFilter]);
    
       console.log('my grants',grants)
+  console.log('my state filter', stateFilter)
     return (  
         <div className='searchholder'>
             <div className='filters'>
