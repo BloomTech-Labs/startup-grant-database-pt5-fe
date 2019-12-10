@@ -62,19 +62,19 @@ const Search = () => {
         const fetchAll = async () => {
             //Fetch States
             const stateResult = await axios(
-                'https://startup-grant-database-staging.herokuapp.com/api/states',
+                `${process.env.REACT_APP_API}/api/states`,
               );  
               //Fetch Counties
               const countyResult = await axios(
-                'https://startup-grant-database-staging.herokuapp.com/api/counties',
+                `${process.env.REACT_APP_API}/api/counties`,
               );                
               //Fetch Elegibility
               const elegibilityResult = await axios(
-                'https://startup-grant-database-staging.herokuapp.com/api/elegibility' 
+                `${process.env.REACT_APP_API}/api/elegibility` 
               );
               //Fetch Categories
               const categoryResult = await axios(
-                'https://startup-grant-database-staging.herokuapp.com/api/categories' 
+                `${process.env.REACT_APP_API}/api/categories`
               );
 
               //Fetch Grants

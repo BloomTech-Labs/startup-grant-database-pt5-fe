@@ -38,7 +38,7 @@ const ProfileBox = props => {
   useEffect(() => {
     const fetchAll = async () => {
       const userResult = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
+        `${process.env.REACT_APP_API}/api/users/${id}`
       );
       setValues(userResult.data.accountData);
     };

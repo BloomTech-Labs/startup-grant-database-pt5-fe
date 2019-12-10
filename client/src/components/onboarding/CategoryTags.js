@@ -28,7 +28,7 @@ const CategoryTags = props => {
     const fetchAll = async () => {
       //Fetch Elegibility
       const elegibilityResult = await axios(
-        'https://startup-grant-database-staging.herokuapp.com/api/elegibility'
+        `${process.env.REACT_APP_API}/api/elegibility`
       );
       setIsLoading(false);
       setElegibilityTags(elegibilityResult.data);

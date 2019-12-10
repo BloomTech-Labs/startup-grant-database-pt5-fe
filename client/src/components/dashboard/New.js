@@ -16,7 +16,7 @@ const New = props => {
 
   useEffect(() => {
     axios
-      .get("https://startup-grant-database-staging.herokuapp.com/api/grants")
+      .get(`${process.env.REACT_APP_API}/api/grants`)
       .then(res => {
         console.log(res);
         setNewGrants(res.data);

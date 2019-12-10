@@ -24,7 +24,7 @@ const Saved = props => {
   useEffect(() => {
     axios
       .get(
-        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
+        `${process.env.REACT_APP_API}/api/users/${id}`
       )
       .then(res => {
         console.log(res);

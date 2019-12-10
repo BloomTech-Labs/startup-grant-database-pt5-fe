@@ -30,7 +30,7 @@ const Choose_Tags = () => {
     const fetchAll = async () => {
       //Fetch Categories
       const categoryResult = await axios(
-        'https://startup-grant-database-staging.herokuapp.com/api/categories'
+        `${process.env.REACT_APP_API}api/categories`
       );
       setIsLoading(false);
       setCompanyTags(categoryResult.data);
