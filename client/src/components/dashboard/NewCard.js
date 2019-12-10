@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card } from "@material-ui/core";
+import Moment from 'react-moment';
 
 const NewCard = props => {
   return (
@@ -10,7 +11,8 @@ const NewCard = props => {
           <p>Due: {props.grant.due_date}</p>
         </div>
         <div style={{ display: "flex" }}>
-          <p>Amount: ${props.grant.grant_amount}</p>
+          <p>Amount: <Moment date ={props.grant.grant_amount} />
+          </p>
         </div>
       </div>
     </Card>
