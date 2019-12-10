@@ -7,20 +7,11 @@ import "./search.css";
 import qs from 'qs';
 
 //Dropdown with checkboxes built in components.
-import StateComponent from './dropdowns/states_component.js';
-import CountiesComponent from './dropdowns/counties_component.js';
-import AmountComponent from './dropdowns/amount_component.js';
+import StateComponent from "./dropdowns/states_component.js";
+import CountiesComponent from "./dropdowns/counties_component.js";
+import AmountComponent from "./dropdowns/amount_component.js";
 import ElegibilityComponent from "./dropdowns/elegibility_component.js";
 import CategoryComponent from "./dropdowns/category_component.js";
-
-// //Hooks to store checked values from filters
-// function useProcessStates(e) {
-//     const [checkedStates, setCheckedStates] = useState([]);
-//     const stateObject =[];
-//     let isChecked = e.target.value
-//     setCheckedStates([...stateObject, isChecked]);
-//     return checkedStates;
-// };
 
 const Search = () => {
 
@@ -93,10 +84,6 @@ const Search = () => {
                    eligibility: eligibilityFilter,
                    category: categoryFilter
                 },
-                // paramsSerializer: params => {
-                //   console.log('my params from axios', params)
-                //   return qs.stringify(params);
-                // }
               }
             )
               
@@ -139,8 +126,6 @@ const Search = () => {
             </div>
         </div>
     )
+};
 
-}
-
-export default Search
-
+export default Search;

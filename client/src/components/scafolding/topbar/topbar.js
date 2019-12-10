@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
-import './Grantify.png';
-import './topbar.css';
+import "./Grantify.png";
+import "./topbar.css";
 
-const firebase = require('firebase/app');
-require('firebase/auth');
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 const TopBar = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -23,16 +23,14 @@ const TopBar = () => {
   return (
     <div className="top-bar">
       <div className="logo">
-        <img src={require('./Grantify.png')} />
+        <img src={require("./Grantify.png")} />
       </div>
       <div className="nav-links">
-        <NavLink exact to="/">
-          Home
+        <NavLink to="/search">Search for Grants</NavLink>
+        <br />
+        <NavLink exact to="/dashboard">
+          My Dashboard
         </NavLink>
-        <br />
-        <NavLink to="/welcome">Welcome </NavLink>
-        <br />
-        <NavLink to="/search">Search</NavLink>
         <br />
         {isLogin ? (
           <NavLink
@@ -42,12 +40,12 @@ const TopBar = () => {
                 .signOut()
                 .then(function() {
                   // Sign-out successful.
-                  console.log('Successful Loged out!');
+                  console.log("Successful Loged out!");
                   setIsLogin(false);
                 })
                 .catch(error => {
                   // An error happened.
-                  console.log('There was an issue while signing out!', error);
+                  console.log("There was an issue while signing out!", error);
                 });
             }}
             to="/login"

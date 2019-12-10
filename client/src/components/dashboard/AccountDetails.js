@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -11,27 +11,43 @@ import {
   TextField
 } from "@material-ui/core";
 
+import axios from "axios";
+
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
     width: "50%",
     margin: "0 2%"
+  },
+  actions: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around"
   }
 }));
 
 const AccountDetails = props => {
   const { className, ...rest } = props;
 
+  const [values, setValues] = useState([]);
+
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    firstName: "Claire",
-    lastName: "Sinozich",
-    email: "claire@claire.com",
-    phone: "",
-    state: "Colorado",
-    country: "USA"
-  });
+  const id = localStorage.getItem("id");
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
+      )
+      .then(res => {
+        console.log(res);
+        setValues(res.data);
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  }, []);
 
   const handleChange = event => {
     setValues({
@@ -39,6 +55,8 @@ const AccountDetails = props => {
       [event.target.name]: event.target.value
     });
   };
+
+  //onBlur
 
   const states = [
     {
@@ -283,7 +301,7 @@ const AccountDetails = props => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.first_name}
                 variant="outlined"
               />
             </Grid>
@@ -295,7 +313,7 @@ const AccountDetails = props => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.last_name}
                 variant="outlined"
               />
             </Grid>
@@ -314,12 +332,11 @@ const AccountDetails = props => {
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
-                label="Phone Number"
+                label="Company"
                 margin="dense"
-                name="phone"
+                name="company"
                 onChange={handleChange}
-                type="number"
-                value={values.phone}
+                value={values.organization_name}
                 variant="outlined"
               />
             </Grid>
@@ -359,8 +376,11 @@ const AccountDetails = props => {
           </Grid>
         </CardContent>
         <Divider />
-        <CardActions>
-          <Button color="primary" variant="contained">
+        <CardActions className={classes.actions}>
+          <Button
+            style={{ backgroundColor: "#2a87af", color: "#FFF" }}
+            variant="contained"
+          >
             Save details
           </Button>
         </CardActions>
