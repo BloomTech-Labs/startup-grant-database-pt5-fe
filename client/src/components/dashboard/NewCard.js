@@ -8,7 +8,7 @@ const NewCard = props => {
       <h3>{props.grant.name}</h3>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <div style={{ display: "flex" }}>
-          <p>Due: <Moment date ={props.grant.due_date} /></p>
+          <Moment format="YYYY/MM/DD">{this.props.due_date}</Moment>
         </div>
         <div style={{ display: "flex" }}>
           <p>Amount: {props.grant.grant_amount}
@@ -18,5 +18,5 @@ const NewCard = props => {
     </Card>
   );
 };
-
+// moment(post.date).format()
 export default NewCard;
