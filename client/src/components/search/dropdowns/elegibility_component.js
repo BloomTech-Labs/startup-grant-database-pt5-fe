@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState , useEffect} from 'react';
+import axios from 'axios';
+import getDropdownId from '../getdropdownids.js';
 
 //Material UI components
 import Checkbox from '@material-ui/core/Checkbox';
@@ -10,16 +12,37 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
+var elegibilityResult= [];
 
 const ElegibilityComponent = (props) => {
+  const [elegibility, setElegibility] = useState([]);
+  useEffect(() => {
+    const fetchAll = async () => {    
+          //Fetch Elegibility
+          elegibilityResult = await axios(
+            'https://startup-grant-database-staging.herokuapp.com/api/elegibility' 
+          );
+
+        setElegibility(elegibilityResult.data);
+    }; 
+    fetchAll()
+}, []);
+
+const handleEligibility = (event, value) => {
+  
+  const CheckedEligibilityValues = value.map(({elegibility_name})=> elegibility_name); //event.target.getAttribute('value');
+   //Updating State Filter Hook 
+   props.updateEligibilityFilter(getDropdownId(elegibilityResult.data, CheckedEligibilityValues));
+  };
 
     return (
       <Autocomplete
       multiple
       id="checkboxes-eligibility"
-      options={props.elegibility}
+      options={elegibility}
       disableCloseOnSelect
       getOptionLabel={option => option.elegibility_name}
+      onChange={(event, value) => handleEligibility(event, value)}
       renderOption={(option, { selected }) => (
         <React.Fragment>
           <Checkbox
