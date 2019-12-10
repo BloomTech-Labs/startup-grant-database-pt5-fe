@@ -7,10 +7,10 @@ const NewCard = props => {
       <h3>{props.grant.name}</h3>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <div style={{ display: "flex" }}>
-          <p>Due: {props.grant.duedate}</p>
+          <p>Due: {props.grant.due_date}</p>
         </div>
         <div style={{ display: "flex" }}>
-          <p>Amount: ${props.grant.amount}</p>
+          <p>Amount: ${props.grant.grant_amount}</p>
         </div>
       </div>
     </Card>
