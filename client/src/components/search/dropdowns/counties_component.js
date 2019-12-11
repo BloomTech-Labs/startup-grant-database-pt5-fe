@@ -22,7 +22,7 @@ const CountiesComponent = (props) => {
         const fetchCounties = async () => {
               //Fetch Counties
               const countyResult = await axios(
-                'http://localhost:9000/api/counties/states', {
+                `${process.env.REACT_APP_API}/api/counties/states`, {
                   params: {
                      state: props.stateFilter
                    },
