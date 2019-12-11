@@ -49,7 +49,7 @@ const New = props => {
     return (
       <Container style={{ backgroundColor: "#F0FDFE", height: "100%" }}>
         <h2>New Grants for You</h2>
-        {newGrants.slice(0, 5).map(items => {
+        {newGrants.slice(0, 4).map(items => {
           return (
             <Link
               style={{ textDecoration: "none", color: "#000000" }}

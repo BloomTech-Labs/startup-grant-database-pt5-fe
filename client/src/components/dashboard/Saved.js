@@ -23,9 +23,7 @@ const Saved = props => {
 
   useEffect(() => {
     axios
-      .get(
-        `${process.env.REACT_APP_API}/api/users/${id}`
-      )
+      .get(`${process.env.REACT_APP_API}/api/users/${id}`)
       .then(res => {
         console.log(res);
         setSavedGrants(res.data.pinnedGrants);
@@ -66,11 +64,18 @@ const Saved = props => {
 
   if (savedGrants == undefined) {
     return <h1>Loading...</h1>;
+  } else if (savedGrants == 0) {
+    return (
+      <Container>
+        <h2>Saved Grants</h2>
+        <h3>You don't have any saved grants!</h3>
+      </Container>
+    );
   } else {
     return (
       <Container>
         <h2>Saved Grants</h2>
-        {savedGrants.slice(0, 5).map(items => {
+        {savedGrants.slice(0, 4).map(items => {
           return (
             <Link className={classes.link} to={`/search/${items.id}`}>
               <SavedCard key={items.id} grant={items} />
