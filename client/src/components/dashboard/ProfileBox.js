@@ -44,6 +44,7 @@ const ProfileBox = props => {
     };
     fetchAll();
   });
+  console.log(values)
 
   // const user = values[0];
 
@@ -55,7 +56,7 @@ const ProfileBox = props => {
   //
   // <Avatar src={values[0].avatar} className={classes.image} />
 
-  if (values[0] === undefined) {
+  if (0 > values.length {
     return <h1>Loading...</h1>;
   } else {
     return (
