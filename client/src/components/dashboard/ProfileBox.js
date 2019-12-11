@@ -45,27 +45,27 @@ const ProfileBox = props => {
     fetchAll();
   });
 
-  const user = values[0];
+  // const user = values[0];
 
   // const user = {
   //   name: "Claire Sinozich",
   //   company: "The Company",
   //   avatar: "/images/avatars/headshot.jpg"
   // };
+  //
+  // <Avatar src={values[0].avatar} className={classes.image} />
 
-  if (user === undefined) {
+  if (values[0] === undefined) {
     return <h1>Loading...</h1>;
   } else {
     return (
       <Card className={classes.root}>
         <CardContent>
-          <div className={classes.avatar}>
-            <Avatar src={user.avatar} className={classes.image} />
-          </div>
+          <div className={classes.avatar}></div>
           <Typography className={classes.name}>
-            {user.first_name} {user.last_name}
+            {values[0].first_name} {values[0].last_name}
           </Typography>
-          <Typography>{user.organization_name}</Typography>
+          <Typography>{values[0].organization_name}</Typography>
         </CardContent>
       </Card>
     );
