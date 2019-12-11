@@ -52,7 +52,7 @@ const ProfileBox = props => {
 
   console.log(values)
 
-  // const user = values[0];
+  const user = values[0];
 
   // const user = {
   //   name: "Claire Sinozich",
@@ -62,19 +62,17 @@ const ProfileBox = props => {
   //
   // <Avatar src={values[0].avatar} className={classes.image} />
 
-  if (values === undefined) {
+  if (user === undefined) {
     return <h1>Loading...</h1>;
-  } else if(values[0] === undefined){
-    return (<h1>Loading</h1>)
   } else {
     return (
       <Card className={classes.root}>
         <CardContent>
           <div className={classes.avatar}></div>
           <Typography className={classes.name}>
-            {values[0].first_name} {values[0].last_name}
+            {user.first_name} {user.last_name}
           </Typography>
-          <Typography>{values[0].organization_name}</Typography>
+          <Typography>{user.organization_name}</Typography>
         </CardContent>
       </Card>
     );

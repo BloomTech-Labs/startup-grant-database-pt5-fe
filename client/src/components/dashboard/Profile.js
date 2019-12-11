@@ -84,11 +84,11 @@ const AccountProfile = props => {
   //   avatar: "/images/avatars/headshot.jpg"
   // };
 
-  // const first = values[0];
+  const first = values[0];
 
   // console.log("first", first);
 
-  if (values === undefined) {
+  if (first === undefined) {
     return <h1>Loading...</h1>;
   } else {
     return (
@@ -104,11 +104,11 @@ const AccountProfile = props => {
                 color="textSecondary"
                 variant="body1"
               >
-                {values.address_one}
+                {first.address_one}
                 <br />
-                {values.address_two}
+                {first.address_two}
                 <br />
-                {values.zip_code}
+                {first.zip_code}
               </Typography>
               <Typography
                 className={classes.dateText}
