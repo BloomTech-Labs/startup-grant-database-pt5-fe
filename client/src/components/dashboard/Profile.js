@@ -52,24 +52,24 @@ const AccountProfile = props => {
   const id = localStorage.getItem("id");
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API}/api/users/${id}`)
-      .then(res => {
-        console.log(res);
-        setValues(res.data.accountData);
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
+    // axios
+    //   .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
+    //   .then(res => {
+    //     console.log(res);
+    //     setValues(res.data);
+    //   })
+    //   .catch(err => {
+    //     console.error(err.message);
+    //   });
 
-    // const fetchAll = async () => {
-    //   //Fetch
-    //   const userResult = await axios(
-    //     `${process.env.REACT_APP_API}/api/users/${id}`
-    //   );
-    //   setValues(userResult.data.accountData);
-    // };
-    // fetchAll();
+    const fetchAll = async () => {
+      //Fetch
+      const userResult = await axios(
+        `${process.env.REACT_APP_API}/api/users/${id}`
+      );
+      setValues(userResult.data.accountData);
+    };
+    fetchAll();
   }, []);
 
   console.log("user", values);
