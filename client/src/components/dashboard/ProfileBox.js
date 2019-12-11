@@ -36,15 +36,20 @@ const ProfileBox = props => {
   const id = localStorage.getItem("id");
 
   useEffect(() => {
-    const fetchAll = async () => {
-      const userResult = await axios(
+     axios
+     .get(
         `${process.env.REACT_APP_API}/api/users/${id}`
-      );
-      setValues(userResult.data.accountData);
-      console.log(userResult)
-    };
-    fetchAll();
-  });
+      )
+      .then(res => {
+        console.log(res.data)
+        setValues(res.data.accountData)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },[])
+      // setValues(userResult.data.accountData);
+
   console.log(values)
 
   // const user = values[0];
