@@ -65,12 +65,14 @@ const AccountProfile = props => {
     const fetchAll = async () => {
       //Fetch
       const userResult = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
+        `${process.env.REACT_APP_API}/api/users/${id}`
       );
       setValues(userResult.data.accountData);
     };
     fetchAll();
   }, []);
+
+  console.log("user", values);
 
   const classes = useStyles();
 
@@ -82,11 +84,9 @@ const AccountProfile = props => {
   //   avatar: "/images/avatars/headshot.jpg"
   // };
 
-  console.log("user", values[0]);
-
   const first = values[0];
 
-  console.log("first", first);
+  // console.log("first", first);
 
   if (first === undefined) {
     return <h1>Loading...</h1>;
@@ -97,7 +97,7 @@ const AccountProfile = props => {
           <div className={classes.details}>
             <div>
               <Typography gutterBottom variant="h2">
-                {first.first_name} {first.last_name}
+                {values.first_name} {values.last_name}
               </Typography>
               <Typography
                 className={classes.locationText}

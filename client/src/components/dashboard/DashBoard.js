@@ -33,27 +33,27 @@ const DashBoard = props => {
   const classes = useStyles();
 
   return (
-    // <div className={classes.root}>
-    //   {isLoading ? (
-    //     <h1 className={classes.welcome}>Loading...</h1>
-    //   ) : (
-    <div>
-      <h1 className={classes.welcome}>Welcome {currentUser}!</h1>
-      <SideBar />
-      <div
-        style={{
-          display: "flex",
-          width: "80%",
-          marginLeft: "20%",
-          height: "100%"
-        }}
-      >
-        <Saved />
-        <New />
-      </div>
+    <div className={classes.root}>
+      {isLoading ? (
+        <h1 className={classes.welcome}>Loading...</h1>
+      ) : (
+        <div>
+          <h1 className={classes.welcome}>Welcome {currentUser}!</h1>
+          <SideBar />
+          <div
+            style={{
+              display: "flex",
+              width: "80%",
+              marginLeft: "20%",
+              height: "100%"
+            }}
+          >
+            <Saved />
+            <New />
+          </div>
+        </div>
+      )}
     </div>
-    //   )}
-    // </div>
   );
 };
 

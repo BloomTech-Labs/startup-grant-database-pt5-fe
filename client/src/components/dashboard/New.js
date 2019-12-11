@@ -16,7 +16,7 @@ const New = props => {
 
   useEffect(() => {
     axios
-      .get("https://startup-grant-database-staging.herokuapp.com/api/grants")
+      .get(`${process.env.REACT_APP_API}/api/grants`)
       .then(res => {
         console.log(res);
         setNewGrants(res.data);
@@ -24,7 +24,7 @@ const New = props => {
       .catch(err => {
         console.error(err.message);
       });
-  });
+  },[]);
 
   const classes = useStyles();
 
@@ -49,7 +49,7 @@ const New = props => {
     return (
       <Container style={{ backgroundColor: "#F0FDFE", height: "100%" }}>
         <h2>New Grants for You</h2>
-        {newGrants.slice(0, 5).map(items => {
+        {newGrants.slice(0, 4).map(items => {
           return (
             <Link
               style={{ textDecoration: "none", color: "#000000" }}
