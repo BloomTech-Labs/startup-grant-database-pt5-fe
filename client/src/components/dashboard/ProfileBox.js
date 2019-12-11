@@ -57,7 +57,7 @@ const ProfileBox = props => {
   //
   // <Avatar src={values[0].avatar} className={classes.image} />
 
-  if (values === undefined) {
+  if (values[0] === undefined) {
     return <h1>Loading...</h1>;
   } else {
     return (
