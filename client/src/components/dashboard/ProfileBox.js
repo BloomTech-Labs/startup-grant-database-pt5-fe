@@ -65,9 +65,9 @@ const ProfileBox = props => {
         <CardContent>
           <div className={classes.avatar}></div>
           <Typography className={classes.name}>
-            {values.first_name} {values.last_name}
+            {values[0].first_name} {values[0].last_name}
           </Typography>
-          <Typography>{values.organization_name}</Typography>
+          <Typography>{values[0].organization_name}</Typography>
         </CardContent>
       </Card>
     );
