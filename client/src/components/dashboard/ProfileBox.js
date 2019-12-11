@@ -55,7 +55,7 @@ const ProfileBox = props => {
   //
   // <Avatar src={values[0].avatar} className={classes.image} />
 
-  if (values === undefined && values[0] === undefined) {
+  if (0 > values.length()) {
     return <h1>Loading...</h1>;
   } else {
     return (
@@ -63,7 +63,7 @@ const ProfileBox = props => {
         <CardContent>
           <div className={classes.avatar}></div>
           <Typography className={classes.name}>
-            {values[0].first_name} {values[0].last_name}
+            {values.first_name} {values.last_name}
           </Typography>
           <Typography>{values[0].organization_name}</Typography>
         </CardContent>
