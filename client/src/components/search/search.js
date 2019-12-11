@@ -54,12 +54,18 @@ const Search = () => {
   };
 
   //Function to update Amount filter hooks
-  const updateMinAmount = amount => {
-    setMin(amount);
+  const updateMinAmount = value => {
+    const amnt = value.amount;
+    const keylessData = parseInt(amnt.replace("$", "").replace(",", ""));
+    console.log(value);
+    setMin(keylessData);
   };
 
-  const updateMaxAmount = amount => {
-    setMax(amount);
+  const updateMaxAmount = value => {
+    const amnt = value.amount;
+    const keylessData = parseInt(amnt.replace("$", "").replace(",", ""));
+    console.log(keylessData);
+    setMax(keylessData);
   };
 
   //Function to update Eligibility filter hooks
@@ -86,6 +92,7 @@ const Search = () => {
             // countyFilter,
             minimumAmount: minAmount,
             maximumAmount: maxAmount,
+            // maximumAmount: maxAmount.length ? maxAmount[0].amount : null,
             eligibility: eligibilityFilter,
             category: categoryFilter
           }
