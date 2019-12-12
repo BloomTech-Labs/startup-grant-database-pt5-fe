@@ -85,7 +85,7 @@ const Search = () => {
       //Fetch Grants
 
       const grantResults = await axios.get(
-        "http://localhost:9000/api/grants/search",
+        `${process.env.REACT_APP_API}/api/grants/search`,
         {
           params: {
             state: stateFilter,
