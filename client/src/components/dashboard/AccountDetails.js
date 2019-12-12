@@ -30,7 +30,13 @@ const AccountDetails = props => {
   const { className, ...rest } = props;
 
   const [values, setValues] = useState([]);
+  const[form, setForm] = useState({
+    first_name : '',
+    last_name : '',
+    organization_name :'',
+    email: ''
 
+})
   const classes = useStyles();
 
   const id = localStorage.getItem("id");
@@ -49,10 +55,10 @@ const AccountDetails = props => {
       });
   }, []);
 
-  const handleChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
+  const handleChange = name => event => {
+    setForm({
+      ...form,
+      [name]: event.target.value
     });
   };
 
@@ -285,6 +291,18 @@ const AccountDetails = props => {
     }
   ];
 
+  onsubmit = e => {
+    axios.put(`${process.env.REACT_APP_API}/api/users/${id}`, form)
+.then(res => {
+  alert('your profile has been updated')
+  window.location.reload()
+    console.log(res.data)
+})
+.catch(err => {
+  console.log(err.message)
+})
+}
+
   return (
     <Card {...rest} className={(classes.root, classes.card)}>
       <form autoComplete="off" noValidate>
@@ -299,9 +317,9 @@ const AccountDetails = props => {
                 label="First name"
                 margin="dense"
                 name="firstName"
-                onChange={handleChange}
+                onChange={handleChange('first_name')}
                 required
-                value={values.first_name}
+                value={form.first_name}
                 variant="outlined"
               />
             </Grid>
@@ -311,9 +329,9 @@ const AccountDetails = props => {
                 label="Last name"
                 margin="dense"
                 name="lastName"
-                onChange={handleChange}
+                onChange={handleChange('last_name')}
                 required
-                value={values.last_name}
+                value={form.last_name}
                 variant="outlined"
               />
             </Grid>
@@ -323,9 +341,9 @@ const AccountDetails = props => {
                 label="Email Address"
                 margin="dense"
                 name="email"
-                onChange={handleChange}
+                onChange={handleChange('email')}
                 required
-                value={values.email}
+                value={form.email}
                 variant="outlined"
               />
             </Grid>
@@ -335,8 +353,8 @@ const AccountDetails = props => {
                 label="Company"
                 margin="dense"
                 name="company"
-                onChange={handleChange}
-                value={values.organization_name}
+                onChange={handleChange('organization_name')}
+                value={form.organization_name}
                 variant="outlined"
               />
             </Grid>
@@ -351,7 +369,7 @@ const AccountDetails = props => {
                 select
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
-                value={values.state}
+                value={form.state}
                 variant="outlined"
               >
                 {states.map(option => (
@@ -369,7 +387,7 @@ const AccountDetails = props => {
                 name="country"
                 onChange={handleChange}
                 required
-                value={values.country}
+                value={form.country}
                 variant="outlined"
               />
             </Grid>
@@ -377,7 +395,7 @@ const AccountDetails = props => {
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <Button
+          <Button onClick={onsubmit}
             style={{ backgroundColor: "#2a87af", color: "#FFF" }}
             variant="contained"
           >
