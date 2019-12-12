@@ -23,10 +23,7 @@ const Login = props => {
             // console.log('Token: ', idToken);
             const token = { idToken: idToken };
             axios
-              .post(
-                `https://startup-grant-database.herokuapp.com/api/users/login`,
-                token
-              )
+              .post(`${process.env.REACT_APP_API}/api/users/login`, token)
               .then(res => {
                 //Succesful login
                 //SAVE USER ID TO LOCAL STORAGE
