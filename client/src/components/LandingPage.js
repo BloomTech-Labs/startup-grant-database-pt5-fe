@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-// import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
 const useStyles = makeStyles(theme => ({
   // pageContainer: {
