@@ -1,0 +1,17 @@
+# pack-refs with: peeled fully-peeled sorted 
+896fa9da6576e1381f8a077dc7624e2a16715a1f refs/remotes/origin/analytics
+1b300db09c852b57b0272c14c4df6913d287dda1 refs/remotes/origin/cypress
+3119584aad4667101e4bb3731d62638e63279190 refs/remotes/origin/dashboard
+9b91e2bda766e46645488a58a17ea278c23cfb95 refs/remotes/origin/dashboardstyling
+03bb848a7ce567f464a010503220a3ce0cff4da5 refs/remotes/origin/deploy-fix
+226d7533cc08931e90408453843fa32fc4a97b60 refs/remotes/origin/display-be-data-on-fe
+0d9001991eee95e15036217acb56b19af71a9f40 refs/remotes/origin/frontend-testing
+36afc6dde5369b1faff7830e7ef8bfdae03b1ce6 refs/remotes/origin/frontend-testing-suite
+93109dfec038d7802a80bbab7c83653003783ee9 refs/remotes/origin/landing-page
+42dbcee058fb229ff608e502fda653d4638afccf refs/remotes/origin/logout-button
+681ab6adc428103b6cfa7ee307f0de6e92cb5e27 refs/remotes/origin/master
+e92dca7c0394a342e4e814d8439bc54b7d909051 refs/remotes/origin/onboarding
+99966dba25d8bf9f1d4bd054fbe94e59e7b6abe9 refs/remotes/origin/react
+ab10b725249f31bb3554fdd6b7d96e41e1829f25 refs/remotes/origin/sentry
+765f5ba5203db2319a04e514e60691640400f66b refs/remotes/origin/user-updates
+a75b5d9e45df7cd570b93379817f73d6b2750366 refs/remotes/origin/welcome+onboarding

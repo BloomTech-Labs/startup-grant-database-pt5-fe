@@ -65,6 +65,8 @@ const AmountComponent = props => {
           />
         )}
       />
+      <br></br>
+      <br></br>
       {/* -------CREATING A SECOND COMPONENT TO HOLD THE "MAX" VALUE---------- */}
       <Autocomplete
         id="checkboxes-amount"
