@@ -23,14 +23,14 @@ const TotalReceived = props => {
 
   //axios call
 
-  //fix endpoint and setGrantTotal
+  //fix endpoint and setTotalReceived
 
   // useEffect(() => {
   //   axios
   //     .get(`${process.env.REACT_APP_API}/api/grants/`)
   //     .then(res => {
   //       console.log(res);
-  //       setGrantTotal(res.data);
+  //       setTotalReceived(res.data);
   //     })
   //     .catch(err => {
   //       console.error(err.message);
@@ -39,7 +39,7 @@ const TotalReceived = props => {
 
   const classes = useStyles();
 
-  // if ((grantTotal = undefined)) {
+  // if ((totalReceived = undefined)) {
   //   return <h1>Loading...</h1>;
   // } else {
   return (
