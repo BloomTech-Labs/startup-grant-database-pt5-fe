@@ -24,7 +24,7 @@ const Login = props => {
             const token = { idToken: idToken };
             axios
               .post(
-                `https://startup-grant-database.herokuapp.com/api/users/login`,
+                `${process.env.REACT_APP_API}/api/users/login`,
                 token
               )
               .then(res => {

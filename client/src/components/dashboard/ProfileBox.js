@@ -36,18 +36,23 @@ const ProfileBox = props => {
   const id = localStorage.getItem("id");
 
   useEffect(() => {
-    const fetchAll = async () => {
-      const userResult = await axios(
+     axios
+     .get(
         `${process.env.REACT_APP_API}/api/users/${id}`
-      );
-      setValues(userResult.data.accountData);
-      console.log(userResult)
-    };
-    fetchAll();
-  });
+      )
+      .then(res => {
+        console.log(res.data)
+        setValues(res.data.accountData)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },[])
+      // setValues(userResult.data.accountData);
+
   console.log(values)
 
-  // const user = values[0];
+  const user = values[0];
 
   // const user = {
   //   name: "Claire Sinozich",
@@ -57,7 +62,7 @@ const ProfileBox = props => {
   //
   // <Avatar src={values[0].avatar} className={classes.image} />
 
-  if (values === undefined) {
+  if (user === undefined) {
     return <h1>Loading...</h1>;
   } else {
     return (
@@ -65,9 +70,9 @@ const ProfileBox = props => {
         <CardContent>
           <div className={classes.avatar}></div>
           <Typography className={classes.name}>
-            {values.first_name} {values.last_name}
+            {user.first_name} {user.last_name}
           </Typography>
-          <Typography>{values.organization_name}</Typography>
+          <Typography>{user.organization_name}</Typography>
         </CardContent>
       </Card>
     );
