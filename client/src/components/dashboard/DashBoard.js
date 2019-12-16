@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SideBar from "./SideBar";
 import Saved from "./Saved";
 import New from "./New";
+import TotalSubmitted from "./TotalSubmitted";
 import { makeStyles } from "@material-ui/core/styles";
 
 //Import firebase
@@ -50,6 +51,7 @@ const DashBoard = props => {
           >
             <Saved />
             <New />
+            <TotalSubmitted />
           </div>
         </div>
       )}
