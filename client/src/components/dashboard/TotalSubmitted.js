@@ -46,7 +46,7 @@ const TotalSubmitted = props => {
     <Container className={classes.container}>
       <h2>Total Applications Submitted</h2>
       <div>
-        <img src="../../public/images/icons/ClipBoardCheck.svg" />
+        <img src="images/icons/ClipBoardCheck.svg" alt="clipboard icon" />
         <h2 className={classes.number}>{grantTotal}</h2>
       </div>
     </Container>
