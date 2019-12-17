@@ -32,35 +32,11 @@ const Saved = props => {
         console.error(err.message);
       });
 
-    //alternate code
-    // const fetchAll = async () => {
-    //   //Fetch
-    //   const userResult = await axios(
-    //     "https://startup-grant-database-staging.herokuapp.com/api/users/1"
-    //   );
-    //   setSavedGrants(userResult.data.pinnedGrants);
-    // };
-    // fetchAll();
   }, []);
 
   console.log("savedgrants", savedGrants);
 
   const classes = useStyles();
-
-  // const grant = [
-  //   {
-  //     id: 1,
-  //     name: "This is the name of a grant",
-  //     duedate: "10/23/17",
-  //     amount: "5000"
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "this is grant #2",
-  //     duedate: "10/11/11",
-  //     amount: "6345"
-  //   }
-  // ];
 
   if (savedGrants == undefined) {
     return <h1>Loading...</h1>;

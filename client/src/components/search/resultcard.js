@@ -1,4 +1,5 @@
 import React from "react";
+import './search.css';
 
 const ResultCard = props => {
   const dueDate = props.resultcard.due_date.slice(0, 10);
@@ -16,24 +17,24 @@ const ResultCard = props => {
 
       <div className="elegibility">
         <label className="elegibility-label">Elegibility:</label>
+        <div className="elegibility-container">
         {props.resultcard.elegibilities.map((elegibility, i) => {
           return (
-            <p key={i} className="elegibility-tags">
-              <span className="span-class">{elegibility}</span>
-            </p>
+            <div key={i} className="elegibility-tags">
+              <p>{elegibility}</p>
+            </div>
           );
         })}
+      </div>
       </div>
       <div className="categories">
         <label className="category-label">Categories: </label>
         <div className="categories-container">
           {props.resultcard.categories.map((categories, i) => {
             return (
-              <div className="grant-categories">
-                <p key={i} className="category-tags">
-                  <span className="span-class">{categories}</span>
-                </p>
-              </div>
+                <div key={i} className="category-tags">
+                  <p className="p-element">{categories}</p>
+                </div>
             );
           })}
         </div>
