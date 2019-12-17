@@ -28,9 +28,12 @@ const TopBar = () => {
       <div className="nav-links">
         <NavLink to="/search">Search for Grants</NavLink>
         <br />
+        {isLogin?(
         <NavLink exact to="/dashboard">
           My Dashboard
         </NavLink>
+        ): null
+        }
         <br />
         {isLogin ? (
           <NavLink
