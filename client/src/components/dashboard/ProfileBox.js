@@ -36,14 +36,21 @@ const ProfileBox = props => {
   const id = localStorage.getItem("id");
 
   useEffect(() => {
-    const fetchAll = async () => {
-      const userResult = await axios(
-        "https://startup-grant-database-staging.herokuapp.com/api/users/${id}"
-      );
-      setValues(userResult.data.accountData);
-    };
-    fetchAll();
-  });
+     axios
+     .get(
+        `${process.env.REACT_APP_API}/api/users/${id}`
+      )
+      .then(res => {
+        console.log(res.data)
+        setValues(res.data.accountData)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },[])
+      // setValues(userResult.data.accountData);
+
+  console.log(values)
 
   const user = values[0];
 
@@ -52,6 +59,8 @@ const ProfileBox = props => {
   //   company: "The Company",
   //   avatar: "/images/avatars/headshot.jpg"
   // };
+  //
+  // <Avatar src={values[0].avatar} className={classes.image} />
 
   if (user === undefined) {
     return <h1>Loading...</h1>;
@@ -59,9 +68,7 @@ const ProfileBox = props => {
     return (
       <Card className={classes.root}>
         <CardContent>
-          <div className={classes.avatar}>
-            <Avatar src={user.avatar} className={classes.image} />
-          </div>
+          <div className={classes.avatar}></div>
           <Typography className={classes.name}>
             {user.first_name} {user.last_name}
           </Typography>

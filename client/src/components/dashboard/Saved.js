@@ -33,6 +33,13 @@ const Saved = props => {
 
   if (savedGrants === undefined) {
     return <h1>Loading...</h1>;
+  } else if (savedGrants.length === 0) {
+    return (
+      <Container>
+        <h2>Saved Grants</h2>
+        <h3>You don't have any saved grants!</h3>
+      </Container>
+    );
   } else {
     return (
       <Container>

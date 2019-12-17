@@ -10,6 +10,7 @@ import './playarea.css';
 import InitialSignupForm from '../../onboarding/Welcome';
 import Choose_Tags from '../../onboarding/Choose_Tags';
 import CategoryTags from '../../onboarding/CategoryTags';
+import PrivateRoute from '../../PrivateRoute'
 
 const PlayArea = () => {
   return (
@@ -23,8 +24,8 @@ const PlayArea = () => {
       <Route path="/category-tags" component={CategoryTags} />
 
       {/* PROTECTED ROUTES */}
-      <Route path="/settings" component={Settings} />
-      <Route path="/dashboard" component={DashBoard} />
+      <PrivateRoute  path="/settings" component={Settings} />
+      <PrivateRoute  path="/dashboard" component={DashBoard} />
     </div>
   );
 };
