@@ -23,7 +23,7 @@ const TopBar = () => {
   return (
     <div className="top-bar">
       <div className="logo">
-        <img src={require("./Grantify.png")} />
+        <img alt='Where startups find grants' src={require("./Grantify.png")} />
       </div>
       <div className="nav-links">
         <NavLink to="/search">Search for Grants</NavLink>

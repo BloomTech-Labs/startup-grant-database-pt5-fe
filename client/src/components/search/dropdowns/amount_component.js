@@ -35,7 +35,7 @@ const AmountComponent = props => {
     <>
       {/* FIRST COMPONENT HOLDS MINIMUM AMOUNT */}
       <Autocomplete
-        id="checkboxes-amount"
+        id="checkboxes-amount-min"
         options={minAmounts}
         // disableCloseOnSelect
         onChange={(event, value) => {
@@ -65,9 +65,11 @@ const AmountComponent = props => {
           />
         )}
       />
+      <br></br>
+      <br></br>
       {/* -------CREATING A SECOND COMPONENT TO HOLD THE "MAX" VALUE---------- */}
       <Autocomplete
-        id="checkboxes-amount"
+        id="checkboxes-amount-max"
         options={maxAmounts}
         // disableCloseOnSelect
         onChange={(event, value) => {
