@@ -1,11 +1,16 @@
 import React from "react";
+import ApplyButton from "../search/apply/applyButton";
 
 const ResultCard = props => {
   const dueDate = props.resultcard.due_date.slice(0, 10);
   return (
     <div className="card-holder">
-      <h3 className="title">{props.resultcard.grant_title}</h3>
-
+      <div className="top">
+        <h3 className="title">{props.resultcard.grant_title}</h3>
+        <div className="apply-button">
+          <ApplyButton />
+        </div>
+      </div>
       <p className="description">{props.resultcard.grant_description}</p>
       <div className="due-amount">
         <label className="due-label">Due:</label>
