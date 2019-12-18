@@ -11,6 +11,7 @@ import InitialSignupForm from '../../onboarding/Welcome';
 import Choose_Tags from '../../onboarding/Choose_Tags';
 import CategoryTags from '../../onboarding/CategoryTags';
 import PrivateRoute from '../../PrivateRoute'
+import GrantForm from '../../grant-forms/GrantForm'
 
 const PlayArea = () => {
   return (
@@ -23,9 +24,11 @@ const PlayArea = () => {
       <Route path="/Choose_Tags" component={Choose_Tags} />
       <Route path="/category-tags" component={CategoryTags} />
 
+
       {/* PROTECTED ROUTES */}
       <PrivateRoute  path="/settings" component={Settings} />
       <PrivateRoute  path="/dashboard" component={DashBoard} />
+      <PrivateRoute path='/new-grant' component={GrantForm} />
     </div>
   );
 };
