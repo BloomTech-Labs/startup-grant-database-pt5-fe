@@ -15,7 +15,6 @@ You can find the deployed project at www.grantlify.com.
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
-[![Netlify Status](https://startup-grant-database-staging.netlify.com/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## Project Overview
