@@ -5,22 +5,15 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3, 2),
-    height: 300
+    padding: theme.spacing(3, 2)
+    // height: 300
   }
 }));
 
-let ApplyFormBackground = () => {
+let ApplyFormBackground = props => {
   const classes = useStyles();
 
-  return (
-    <Paper className={classes.root}>
-      <Typography variant="h5" component="h3">
-        Apply for this application
-      </Typography>
-      <Typography component="p"></Typography>
-    </Paper>
-  );
+  return <Paper className={classes.root}>{props.children}</Paper>;
 };
 
 export default ApplyFormBackground;

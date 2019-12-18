@@ -10,7 +10,6 @@ let ApplyForm = () => {
         <ApplyFormBackground>
           <ApplyFormTextFields />
         </ApplyFormBackground>
-        <ApplyFormTextFields />
       </div>
     </div>
   );
