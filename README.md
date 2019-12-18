@@ -4,8 +4,6 @@ You can find the deployed project at www.grantlify.com.
 
 ## Contributors
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
-
 |                                       [Fritz Gamboa](https://github.com/fritzgt)                                        |                                       [Ernesto Pena](https://github.com/ErnestoPena)                                        |                                       [Scott Schindler](https://github.com/scottschindler)                                        |                                       [Claire Sinozich](https://github.com/csinozich)                                        |                                       [Jonathan Traverso](https://github.com/jonnytrav)                                        |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
 |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://media.licdn.com/dms/image/C5603AQHeLp7ZHAEASQ/profile-displayphoto-shrink_200_200/0?e=1582156800&v=beta&t=NNKkwh8cReCNNTOWvKZj8cxI0dsZxAH5FIvUdp55I5Y" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |
@@ -69,7 +67,7 @@ We chose this tech stack because Node and express provide great boilerplate to g
 
 We used Firebase for our authentication. Firebase is easy to use and ubiquitous, allowing us to create an interface that people are familiar with while allowing them to sign in with their Google accounts.
 
-# 3️⃣ Environment Variables
+# Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
@@ -78,15 +76,15 @@ In order for the app to function correctly, the user must set up their own envir
     *  REACT_APP_APP_ID=1:340541938572:web:f199cff64da00843b714a9
     *  REACT_APP_API=http://localhost:10000
 
-# 5️⃣ Content Licenses
+# Content Licenses
 
 none
 
-# 4️⃣ Testing
+# Testing
 
 🚫Document what you used for testing and why
 
-# 4️⃣ Installation Instructions
+# Installation Instructions
 
 This application runs on npm. You will need to add: 
 
