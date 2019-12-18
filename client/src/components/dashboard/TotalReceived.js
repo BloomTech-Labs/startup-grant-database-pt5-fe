@@ -35,7 +35,7 @@ const TotalReceived = props => {
   //     .catch(err => {
   //       console.error(err.message);
   //     })
-  // })
+  // }, [])
 
   const classes = useStyles();
 
