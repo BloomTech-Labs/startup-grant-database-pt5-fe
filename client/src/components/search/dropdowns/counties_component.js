@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import getDropdownId from '../getdropdownids.js';
 
 //Material UI components
 import Checkbox from '@material-ui/core/Checkbox';
@@ -12,6 +12,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
+var countyResult =[];
 
 const CountiesComponent = (props) => {
       //Creating hook to store County state  
@@ -21,7 +22,7 @@ const CountiesComponent = (props) => {
       useEffect(() => {
         const fetchCounties = async () => {
               //Fetch Counties
-              const countyResult = await axios(
+              countyResult = await axios(
                 `${process.env.REACT_APP_API}/api/counties/states`, {
                   params: {
                      state: props.stateFilter
@@ -33,6 +34,15 @@ const CountiesComponent = (props) => {
         fetchCounties()
     }, [props.stateFilter]);
 
+        //Function to handle County dropdown selection 
+        const handleCounty = (event, value) => {
+        const checkedCountyValue = value.map(({id})=> id); //event.target.getAttribute('value');
+        console.log('inside county', checkedCountyValue) 
+                    
+           //Updating County Filter Hook 
+           props.updateCountyFilter(checkedCountyValue);
+          };
+
     return (
         <Autocomplete
         multiple
@@ -40,6 +50,7 @@ const CountiesComponent = (props) => {
         options={counties}
         disableCloseOnSelect
         getOptionLabel={option => option.county_name}
+        onChange={(event, value) => handleCounty(event, value)}
         renderOption={(option, { selected }) => (
           <React.Fragment>
             <Checkbox
