@@ -70,9 +70,9 @@ We used Firebase for our authentication. Firebase is easy to use and ubiquitous,
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-    *  REACT_APP_FIREBASE_KEY=AIzaSyBfUYY980UqlyS5m4OPE0bvNagUaQD4b_A
-    *  REACT_APP_MESSAGIN_SENDER_ID=340541938572
-    *  REACT_APP_APP_ID=1:340541938572:web:f199cff64da00843b714a9
+    *  REACT_APP_FIREBASE_KEY
+    *  REACT_APP_MESSAGIN_SENDER_ID
+    *  REACT_APP_APP_ID
     *  REACT_APP_API=http://localhost:10000
 
 # Content Licenses
