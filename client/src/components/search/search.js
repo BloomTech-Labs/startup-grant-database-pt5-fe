@@ -13,7 +13,7 @@ import AmountComponent from "./dropdowns/amount_component.js";
 import ElegibilityComponent from "./dropdowns/elegibility_component.js";
 import CategoryComponent from "./dropdowns/category_component.js";
 
-const Search = () => {
+const Search = props => {
   // Hooks declaration ------------------------------------------------------------------------
 
   // Hooks to render the results.
@@ -57,14 +57,14 @@ const Search = () => {
   const updateMinAmount = value => {
     const amnt = value.amount;
     const keylessData = parseInt(amnt.replace("$", "").replace(",", ""));
-    console.log(value);
+    // console.log(value);
     setMin(keylessData);
   };
 
   const updateMaxAmount = value => {
     const amnt = value.amount;
     const keylessData = parseInt(amnt.replace("$", "").replace(",", ""));
-    console.log(keylessData);
+    // console.log(keylessData);
     setMax(keylessData);
   };
 
@@ -105,8 +105,8 @@ const Search = () => {
   }, [stateFilter, eligibilityFilter, categoryFilter, minAmount, maxAmount]);
 
   // console.log("my grants", grants);
-  console.log("min amount filter", minAmount);
-  console.log("max amount filter", maxAmount);
+  // console.log("min amount filter", minAmount);
+  // console.log("max amount filter", maxAmount);
   return (
     <div className="searchholder">
       <div className="filters">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 import ApplySuccessModal from "../applyForm/ApplySuccessModal";
@@ -13,22 +14,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-let ApplyFormTextFields = () => {
+let ApplyFormTextFields = props => {
   const classes = useStyles();
-  const [value, setValue] = useState([
-    {
-      question1: "",
-      question2: "",
-      question3: ""
-    }
-  ]);
+  const [value, setValue] = useState({
+    worthy_because: "",
+    spending_plans: "",
+    mission_statement: ""
+  });
 
   const handleChange = event => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = event => {
-    console.log("submitted!");
+    event.preventDefault();
+    //parseInt
+    const user = {
+      ...value,
+      grant_id: props.grant_id,
+    };
+    console.log(user);
   };
 
   return (
@@ -44,9 +49,9 @@ let ApplyFormTextFields = () => {
           <h3>Why do you deserve this grant? </h3>
           <TextField
             id="outlined-textarea"
-            value={value.question1}
+            value={value.worthy_because}
             onChange={handleChange}
-            name="question1"
+            name="worthy_because"
             label=""
             placeholder=""
             multiline
@@ -57,9 +62,9 @@ let ApplyFormTextFields = () => {
           <h3>What would you do with the money?</h3>
           <TextField
             id="outlined-textarea"
-            value={value.question2}
+            value={value.spending_plans}
             onChange={handleChange}
-            name="question2"
+            name="spending_plans"
             label=""
             placeholder=""
             multiline
@@ -70,9 +75,9 @@ let ApplyFormTextFields = () => {
           <h3>Tell us more about your business</h3>
           <TextField
             id="outlined-textarea"
-            value={value.question3}
+            value={value.mission_statement}
             onChange={handleChange}
-            name="question3"
+            name="mission_statement"
             label=""
             placeholder=""
             multiline
@@ -81,7 +86,11 @@ let ApplyFormTextFields = () => {
           />
           <br></br>
           <br></br>
-          <ApplySuccessModal />
+
+          {/* <ApplySuccessModal /> */}
+          <Button type="submit" variant="contained" color="primary">
+            Back to Search Grants
+          </Button>
         </div>
       </form>
     </div>

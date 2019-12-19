@@ -42,7 +42,6 @@ let ApplySuccessModal = () => {
 
   const handleOpen = () => {
     setOpen(true);
-    console.log("submitted!");
   };
 
   const handleClose = () => {
@@ -65,11 +64,7 @@ let ApplySuccessModal = () => {
             Congrats! Your application has been submitted
           </h2>
           <p id="simple-modal-description">To view more grants, click here:</p>
-          <Link to="/search">
-            <Button variant="contained" color="primary">
-              Back to Search Grants
-            </Button>
-          </Link>
+          <Link to="/search"></Link>
         </div>
       </Modal>
     </div>

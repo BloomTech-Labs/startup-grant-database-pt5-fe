@@ -8,7 +8,7 @@ const ResultCard = props => {
       <div className="top">
         <h3 className="title">{props.resultcard.grant_title}</h3>
         <div className="apply-button">
-          <ApplyButton />
+          <ApplyButton grant_id={props.resultcard.id} />
         </div>
       </div>
       <p className="description">{props.resultcard.grant_description}</p>
