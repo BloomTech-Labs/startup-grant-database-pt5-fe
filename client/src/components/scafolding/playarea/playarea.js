@@ -12,7 +12,7 @@ import Choose_Tags from '../../onboarding/Choose_Tags';
 import CategoryTags from '../../onboarding/CategoryTags';
 import PrivateRoute from '../../PrivateRoute'
 import GrantForm from '../../grant-forms/GrantForm'
-
+import ApplyForm from "../../search/apply/applyForm/applyForm";
 
 const PlayArea = () => {
   return (
