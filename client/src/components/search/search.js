@@ -4,7 +4,6 @@ import axios from "axios";
 import ResultCard from "./resultcard.js";
 import AlertDialog from "./AlertDialog.js";
 import "./search.css";
-import qs from "qs";
 
 //Dropdown with checkboxes built in components.
 import StateComponent from "./dropdowns/states_component.js";
@@ -15,7 +14,7 @@ import CategoryComponent from "./dropdowns/category_component.js";
 
 const Search = props => {
   // Hooks declaration ------------------------------------------------------------------------
-
+  var grantResults = [];
   // Hooks to render the results.
   const [grants, setGrants] = useState([]);
 
@@ -84,15 +83,14 @@ const Search = props => {
     const fetchAll = async () => {
       //Fetch Grants
 
-      const grantResults = await axios.get(
+      grantResults = await axios.get(
         `${process.env.REACT_APP_API}/api/grants/search`,
         {
           params: {
             state: stateFilter,
-            // countyFilter,
+            county: countyFilter,
             minimumAmount: minAmount,
             maximumAmount: maxAmount,
-            // maximumAmount: maxAmount.length ? maxAmount[0].amount : null,
             eligibility: eligibilityFilter,
             category: categoryFilter
           }
@@ -102,7 +100,14 @@ const Search = props => {
       setGrants(grantResults.data);
     };
     fetchAll();
-  }, [stateFilter, eligibilityFilter, categoryFilter, minAmount, maxAmount]);
+  }, [
+    stateFilter,
+    countyFilter,
+    eligibilityFilter,
+    categoryFilter,
+    minAmount,
+    maxAmount
+  ]);
 
   // console.log("my grants", grants);
   // console.log("min amount filter", minAmount);
@@ -141,9 +146,13 @@ const Search = props => {
         <AlertDialog handleClose={handleClose} open={open} />
         {grants.map((items, i) => {
           return (
-            // <Link style={{ textDecoration: 'none', color: '#000000'}}to={`/search/${items.id}`}>
-            <ResultCard key={i} resultcard={items} />
-            // </Link>
+            <Link
+              key={i}
+              style={{ textDecoration: "none", color: "#000000" }}
+              to={`/search/${items.id}`}
+            >
+              <ResultCard resultcard={items} />
+            </Link>
           );
         })}
       </div>
