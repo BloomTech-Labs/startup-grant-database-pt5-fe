@@ -1,34 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paper, Button, Input } from '@material-ui/core';
 import axios from 'axios';
 
-const GrantForm = () => {
-  const id = localStorage.getItem('id');
+const GrantForm = props => {
+  //Get user ID from local storage
+  //   const id = localStorage.getItem('id');
+
+  let grantID = props.match.params.id || 7;
 
   const [form, setForm] = useState({
-    user_id: id,
     grant_title: '',
-    grant_number: 1,
-    grant_status: 1,
     grant_description: '',
-    grant_amount: null,
-    grant_type: '',
-    created_at: new Date()
+    grant_amount: '',
+    grant_type: ''
   });
 
+  //Create axios call to get the current data from specific grant
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API}/api/grants/${grantID}`)
+      .then(res => {
+        let currentForm = res.data[0];
+        console.log(grantID);
+        setForm(currentForm);
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  }, []);
+
+  //Handle change while typing
   const handleChange = name => event => {
     setForm({ ...form, [name]: event.target.value });
   };
 
+  //Handle submition of form
   onsubmit = e => {
     e.preventDefault();
+    console.log(form, grantID);
+    //
+    //TODO:
+    // 1. Get the grant ID from params when
+    //user click edit to redirect here
+    // 2.Try to use this same form for both post and edit to be DRY
+    //
     axios
-      .post(`${process.env.REACT_APP_API}/api/grants`, form)
+      .put(`${process.env.REACT_APP_API}/api/grants/${grantID}`, form)
       .then(res => {
-        console.log(res);
+        console.log(res.data);
       })
       .catch(err => {
-        console.log(err);
+        console.log('Error', err);
       });
   };
 
@@ -64,7 +86,6 @@ const GrantForm = () => {
             onChange={handleChange('grant_type')}
             className="input-field"
           />
-
           <Button
             type="submit"
             variant="contained"
