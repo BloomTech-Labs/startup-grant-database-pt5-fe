@@ -2,12 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Button, Input } from '@material-ui/core';
 import axios from 'axios';
 
-//TODO:
-// 1. Create button on forms
-// 2.Redirect user to this page with id in URL
-
 const GrantForm = props => {
-  let grantID = props.match.params.id || 7;
+  //Get Grants ID from URL
+  let grantID = props.match.params.id;
 
   const [form, setForm] = useState({
     grant_title: '',

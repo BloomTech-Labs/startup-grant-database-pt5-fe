@@ -13,8 +13,6 @@ import CategoryTags from '../../onboarding/CategoryTags';
 import PrivateRoute from '../../PrivateRoute';
 import GrantForm from '../../grant-forms/GrantForm';
 import ApplyForm from '../../search/apply/applyForm/applyForm';
-
-//TODO: Testing route to update grants
 import EditGrantForm from '../../grant-forms/EditGrantForm';
 
 const PlayArea = () => {
@@ -36,7 +34,7 @@ const PlayArea = () => {
       <PrivateRoute path="/new-grant" component={GrantForm} />
 
       {/* //TODO: Testing route to update grants */}
-      <PrivateRoute path="/edit-grant" component={EditGrantForm} />
+      <PrivateRoute path="/edit-grant/:id" component={EditGrantForm} />
     </div>
   );
 };
