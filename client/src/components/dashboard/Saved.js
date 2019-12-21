@@ -20,15 +20,6 @@ const Saved = props => {
   const [savedGrants, setSavedGrants] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API}/api/users/${id}`)
-      .then(res => {
-        setSavedGrants(res.data.pinnedGrants);
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
-
     const fetchAll = async () => {
       const savedGrants = await axios(
         `${process.env.REACT_APP_API}/api/savedgrants/${id}`
@@ -36,11 +27,9 @@ const Saved = props => {
       setSavedGrants(savedGrants.data);
     };
     fetchAll();
-
   }, []);
 
   const classes = useStyles();
-
 
   if (savedGrants === undefined) {
     return <h1>Loading...</h1>;
