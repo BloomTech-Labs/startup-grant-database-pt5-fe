@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Button, Input } from '@material-ui/core';
 import axios from 'axios';
 
-const GrantForm = props => {
-  //Get user ID from local storage
-  //   const id = localStorage.getItem('id');
+//TODO:
+// 1. Create button on forms
+// 2.Redirect user to this page with id in URL
 
+const GrantForm = props => {
   let grantID = props.match.params.id || 7;
 
   const [form, setForm] = useState({
@@ -17,16 +18,16 @@ const GrantForm = props => {
 
   //Create axios call to get the current data from specific grant
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API}/api/grants/${grantID}`)
-      .then(res => {
-        let currentForm = res.data[0];
-        console.log(grantID);
-        setForm(currentForm);
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
+    const fetchAll = async () => {
+      //Fetch Categories
+      const postData = await axios(
+        `${process.env.REACT_APP_API}/api/grants/${grantID}`
+      );
+      let currentForm = postData.data[0];
+      console.log(currentForm);
+      setForm(currentForm);
+    };
+    fetchAll();
   }, []);
 
   //Handle change while typing
@@ -38,12 +39,6 @@ const GrantForm = props => {
   onsubmit = e => {
     e.preventDefault();
     console.log(form, grantID);
-    //
-    //TODO:
-    // 1. Get the grant ID from params when
-    //user click edit to redirect here
-    // 2.Try to use this same form for both post and edit to be DRY
-    //
     axios
       .put(`${process.env.REACT_APP_API}/api/grants/${grantID}`, form)
       .then(res => {
