@@ -1,34 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paper, Button, Input } from '@material-ui/core';
 import axios from 'axios';
 
-const GrantForm = () => {
-  const id = localStorage.getItem('id');
+const GrantForm = props => {
+  //Get Grants ID from URL
+  let grantID = props.match.params.id;
 
   const [form, setForm] = useState({
-    user_id: id,
     grant_title: '',
-    grant_number: 1,
-    grant_status: 1,
     grant_description: '',
-    grant_amount: null,
-    grant_type: '',
-    created_at: new Date()
+    grant_amount: '',
+    grant_type: ''
   });
 
+  //Create axios call to get the current data from specific grant
+  useEffect(() => {
+    const fetchAll = async () => {
+      //Fetch Categories
+      const postData = await axios(
+        `${process.env.REACT_APP_API}/api/grants/${grantID}`
+      );
+      let currentForm = postData.data[0];
+      console.log(currentForm);
+      setForm(currentForm);
+    };
+    fetchAll();
+  }, []);
+
+  //Handle change while typing
   const handleChange = name => event => {
     setForm({ ...form, [name]: event.target.value });
   };
 
+  //Handle submition of form
   onsubmit = e => {
     e.preventDefault();
+    console.log(form, grantID);
     axios
-      .post(`${process.env.REACT_APP_API}/api/grants`, form)
+      .put(`${process.env.REACT_APP_API}/api/grants/${grantID}`, form)
       .then(res => {
-        console.log(res);
+        console.log(res.data);
       })
       .catch(err => {
-        console.log(err);
+        console.log('Error', err);
       });
   };
 
@@ -64,7 +78,6 @@ const GrantForm = () => {
             onChange={handleChange('grant_type')}
             className="input-field"
           />
-
           <Button
             type="submit"
             variant="contained"
