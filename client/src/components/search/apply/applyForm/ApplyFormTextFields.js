@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-
+import axios from "axios";
 import ApplySuccessModal from "../applyForm/ApplySuccessModal";
 
 const useStyles = makeStyles(theme => ({
@@ -13,22 +14,43 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-let ApplyFormTextFields = () => {
+let ApplyFormTextFields = props => {
   const classes = useStyles();
-  const [value, setValue] = useState([
-    {
-      question1: "",
-      question2: "",
-      question3: ""
-    }
-  ]);
+  const [value, setValue] = useState({
+    worthy_because: "",
+    spending_plans: "",
+    mission_statement: ""
+  });
+  const [modal, setModal] = useState(false);
 
   const handleChange = event => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
 
+  // parseInt of grant id
+
+  let newGrantId = parseInt(props.grant_id);
+
   const handleSubmit = event => {
-    console.log("submitted!");
+    event.preventDefault();
+    const data = {
+      user_id: props.user_id,
+      grant_id: newGrantId,
+      ...value,
+      created_at: new Date(),
+      status: 1
+    };
+
+    axios
+      .post(`${process.env.REACT_APP_API}/api/applications`, data)
+      .then(res => {
+        setModal({ modal: true });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    console.log(data);
   };
 
   return (
@@ -44,9 +66,9 @@ let ApplyFormTextFields = () => {
           <h3>Why do you deserve this grant? </h3>
           <TextField
             id="outlined-textarea"
-            value={value.question1}
+            value={value.worthy_because}
             onChange={handleChange}
-            name="question1"
+            name="worthy_because"
             label=""
             placeholder=""
             multiline
@@ -57,9 +79,9 @@ let ApplyFormTextFields = () => {
           <h3>What would you do with the money?</h3>
           <TextField
             id="outlined-textarea"
-            value={value.question2}
+            value={value.spending_plans}
             onChange={handleChange}
-            name="question2"
+            name="spending_plans"
             label=""
             placeholder=""
             multiline
@@ -70,9 +92,9 @@ let ApplyFormTextFields = () => {
           <h3>Tell us more about your business</h3>
           <TextField
             id="outlined-textarea"
-            value={value.question3}
+            value={value.mission_statement}
             onChange={handleChange}
-            name="question3"
+            name="mission_statement"
             label=""
             placeholder=""
             multiline
@@ -81,7 +103,11 @@ let ApplyFormTextFields = () => {
           />
           <br></br>
           <br></br>
-          <ApplySuccessModal />
+
+          <Button type="submit" variant="contained" color="primary">
+            Submit
+          </Button>
+          {modal ? <ApplySuccessModal /> : ""}
         </div>
       </form>
     </div>

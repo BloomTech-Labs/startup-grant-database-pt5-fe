@@ -20,11 +20,25 @@ const PlayArea = () => {
       {/* ALL ROUTES */}
       <Route exact path="/" component={LandingPage} />
       <Route path="/login" component={Login} />
-      <Route path="/search" component={Search} />
+      {/* <Route path="/search" component={Search} />
+      <Route path="/apply-form" component={ApplyForm} /> */}
+      <Route
+        path="/search"
+        render={props => (
+          <div>
+            <Route exact path={`${props.match.path}`} component={Search} />
+            <Route
+              exact
+              path={`${props.match.path}/apply/:grant_id`}
+              component={ApplyForm}
+            />
+          </div>
+        )}
+      />
+
       <Route path="/welcome" component={InitialSignupForm} />
       <Route path="/Choose_Tags" component={Choose_Tags} />
       <Route path="/category-tags" component={CategoryTags} />
-      <Route path="/apply-form" component={ApplyForm} />
 
 
       {/* PROTECTED ROUTES */}

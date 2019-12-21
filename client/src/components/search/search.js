@@ -12,9 +12,9 @@ import AmountComponent from "./dropdowns/amount_component.js";
 import ElegibilityComponent from "./dropdowns/elegibility_component.js";
 import CategoryComponent from "./dropdowns/category_component.js";
 
-const Search = () => {
+const Search = props => {
   // Hooks declaration ------------------------------------------------------------------------
-var grantResults =[]
+  var grantResults = [];
   // Hooks to render the results.
   const [grants, setGrants] = useState([]);
 
@@ -54,26 +54,16 @@ var grantResults =[]
 
   //Function to update Amount filter hooks
   const updateMinAmount = value => {
-    const amnt = [];
-    if (value === null) {
-      value = {
-        amount: 1.00
-      }
-    } else {
-      var keylessData = value.amount.replace("$", "").replace(",", "");
-    }
+    const amnt = value.amount;
+    const keylessData = parseInt(amnt.replace("$", "").replace(",", ""));
+    // console.log(value);
     setMin(keylessData);
   };
 
   const updateMaxAmount = value => {
-    const amnt = [];
-    if (value === null) {
-      value = {
-        amount: 1000000.00
-      }
-    } else {
-      var keylessData = value.amount.replace("$", "").replace(",", "").replace(",", "");
-    }
+    const amnt = value.amount;
+    const keylessData = parseInt(amnt.replace("$", "").replace(",", ""));
+    // console.log(keylessData);
     setMax(keylessData);
   };
 
@@ -93,7 +83,8 @@ var grantResults =[]
     const fetchAll = async () => {
       //Fetch Grants
 
-     grantResults = await axios.get(
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      grantResults = await axios.get(
         `${process.env.REACT_APP_API}/api/grants/search`,
         {
           params: {
@@ -110,12 +101,18 @@ var grantResults =[]
       setGrants(grantResults.data);
     };
     fetchAll();
-  }, [stateFilter, countyFilter, eligibilityFilter, categoryFilter, minAmount, maxAmount]);
+  }, [
+    stateFilter,
+    countyFilter,
+    eligibilityFilter,
+    categoryFilter,
+    minAmount,
+    maxAmount
+  ]);
 
   // console.log("my grants", grants);
-  console.log("My Grant Result", grantResults);
-  console.log("county filter", countyFilter);
-
+  // console.log("min amount filter", minAmount);
+  // console.log("max amount filter", maxAmount);
   return (
     <div className="searchholder">
       <div className="filters">
@@ -150,8 +147,12 @@ var grantResults =[]
         <AlertDialog handleClose={handleClose} open={open} />
         {grants.map((items, i) => {
           return (
-            <Link key={i} style={{ textDecoration: 'none', color: '#000000'}}to={`/search/${items.id}`}>
-              <ResultCard  resultcard={items} />
+            <Link
+              key={i}
+              style={{ textDecoration: "none", color: "#000000" }}
+              to={`/search/${items.id}`}
+            >
+              <ResultCard resultcard={items} />
             </Link>
           );
         })}

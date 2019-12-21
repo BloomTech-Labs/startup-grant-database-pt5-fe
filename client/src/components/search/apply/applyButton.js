@@ -11,14 +11,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-let ApplyButton = () => {
+let ApplyButton = props => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
-      <Link to="/apply-form">
+      <Link to={`/search/apply/${props.grant_id}`}>
         <Button variant="contained" color="primary">
-          Apply to this Grant
+          Submit
         </Button>
       </Link>
     </div>
