@@ -83,6 +83,7 @@ const Search = props => {
     const fetchAll = async () => {
       //Fetch Grants
 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       grantResults = await axios.get(
         `${process.env.REACT_APP_API}/api/grants/search`,
         {

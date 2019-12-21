@@ -17,7 +17,7 @@ let ApplyButton = props => {
     <div className={classes.root}>
       <Link to={`/search/apply/${props.grant_id}`}>
         <Button variant="contained" color="primary">
-          Apply to this Grant
+          Submit
         </Button>
       </Link>
     </div>

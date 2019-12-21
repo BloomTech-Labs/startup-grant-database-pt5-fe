@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-
+import axios from "axios";
 import ApplySuccessModal from "../applyForm/ApplySuccessModal";
 
 const useStyles = makeStyles(theme => ({
@@ -21,19 +21,36 @@ let ApplyFormTextFields = props => {
     spending_plans: "",
     mission_statement: ""
   });
+  const [modal, setModal] = useState(false);
 
   const handleChange = event => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
 
+  // parseInt of grant id
+
+  let newGrantId = parseInt(props.grant_id);
+
   const handleSubmit = event => {
     event.preventDefault();
-    //parseInt
-    const user = {
+    const data = {
+      user_id: props.user_id,
+      grant_id: newGrantId,
       ...value,
-      grant_id: props.grant_id,
+      created_at: new Date(),
+      status: 1
     };
-    console.log(user);
+
+    axios
+      .post(`${process.env.REACT_APP_API}/api/applications`, data)
+      .then(res => {
+        setModal({ modal: true });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    console.log(data);
   };
 
   return (
@@ -87,10 +104,10 @@ let ApplyFormTextFields = props => {
           <br></br>
           <br></br>
 
-          {/* <ApplySuccessModal /> */}
           <Button type="submit" variant="contained" color="primary">
-            Back to Search Grants
+            Submit
           </Button>
+          {modal ? <ApplySuccessModal /> : ""}
         </div>
       </form>
     </div>

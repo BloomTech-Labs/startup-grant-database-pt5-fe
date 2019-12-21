@@ -38,11 +38,7 @@ let ApplySuccessModal = () => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = React.useState(true);
 
   const handleClose = () => {
     setOpen(false);
@@ -50,9 +46,6 @@ let ApplySuccessModal = () => {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        Apply to this Grant
-      </Button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -64,7 +57,11 @@ let ApplySuccessModal = () => {
             Congrats! Your application has been submitted
           </h2>
           <p id="simple-modal-description">To view more grants, click here:</p>
-          <Link to="/search"></Link>
+          <Link to="/search">
+            <Button variant="contained" color="primary">
+              Back to Grants
+            </Button>
+          </Link>
         </div>
       </Modal>
     </div>
