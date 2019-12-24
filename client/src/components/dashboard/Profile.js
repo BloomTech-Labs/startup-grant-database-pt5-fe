@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import moment from "moment";
-import { makeStyles } from "@material-ui/styles";
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
+import { makeStyles } from '@material-ui/styles';
 import {
   Card,
   CardActions,
@@ -9,38 +9,38 @@ import {
   Typography,
   Divider,
   Button
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import axios from "axios";
+import axios from 'axios';
 // import DropZone from "./DropZone";
 
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
-    width: "40%",
-    margin: "0 2%",
-    height: "30%"
+    width: '40%',
+    margin: '0 2%',
+    height: '30%'
   },
   details: {
-    display: "flex"
+    display: 'flex'
   },
   avatar: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
     height: 100,
     width: 100,
     flexShrink: 0,
     flexGrow: 0
   },
   progress: {
-    marginTop: "10px"
+    marginTop: '10px'
   },
   uploadButton: {
-    marginRight: "10px"
+    marginRight: '10px'
   },
   actions: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 }));
 
@@ -49,7 +49,7 @@ const AccountProfile = props => {
 
   const [values, setValues] = useState([]);
 
-  const id = localStorage.getItem("id");
+  const id = localStorage.getItem('id');
 
   useEffect(() => {
     // axios
@@ -72,7 +72,7 @@ const AccountProfile = props => {
     fetchAll();
   }, []);
 
-  console.log("user", values);
+  console.log('user', values);
 
   const classes = useStyles();
 
@@ -87,6 +87,9 @@ const AccountProfile = props => {
   const first = values[0];
 
   // console.log("first", first);
+
+  //TODO:
+  // 1. Implement firebase storage
 
   if (first === undefined) {
     return <h1>Loading...</h1>;
@@ -115,7 +118,7 @@ const AccountProfile = props => {
                 color="textSecondary"
                 variant="body1"
               >
-                {moment().format("hh:mm A")}
+                {moment().format('hh:mm A')}
               </Typography>
             </div>
             <Avatar className={classes.avatar} src={props.files} />
