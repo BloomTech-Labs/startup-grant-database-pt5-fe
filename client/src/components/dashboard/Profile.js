@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 
 import axios from 'axios';
-// import DropZone from "./DropZone";
+import DropZone from './DropZone';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -88,9 +88,6 @@ const AccountProfile = props => {
 
   // console.log("first", first);
 
-  //TODO:
-  // 1. Implement firebase storage
-
   if (first === undefined) {
     return <h1>Loading...</h1>;
   } else {
@@ -126,7 +123,9 @@ const AccountProfile = props => {
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <Button variant="text">Upload picture</Button>
+          {/* custom component to upload photos */}
+          <DropZone />
+          {/* <Button variant="text">Upload picture</Button> */}
           <Button variant="text">Remove picture</Button>
         </CardActions>
       </Card>

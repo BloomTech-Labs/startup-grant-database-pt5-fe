@@ -1,50 +1,41 @@
-import React, { Component } from "react";
-import { DropzoneDialog } from "material-ui-dropzone";
-import Button from "@material-ui/core/Button";
+import React, { useState } from 'react';
+import { DropzoneDialog } from 'material-ui-dropzone';
+import Button from '@material-ui/core/Button';
+//importing firebase for storage
+import { firebase } from '../../helpers/index';
 
-export default class DropZone extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      files: []
-    };
-  }
+const DropZone = props => {
+  //state hooks
+  const [isOpen, setIsOpen] = useState(false);
+  const [files, setFiles] = useState('');
 
-  handleClose() {
-    this.setState({
-      open: false
-    });
-  }
+  const handleSave = file => {
+    console.log(file[0]);
+    //Saving files to state
+    setFiles(file);
+    //close modal after clicking save
+    setIsOpen(false);
 
-  handleSave(files) {
-    //Saving files to state for further use and closing Modal.
-    this.setState({
-      files: files,
-      open: false
-    });
-  }
+    //TODO:
+    // 1. Implement firebase storage
+    //initializing firebase
+    // firebase();
+  };
 
-  handleOpen() {
-    this.setState({
-      open: true
-    });
-  }
+  return (
+    <div>
+      <Button onClick={() => setIsOpen(true)}>Upload Picture</Button>
+      <DropzoneDialog
+        open={isOpen}
+        onSave={handleSave}
+        acceptedFiles={['image/jpeg', 'image/png']}
+        showPreviews={true}
+        maxFileSize={5000000}
+        onClose={() => setIsOpen(false)}
+        file={files}
+      />
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div>
-        <Button onClick={this.handleOpen.bind(this)}>Upload Picture</Button>
-        <DropzoneDialog
-          open={this.state.open}
-          onSave={this.handleSave.bind(this)}
-          acceptedFiles={["image/jpeg", "image/png"]}
-          showPreviews={true}
-          maxFileSize={5000000}
-          onClose={this.handleClose.bind(this)}
-          file={this.state.files}
-        />
-      </div>
-    );
-  }
-}
+export default DropZone;
