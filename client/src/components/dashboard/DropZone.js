@@ -1,25 +1,36 @@
 import React, { useState } from 'react';
 import { DropzoneDialog } from 'material-ui-dropzone';
 import Button from '@material-ui/core/Button';
-//importing firebase for storage
-import { firebase } from '../../helpers/index';
+const firebase = require('firebase/app');
+require('firebase/storage');
 
 const DropZone = props => {
   //state hooks
   const [isOpen, setIsOpen] = useState(false);
   const [files, setFiles] = useState('');
 
-  const handleSave = file => {
-    console.log(file[0]);
+  const handleSave = data => {
+    let file = data[0];
+    let fileName = file.name;
+    console.log(fileName);
     //Saving files to state
     setFiles(file);
     //close modal after clicking save
     setIsOpen(false);
 
-    //TODO:
-    // 1. Implement firebase storage
-    //initializing firebase
-    // firebase();
+    // 1. Create storage reference
+    var storageRef = firebase.storage().ref(`avatars/${fileName}`);
+
+    //2.Upload file to firebase
+    var task = storageRef.put(file);
+
+    //3.Update progress bar
+    task.on('state_changed', function progress(snapshot) {
+      //create percentage to set progress bar
+      var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      // uploader.value = percentage
+      console.log(percentage);
+    });
   };
 
   return (
