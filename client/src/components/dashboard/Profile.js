@@ -14,6 +14,9 @@ import {
 import axios from 'axios';
 import DropZone from './DropZone';
 
+const firebase = require('firebase/app');
+require('firebase/auth');
+
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
@@ -48,34 +51,29 @@ const AccountProfile = props => {
   const { className, files, ...rest } = props;
 
   const [values, setValues] = useState([]);
+  const [avartarURL, setavartarURL] = useState('');
 
   const id = localStorage.getItem('id');
 
   useEffect(() => {
-    // axios
-    //   .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
-    //   .then(res => {
-    //     console.log(res);
-    //     setValues(res.data);
-    //   })
-    //   .catch(err => {
-    //     console.error(err.message);
-    //   });
-
     const fetchAll = async () => {
       //Fetch
       const userResult = await axios(
         `${process.env.REACT_APP_API}/api/users/${id}`
       );
-      setValues(userResult.data.accountData);
+      let userdata = userResult.data.accountData;
+      setValues(userdata);
+      //Get user profile pic
+      var currentUser = firebase.auth().currentUser;
+      if (currentUser != null) {
+        setavartarURL(currentUser.photoURL);
+      }
     };
+
     fetchAll();
   }, []);
 
-  console.log('user', values);
-
   const classes = useStyles();
-
   // const user = {
   //   name: "Claire Sinozich",
   //   state: "Colorado",
@@ -118,7 +116,8 @@ const AccountProfile = props => {
                 {moment().format('hh:mm A')}
               </Typography>
             </div>
-            <Avatar className={classes.avatar} src={props.files} />
+
+            <Avatar className={classes.avatar} src={avartarURL} />
           </div>
         </CardContent>
         <Divider />
@@ -126,7 +125,7 @@ const AccountProfile = props => {
           {/* custom component to upload photos */}
           <DropZone />
           {/* <Button variant="text">Upload picture</Button> */}
-          <Button variant="text">Remove picture</Button>
+          {/* <Button variant="text">Remove picture</Button> */}
         </CardActions>
       </Card>
     );
