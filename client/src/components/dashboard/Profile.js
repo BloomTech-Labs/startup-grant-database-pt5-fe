@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import moment from "moment";
-import { makeStyles } from "@material-ui/styles";
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
+import { makeStyles } from '@material-ui/styles';
 import {
   Card,
   CardActions,
@@ -9,38 +9,41 @@ import {
   Typography,
   Divider,
   Button
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import axios from "axios";
-// import DropZone from "./DropZone";
+import axios from 'axios';
+import DropZone from './DropZone';
+
+const firebase = require('firebase/app');
+require('firebase/auth');
 
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
-    width: "40%",
-    margin: "0 2%",
-    height: "30%"
+    width: '40%',
+    margin: '0 2%',
+    height: '30%'
   },
   details: {
-    display: "flex"
+    display: 'flex'
   },
   avatar: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
     height: 100,
     width: 100,
     flexShrink: 0,
     flexGrow: 0
   },
   progress: {
-    marginTop: "10px"
+    marginTop: '10px'
   },
   uploadButton: {
-    marginRight: "10px"
+    marginRight: '10px'
   },
   actions: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 }));
 
@@ -48,34 +51,29 @@ const AccountProfile = props => {
   const { className, files, ...rest } = props;
 
   const [values, setValues] = useState([]);
+  const [avartarURL, setavartarURL] = useState('');
 
-  const id = localStorage.getItem("id");
+  const id = localStorage.getItem('id');
 
   useEffect(() => {
-    // axios
-    //   .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
-    //   .then(res => {
-    //     console.log(res);
-    //     setValues(res.data);
-    //   })
-    //   .catch(err => {
-    //     console.error(err.message);
-    //   });
-
     const fetchAll = async () => {
       //Fetch
       const userResult = await axios(
         `${process.env.REACT_APP_API}/api/users/${id}`
       );
-      setValues(userResult.data.accountData);
+      let userdata = userResult.data.accountData;
+      setValues(userdata);
+      //Get user profile pic
+      var currentUser = firebase.auth().currentUser;
+      if (currentUser != null) {
+        setavartarURL(currentUser.photoURL);
+      }
     };
+
     fetchAll();
   }, []);
 
-  console.log("user", values);
-
   const classes = useStyles();
-
   // const user = {
   //   name: "Claire Sinozich",
   //   state: "Colorado",
@@ -115,16 +113,19 @@ const AccountProfile = props => {
                 color="textSecondary"
                 variant="body1"
               >
-                {moment().format("hh:mm A")}
+                {moment().format('hh:mm A')}
               </Typography>
             </div>
-            <Avatar className={classes.avatar} src={props.files} />
+
+            <Avatar className={classes.avatar} src={avartarURL} />
           </div>
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <Button variant="text">Upload picture</Button>
-          <Button variant="text">Remove picture</Button>
+          {/* custom component to upload photos */}
+          <DropZone />
+          {/* <Button variant="text">Upload picture</Button> */}
+          {/* <Button variant="text">Remove picture</Button> */}
         </CardActions>
       </Card>
     );
