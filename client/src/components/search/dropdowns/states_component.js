@@ -15,9 +15,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 var stateResult = [];
 
 const StateComponent = (props) => {
-    //Hook to control the States Autocomplete text filed
-    const [autoCompleteText, setAutoCompleteText] = useState('')
-    
+ 
     //Hooks to store the States drop down results
     const [state, setStates] = useState([]);
 
