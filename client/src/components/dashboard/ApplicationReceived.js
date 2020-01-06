@@ -37,7 +37,7 @@ const ApplicationReceived = props => {
   // }, [])
 
   const classes = useStyles();
-  // if ((received = undefined)) {
+  // if ((received === undefined)) {
   // return <h1>Loading...</h1>;
   // } else if (received.length === 0) {
   //   return (

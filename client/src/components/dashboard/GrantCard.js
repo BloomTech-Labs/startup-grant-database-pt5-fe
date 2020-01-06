@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "@material-ui/core";
 import Moment from "moment";
 
-const NewCard = props => {
+const GrantCard = props => {
   return (
     <Card>
       <h3>{props.grant.grant_title}</h3>
@@ -19,5 +19,5 @@ const NewCard = props => {
     </Card>
   );
 };
-// moment(post.date).format()
-export default NewCard;
+
+export default GrantCard;
