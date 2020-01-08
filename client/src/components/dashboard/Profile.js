@@ -64,10 +64,24 @@ const AccountProfile = props => {
       let userdata = userResult.data.accountData;
       setValues(userdata);
 
-      var currentUser = firebase.auth().currentUser;
-      setavartarURL(currentUser.photoURL);
-      console.log('Avatar', currentUser.photoURL);
+      var currentUser = await firebase.auth().currentUser;
+      if (currentUser != null) {
+        setavartarURL(currentUser.photoURL);
+        console.log('Avatar', avartarURL == null);
+      } else {
+        console.log('Cannot get avatar');
+      }
     };
+
+    // const getAvatar = async () => {
+    //   var currentUser = await firebase.auth().currentUser;
+    //   if (currentUser != null) {
+    //     setavartarURL(currentUser.photoURL);
+    //     console.log('Avatar', avartarURL);
+    //   } else {
+    //     console.log('Cannot get avatar');
+    //   }
+    // };
 
     fetchAll();
   }, []);
