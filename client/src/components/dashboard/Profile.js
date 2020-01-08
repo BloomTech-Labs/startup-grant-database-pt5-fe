@@ -77,7 +77,7 @@ const AccountProfile = props => {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           let pic = user.photoURL;
-          console.log('Avatar', user);
+          // console.log('Avatar', user);
           setavartarURL(pic);
         } else {
           console.log('Error setting profile pic', user);
