@@ -37,6 +37,7 @@ const Login = props => {
                 if (res.data.user_type === null) {
                   props.history.push('/welcome');
                 } else {
+                  localStorage.setItem('user_type', res.data.user_type);
                   props.history.push('/dashboard');
                 }
               })
