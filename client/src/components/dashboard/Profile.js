@@ -64,25 +64,27 @@ const AccountProfile = props => {
       let userdata = userResult.data.accountData;
       setValues(userdata);
 
-      var currentUser = firebase.auth().currentUser;
-      if (currentUser != null) {
-        setavartarURL(currentUser.photoURL);
-        console.log('Avatar', avartarURL, currentUser);
-      } else {
-        console.log('Error setting profile pic', currentUser);
-      }
+      // var currentUser = firebase.auth().currentUser;
+      // if (currentUser != null) {
+      //   setavartarURL(currentUser.photoURL);
+      //   console.log('Avatar', avartarURL, currentUser);
+      // } else {
+      //   console.log('Error setting profile pic', currentUser);
+      // }
     };
 
-    // const getAvatar = async () => {
-    //   var currentUser = await firebase.auth().currentUser;
-    //   if (currentUser != null) {
-    //     setavartarURL(currentUser.photoURL);
-    //     console.log('Avatar', avartarURL);
-    //   } else {
-    //     console.log('Cannot get avatar');
-    //   }
-    // };
-
+    const getAvatar = () => {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          let pic = user.photoURL;
+          console.log('Avatar', user);
+          setavartarURL(pic);
+        } else {
+          console.log('Error setting profile pic', user);
+        }
+      });
+    };
+    getAvatar();
     fetchAll();
   }, []);
 
