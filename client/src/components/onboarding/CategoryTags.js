@@ -30,8 +30,16 @@ const CategoryTags = props => {
       const elegibilityResult = await axios(
         `${process.env.REACT_APP_API}/api/elegibility`
       );
-      setIsLoading(false);
-      setElegibilityTags(elegibilityResult.data);
+
+      //Prevent user from continue onboarding if DB is not returning tags
+      // console.log('Array', companyTags.count == undefined);
+      if (elegibilityResult.data.count == undefined) {
+        setIsLoading(true);
+        props.history.push('/dashboard');
+      } else {
+        setElegibilityTags(elegibilityResult.data);
+        setIsLoading(false);
+      }
     };
     fetchAll();
   }, []);
@@ -79,7 +87,7 @@ const CategoryTags = props => {
       {isSubmited ? (
         <div>
           <CircularProgress />
-          <h1>Submitted</h1>
+          <h1>Submitting</h1>
         </div>
       ) : (
         <div>

@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 //Hooks
-const Choose_Tags = () => {
+const Choose_Tags = props => {
   const classes = useStyles();
   const [companyTags, setCompanyTags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,8 +32,15 @@ const Choose_Tags = () => {
       const categoryResult = await axios(
         `${process.env.REACT_APP_API}/api/categories`
       );
-      setIsLoading(false);
-      setCompanyTags(categoryResult.data);
+      //Prevent user from continue onboarding if DB is not returning tags
+      // console.log('Array', companyTags.count == undefined);
+      if (categoryResult.data.count == undefined) {
+        setIsLoading(true);
+        props.history.push('/dashboard');
+      } else {
+        setCompanyTags(categoryResult.data);
+        setIsLoading(false);
+      }
     };
     fetchAll();
   }, []);
