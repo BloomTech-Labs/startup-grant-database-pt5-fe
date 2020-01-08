@@ -64,12 +64,12 @@ const AccountProfile = props => {
       let userdata = userResult.data.accountData;
       setValues(userdata);
 
-      var currentUser = await firebase.auth().currentUser;
+      var currentUser = firebase.auth().currentUser;
       if (currentUser != null) {
         setavartarURL(currentUser.photoURL);
-        console.log('Avatar', avartarURL == null);
+        console.log('Avatar', avartarURL, currentUser);
       } else {
-        console.log('Cannot get avatar');
+        console.log('Error setting profile pic', currentUser);
       }
     };
 
