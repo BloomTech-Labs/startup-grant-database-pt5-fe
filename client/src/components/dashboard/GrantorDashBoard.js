@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import SideBar from "./SideBar";
+import GrantorSideBar from "./GrantorSideBar";
 import Saved from "./Saved";
 import New from "./New";
+import TotalAmountGiven from "./TotalAmountGiven";
+import TotalReceived from "./TotalReceived";
 import { makeStyles } from "@material-ui/core/styles";
 
 //Import firebase
@@ -39,7 +41,7 @@ const GrantorDashBoard = props => {
       ) : (
         <div>
           <h1 className={classes.welcome}>Welcome {currentUser}!</h1>
-          <SideBar />
+          <GrantorSideBar />
           <div
             style={{
               display: "flex",
@@ -50,6 +52,8 @@ const GrantorDashBoard = props => {
           >
             <Saved />
             <New />
+            <TotalReceived />
+            <TotalAmountGiven />
           </div>
         </div>
       )}

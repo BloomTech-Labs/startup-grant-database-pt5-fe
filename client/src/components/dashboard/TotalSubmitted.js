@@ -12,6 +12,9 @@ const useStyles = makeStyles(theme => ({
     height: "10%",
     width: "20%",
     backgroundColor: "#FFFFFF"
+  },
+  number: {
+    fontSize: "15px"
   }
 }));
 

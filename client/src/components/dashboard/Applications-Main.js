@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Container } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import SideBar from "./SideBar";
 
 import ApplicationCard from "./ApplicationCard";
 
@@ -35,27 +37,33 @@ const ApplicationsMain = props => {
   }, []);
 
   const classes = useStyles();
-  if (received === undefined) {
+  if (applications === undefined) {
     return <h1>Loading...</h1>;
-  } else if (received.length === 0) {
+  } else if (applications.length === 0) {
     return (
-      <Container className={classes.container}>
-        <h2>Your Applications</h2>
-        <h3>You haven't applied to any grants!</h3>
-      </Container>
+      <div>
+        <SideBar />
+        <Container className={classes.container}>
+          <h2>Your Applications</h2>
+          <h3>You haven't applied to any grants!</h3>
+        </Container>
+      </div>
     );
   } else {
     return (
-      <Container className={classes.container}>
-        <h2>Your Applications</h2>
-        {applications.map(items => {
-          return (
-            <Link to={`/applications/${items.id}`}>
-              <ApplicationCard key={items.id} application={items} />
-            </Link>
-          );
-        })}
-      </Container>
+      <div>
+        <SideBar />
+        <Container className={classes.container}>
+          <h2>Your Applications</h2>
+          {applications.map(items => {
+            return (
+              <Link to={`/applications/${items.id}`}>
+                <ApplicationCard key={items.id} application={items} />
+              </Link>
+            );
+          })}
+        </Container>
+      </div>
     );
   }
 };

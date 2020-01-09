@@ -108,13 +108,6 @@ const AccountProfile = props => {
                 <br />
                 {first.zip_code}
               </Typography>
-              <Typography
-                className={classes.dateText}
-                color="textSecondary"
-                variant="body1"
-              >
-                {moment().format("hh:mm A")}
-              </Typography>
             </div>
 
             <Avatar className={classes.avatar} src={avartarURL} />

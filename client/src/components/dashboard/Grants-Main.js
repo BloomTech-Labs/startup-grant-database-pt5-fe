@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Container } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import GrantorSideBar from "./GrantorSideBar";
 
 import GrantCard from "./GrantCard";
 
@@ -35,26 +37,33 @@ const GrantsMain = props => {
   }, []);
 
   const classes = useStyles();
-  if (received === undefined) {
+  if (grants === undefined) {
     return <h1>Loading...</h1>;
-  } else if (received.length === 0) {
+  } else if (grants.length === 0) {
     return (
-      <Container className={classes.container}>
-        <h2>Your Grants</h2>
-        <h3>You haven't created any!</h3>
-      </Container>
+      <div>
+        <GrantorSideBar />
+        <Container className={classes.container}>
+          <h2>Your Grants</h2>
+          <h3>You haven't created any grants!</h3>
+        </Container>
+      </div>
     );
   } else {
     return (
-      <Container className={classes.container}>
-        <h2>Your Grants</h2>
-        {applications.map(items => {
-          return;
-          <Link to={`/grants/${items.id}`}>
-            <GrantCard key={items.id} grant={items} />
-          </Link>;
-        })}
-      </Container>
+      <div>
+        <GrantorSideBar />
+        <Container className={classes.container}>
+          <h2>Your Grants</h2>
+          {grants.map(items => {
+            return (
+              <Link to={`/grants/${items.id}`}>
+                <GrantCard key={items.id} grant={items} />
+              </Link>
+            );
+          })}
+        </Container>
+      </div>
     );
   }
 };
