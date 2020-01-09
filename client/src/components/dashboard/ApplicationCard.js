@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "@material-ui/core";
-import Moment from "moment";
+import Moment from "react-moment";
 
 //pull grant information as well: {props.application.grant_amount}
 

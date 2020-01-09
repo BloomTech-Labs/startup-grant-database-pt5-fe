@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "@material-ui/core";
 //Use moment to format date coming from BE
-import Moment from "moment";
+import Moment from "react-moment";
 
 const SavedCard = props => {
   return (

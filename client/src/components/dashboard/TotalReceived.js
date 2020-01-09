@@ -47,7 +47,9 @@ const TotalReceived = props => {
       <h2>Total Applications Received</h2>
       <div>
         <img src="images/icons/ClipBoardCheck.svg" alt="clipboard icon" />
-        <h2 className={classes.number}>{totalReceived}</h2>
+        <h2 className={classes.number}>
+          You haven't received any applications!
+        </h2>
       </div>
     </Container>
   );

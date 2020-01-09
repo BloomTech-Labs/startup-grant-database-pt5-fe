@@ -47,7 +47,7 @@ const TotalAmountReceived = props => {
       <h2>Total Amount Received</h2>
       <div>
         <img src="images/icons/DollarSign.svg" alt="dollar sign icon" />
-        <h2 className={classes.number}>{totalAmountReceived}</h2>
+        <h2 className={classes.number}>You haven't received any grants!</h2>
       </div>
     </Container>
   );
