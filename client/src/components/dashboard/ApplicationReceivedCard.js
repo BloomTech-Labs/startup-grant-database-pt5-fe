@@ -1,16 +1,20 @@
 import React from "react";
 import { Card } from "@material-ui/core";
 
+//pull grant information as well, pull user information as well
+
+//{props.application.grant_name}
+
+// {props.application.first_name}{" "}
+// {props.application.last_name}
+
 const ApplicationReceivedCard = props => {
   return (
     <Card>
-      <h3>{props.application.grant_name}</h3>
+      <h3>The Nature Grant (EG)</h3>
       <div>
         <div>
-          <p>
-            Applicant: {props.application.first_name}{" "}
-            {props.application.last_name}
-          </p>
+          <p>Applicant:</p>
         </div>
         <div>
           <p>Status: {props.application.status}</p>
