@@ -63,14 +63,6 @@ const AccountProfile = props => {
       );
       let userdata = userResult.data.accountData;
       setValues(userdata);
-
-      // var currentUser = firebase.auth().currentUser;
-      // if (currentUser != null) {
-      //   setavartarURL(currentUser.photoURL);
-      //   console.log('Avatar', avartarURL, currentUser);
-      // } else {
-      //   console.log('Error setting profile pic', currentUser);
-      // }
     };
 
     const getAvatar = () => {
