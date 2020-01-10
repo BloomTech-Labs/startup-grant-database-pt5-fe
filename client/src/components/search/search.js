@@ -12,9 +12,9 @@ import AmountComponent from "./dropdowns/amount_component.js";
 import ElegibilityComponent from "./dropdowns/elegibility_component.js";
 import CategoryComponent from "./dropdowns/category_component.js";
 
-const Search = props => {
+const Search = () => {
   // Hooks declaration ------------------------------------------------------------------------
-  var grantResults = [];
+var grantResults =[]
   // Hooks to render the results.
   const [grants, setGrants] = useState([]);
 
@@ -54,16 +54,26 @@ const Search = props => {
 
   //Function to update Amount filter hooks
   const updateMinAmount = value => {
-    const amnt = value.amount;
-    const keylessData = parseInt(amnt.replace("$", "").replace(",", ""));
-    // console.log(value);
+    const amnt = [];
+    if (value === null) {
+      value = {
+        amount: 1.00
+      }
+    } else {
+      var keylessData = value.amount.replace("$", "").replace(",", "");
+    }
     setMin(keylessData);
   };
 
   const updateMaxAmount = value => {
-    const amnt = value.amount;
-    const keylessData = parseInt(amnt.replace("$", "").replace(",", ""));
-    // console.log(keylessData);
+    const amnt = [];
+    if (value === null) {
+      value = {
+        amount: 1000000.00
+      }
+    } else {
+      var keylessData = value.amount.replace("$", "").replace(",", "").replace(",", "");
+    }
     setMax(keylessData);
   };
 
@@ -83,13 +93,12 @@ const Search = props => {
     const fetchAll = async () => {
       //Fetch Grants
 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      grantResults = await axios.get(
+     grantResults = await axios.get(
         `${process.env.REACT_APP_API}/api/grants/search`,
         {
           params: {
             state: stateFilter,
-            //county: countyFilter,
+            // county: countyFilter,
             minimumAmount: minAmount,
             maximumAmount: maxAmount,
             eligibility: eligibilityFilter,
@@ -101,18 +110,12 @@ const Search = props => {
       setGrants(grantResults.data);
     };
     fetchAll();
-  }, [
-    stateFilter,
-    //countyFilter,
-    eligibilityFilter,
-    categoryFilter,
-    minAmount,
-    maxAmount
-  ]);
+  }, [stateFilter,  eligibilityFilter, categoryFilter, minAmount, maxAmount]); //countyFilter,
 
   // console.log("my grants", grants);
-  // console.log("min amount filter", minAmount);
-  // console.log("max amount filter", maxAmount);
+  console.log("My Grant Result", grantResults);
+  
+
   return (
     <div className="searchholder">
       <div className="filters">
@@ -121,14 +124,14 @@ const Search = props => {
           handleOpen={handleOpen}
           updateStateFilter={updateStateFilter}
         />
+        {/* <br />
+        <br />
+        <CountiesComponent
+          stateFilter={stateFilter}
+          updateCountyFilter={updateCountyFilter}
+        /> */}
         <br />
         <br />
-//         <CountiesComponent
-//           stateFilter={stateFilter}
-//           updateCountyFilter={updateCountyFilter}
-//         />
-         <br />
-         <br />
         <AmountComponent
           updateMin={updateMinAmount}
           updateMax={updateMaxAmount}
@@ -147,12 +150,8 @@ const Search = props => {
         <AlertDialog handleClose={handleClose} open={open} />
         {grants.map((items, i) => {
           return (
-            <Link
-              key={i}
-              style={{ textDecoration: "none", color: "#000000" }}
-              to={`/search/${items.id}`}
-            >
-              <ResultCard resultcard={items} />
+            <Link key={i} style={{ textDecoration: 'none', color: '#000000'}} to={`/search/${items.id}`}>
+              <ResultCard  resultcard={items} onClick={'something'}/>
             </Link>
           );
         })}
