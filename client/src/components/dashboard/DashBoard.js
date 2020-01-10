@@ -13,10 +13,22 @@ require("firebase/auth");
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100vw",
-    height: "82vh"
+    height: "82vh",
+    backgroundColor: "#F0FDFE"
   },
   welcome: {
     paddingLeft: "10vw"
+  },
+  boxes: {
+    display: "flex",
+    marginLeft: "20%",
+    height: "100%",
+    flexWrap: "wrap"
+  },
+  sections: {
+    width: "50%",
+    backgroundColor: "#F0FDFE",
+    paddingTop: "5vh"
   }
 }));
 
@@ -42,18 +54,15 @@ const DashBoard = props => {
         <div>
           <h1 className={classes.welcome}>Welcome {currentUser}!</h1>
           <SideBar />
-          <div
-            style={{
-              display: "flex",
-              width: "80%",
-              marginLeft: "20%",
-              height: "100%"
-            }}
-          >
-            <Saved />
-            <New />
-            <TotalSubmitted />
-            <TotalAmountReceived />
+          <div className={classes.boxes}>
+            <div className={classes.sections}>
+              <TotalSubmitted />
+              <TotalAmountReceived />
+            </div>
+            <div className={classes.sections}>
+              <Saved />
+              <New />
+            </div>
           </div>
         </div>
       )}

@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 const pages = [
   {
     title: "Dashboard",
-    href: "/dashboard",
+    href: "/grantordashboard",
     icon: <DashboardIcon />
   },
   {

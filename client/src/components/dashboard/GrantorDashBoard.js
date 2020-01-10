@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import GrantorSideBar from "./GrantorSideBar";
-import Saved from "./Saved";
-import New from "./New";
 import TotalAmountGiven from "./TotalAmountGiven";
 import TotalReceived from "./TotalReceived";
+import YourGrants from "./YourGrants";
+import ApplicationReceived from "./ApplicationReceived";
 import { makeStyles } from "@material-ui/core/styles";
 
 //Import firebase
@@ -13,10 +13,22 @@ require("firebase/auth");
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100vw",
-    height: "82vh"
+    height: "82vh",
+    backgroundColor: "#F0FDFE"
   },
   welcome: {
     paddingLeft: "10vw"
+  },
+  boxes: {
+    display: "flex",
+    marginLeft: "20%",
+    height: "100%",
+    flexWrap: "wrap"
+  },
+  sections: {
+    width: "50%",
+    backgroundColor: "#F0FDFE",
+    paddingTop: "5vh"
   }
 }));
 
@@ -42,18 +54,15 @@ const GrantorDashBoard = props => {
         <div>
           <h1 className={classes.welcome}>Welcome {currentUser}!</h1>
           <GrantorSideBar />
-          <div
-            style={{
-              display: "flex",
-              width: "80%",
-              marginLeft: "20%",
-              height: "100%"
-            }}
-          >
-            <Saved />
-            <New />
-            <TotalReceived />
-            <TotalAmountGiven />
+          <div className={classes.boxes}>
+            <div className={classes.sections}>
+              <TotalReceived />
+              <TotalAmountGiven />
+            </div>
+            <div className={classes.sections}>
+              <YourGrants />
+              <ApplicationReceived />
+            </div>
           </div>
         </div>
       )}

@@ -11,6 +11,10 @@ import axios from "axios";
 //need endpoint to grab grants by grantor
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: "#F0FDFE",
+    height: "100vh"
+  },
   container: {
     height: "80%"
   }
@@ -41,7 +45,7 @@ const GrantsMain = props => {
     return <h1>Loading...</h1>;
   } else if (grants.length === 0) {
     return (
-      <div>
+      <div className={classes.root}>
         <GrantorSideBar />
         <Container className={classes.container}>
           <h2>Your Grants</h2>
@@ -51,7 +55,7 @@ const GrantsMain = props => {
     );
   } else {
     return (
-      <div>
+      <div className={classes.root}>
         <GrantorSideBar />
         <Container className={classes.container}>
           <h2>Your Grants</h2>

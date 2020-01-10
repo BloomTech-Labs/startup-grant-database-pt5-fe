@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Container } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import GrantCard from "./GrantCard";
 
@@ -10,9 +11,7 @@ import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   container: {
-    height: "35%",
-    width: "20%",
-    backgroundColor: "#FFFFFF"
+    padding: "40px 0"
   }
 }));
 
@@ -62,3 +61,5 @@ const YourGrants = props => {
     );
   }
 };
+
+export default YourGrants;

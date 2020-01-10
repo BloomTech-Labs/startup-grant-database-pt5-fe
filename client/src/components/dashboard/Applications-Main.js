@@ -11,6 +11,10 @@ import axios from "axios";
 //need endpoint to grab applications by grantee
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: "#F0FDFE",
+    height: "100vh"
+  },
   container: {
     height: "80%"
   }
@@ -41,7 +45,7 @@ const ApplicationsMain = props => {
     return <h1>Loading...</h1>;
   } else if (applications.length === 0) {
     return (
-      <div>
+      <div className={classes.root}>
         <SideBar />
         <Container className={classes.container}>
           <h2>Your Applications</h2>
@@ -51,7 +55,7 @@ const ApplicationsMain = props => {
     );
   } else {
     return (
-      <div>
+      <div className={classes.root}>
         <SideBar />
         <Container className={classes.container}>
           <h2>Your Applications</h2>

@@ -10,6 +10,7 @@ import {
   Divider,
   Button
 } from "@material-ui/core";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import axios from "axios";
 import DropZone from "./DropZone";
@@ -95,7 +96,7 @@ const AccountProfile = props => {
           <div className={classes.details}>
             <div>
               <Typography gutterBottom variant="h2">
-                {values.first_name} {values.last_name}
+                {first.first_name} {first.last_name}
               </Typography>
               <Typography
                 className={classes.locationText}
@@ -110,7 +111,7 @@ const AccountProfile = props => {
               </Typography>
             </div>
 
-            <Avatar className={classes.avatar} src={avartarURL} />
+            <AccountCircleIcon className={classes.avatar} />
           </div>
         </CardContent>
         <Divider />
