@@ -1,9 +1,8 @@
 import React from "react";
 import { Card } from "@material-ui/core";
-//Use moment to format date coming from BE
 import Moment from "react-moment";
 
-const SavedCard = props => {
+const GrantCard = props => {
   return (
     <Card>
       <h3>{props.grant.grant_title}</h3>
@@ -14,11 +13,11 @@ const SavedCard = props => {
           </p>
         </div>
         <div style={{ display: "flex" }}>
-          <p>Amount: ${props.grant.grant_amount}</p>
+          <p>Amount: {props.grant.grant_amount}</p>
         </div>
       </div>
     </Card>
   );
 };
 
-export default SavedCard;
+export default GrantCard;
