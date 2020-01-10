@@ -127,8 +127,8 @@ const Search = props => {
 //           stateFilter={stateFilter}
 //           updateCountyFilter={updateCountyFilter}
 //         />
-//         <br />
-//         <br />
+         <br />
+         <br />
         <AmountComponent
           updateMin={updateMinAmount}
           updateMax={updateMaxAmount}
