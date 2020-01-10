@@ -23,17 +23,22 @@ const TopBar = () => {
   return (
     <div className="top-bar">
       <div className="logo">
-        <img alt='Where startups find grants' src={require("./Grantify.png")} />
+        <img alt="Where startups find grants" src={require("./Grantify.png")} />
       </div>
       <div className="nav-links">
         <NavLink to="/search">Search for Grants</NavLink>
         <br />
-        {isLogin?(
-        <NavLink exact to="/dashboard">
-          My Dashboard
-        </NavLink>
-        ): null
-        }
+        {isLogin ? (
+          <div>
+            <NavLink exact to="/applications">
+              Applications
+            </NavLink>
+            <br />
+            <NavLink exact to="/dashboard">
+              My Dashboard
+            </NavLink>
+          </div>
+        ) : null}
         <br />
         {isLogin ? (
           <NavLink
