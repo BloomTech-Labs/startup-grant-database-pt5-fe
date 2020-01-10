@@ -89,7 +89,7 @@ const Search = props => {
         {
           params: {
             state: stateFilter,
-            county: countyFilter,
+            //county: countyFilter,
             minimumAmount: minAmount,
             maximumAmount: maxAmount,
             eligibility: eligibilityFilter,
@@ -103,7 +103,7 @@ const Search = props => {
     fetchAll();
   }, [
     stateFilter,
-    countyFilter,
+    //countyFilter,
     eligibilityFilter,
     categoryFilter,
     minAmount,
@@ -123,12 +123,12 @@ const Search = props => {
         />
         <br />
         <br />
-        <CountiesComponent
-          stateFilter={stateFilter}
-          updateCountyFilter={updateCountyFilter}
-        />
-        <br />
-        <br />
+//         <CountiesComponent
+//           stateFilter={stateFilter}
+//           updateCountyFilter={updateCountyFilter}
+//         />
+//         <br />
+//         <br />
         <AmountComponent
           updateMin={updateMinAmount}
           updateMax={updateMaxAmount}
