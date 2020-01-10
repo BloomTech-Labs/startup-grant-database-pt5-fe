@@ -7,7 +7,7 @@ import "./search.css";
 
 //Dropdown with checkboxes built in components.
 import StateComponent from "./dropdowns/states_component.js";
-import CountiesComponent from "./dropdowns/counties_component.js";
+//import CountiesComponent from "./dropdowns/counties_component.js";
 import AmountComponent from "./dropdowns/amount_component.js";
 import ElegibilityComponent from "./dropdowns/elegibility_component.js";
 import CategoryComponent from "./dropdowns/category_component.js";
@@ -20,7 +20,7 @@ var grantResults =[]
 
   //Setting hooks for each filter
   const [stateFilter, setStateFilter] = useState([]);
-  const [countyFilter, setCountyFilter] = useState([]);
+  //const [countyFilter, setCountyFilter] = useState([]);
   const [minAmount, setMin] = useState([]);
   const [maxAmount, setMax] = useState([]);
   const [eligibilityFilter, setEligibilityFilter] = useState([]);
@@ -48,9 +48,9 @@ var grantResults =[]
   };
 
   //Function to update County filter hooks
-  const updateCountyFilter = county => {
-    setCountyFilter(county);
-  };
+//   const updateCountyFilter = county => {
+//     setCountyFilter(county);
+//   };
 
   //Function to update Amount filter hooks
   const updateMinAmount = value => {
@@ -66,7 +66,6 @@ var grantResults =[]
   };
 
   const updateMaxAmount = value => {
-    const amnt = [];
     if (value === null) {
       value = {
         amount: 1000000.00
