@@ -7,12 +7,7 @@ const ResultCard = props => {
   const dueDate = props.resultcard.due_date.slice(0, 10);
   return (
     <div className="card-holder">
-      <div className="top">
         <h3 className="title">{props.resultcard.grant_title}</h3>
-        <div className="apply-button">
-          <ApplyButton grant_id={props.resultcard.id} />
-        </div>
-      </div>
       <p className="description">{props.resultcard.grant_description}</p>
       <div className="due-amount">
         <label className="due-label">Due:</label>
@@ -44,6 +39,9 @@ const ResultCard = props => {
             );
           })}
         </div>
+      </div>
+      <div className="apply-button">
+          <ApplyButton grant_id={props.resultcard.id} />
       </div>
     </div>
   );
