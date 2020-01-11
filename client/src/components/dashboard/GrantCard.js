@@ -26,28 +26,14 @@ let AcceptOrDenyButton = props => {
 };
 
 const GrantCard = props => {
-  const [user, setUser] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API}/api/users/1`)
-      .then(res => {
-        setUser(res.data.accountData);
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
-  }, []);
-
-  console.log(user);
-
   return (
     <Card style={{ margin: "30px" }}>
       <h1>{props.grant.grant_title}</h1>
-      <h2>Company: {user.map(i => i.organization_name)}</h2>
       <h2>
-        Name: {user.map(i => i.first_name)} {user.map(i => i.last_name)}
+        Name: {props.grant.first_name} {props.grant.last_name}
       </h2>
+      <h2>Company: {props.grant.organization_name}</h2>
+
       <h3>The company's mission is: {props.grant.mission_statement}</h3>
       <h3>The company is worthy because:{props.grant.worthy_because}</h3>
       <h3>The applicants spending plans are: {props.grant.spending_plans}</h3>

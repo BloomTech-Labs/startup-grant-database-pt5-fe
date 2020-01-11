@@ -21,10 +21,11 @@ const GrantsMain = props => {
   const { className, ...rest } = props;
 
   const [grants, setGrants] = useState([]);
+  const userId = localStorage.getItem("id");
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/api/applications/12`)
+      .get(`${process.env.REACT_APP_API}/api/applications/${userId}`)
       .then(res => {
         setGrants(res.data);
       })
@@ -32,6 +33,8 @@ const GrantsMain = props => {
         console.error(err.message);
       });
   }, []);
+
+  console.log(grants, "grants");
 
   const classes = useStyles();
   if (grants === undefined) {
