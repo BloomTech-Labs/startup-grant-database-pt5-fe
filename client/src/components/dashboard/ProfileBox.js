@@ -76,7 +76,7 @@ const ProfileBox = props => {
   // <Avatar src={values[0].avatar} className={classes.image} />
 
   if (user === undefined) {
-    return <h1>Loading...</h1>;
+    return null;
   } else {
     return (
       <Card className={classes.root}>
