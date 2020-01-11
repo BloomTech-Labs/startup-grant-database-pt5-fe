@@ -13,7 +13,8 @@ const GrantForm = props => {
     grant_description: '',
     grant_amount: null,
     grant_type: '',
-    created_at: new Date()
+    created_at: new Date(),
+    due_date:null
   });
 
   const handleChange = name => event => {
@@ -65,6 +66,15 @@ const GrantForm = props => {
             value={form.grant_type}
             onChange={handleChange('grant_type')}
             className="input-field"
+          />
+          <p>due date</p>
+          <Input 
+          id="date"
+          label="due date"
+          type='date'
+          value={form.due_date}
+          onChange={handleChange("due_date")}
+          className="input-field"
           />
 
           <Button
