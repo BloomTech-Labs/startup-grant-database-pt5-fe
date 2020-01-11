@@ -98,7 +98,7 @@ var grantResults =[]
         {
           params: {
             state: stateFilter,
-            county: countyFilter,
+            // county: countyFilter,
             minimumAmount: minAmount,
             maximumAmount: maxAmount,
             eligibility: eligibilityFilter,
@@ -110,11 +110,11 @@ var grantResults =[]
       setGrants(grantResults.data);
     };
     fetchAll();
-  }, [stateFilter, countyFilter, eligibilityFilter, categoryFilter, minAmount, maxAmount]);
+  }, [stateFilter,  eligibilityFilter, categoryFilter, minAmount, maxAmount]); //countyFilter,
 
   // console.log("my grants", grants);
   console.log("My Grant Result", grantResults);
-  console.log("county filter", countyFilter);
+  console.log("My Hooks", stateFilter , minAmount, maxAmount, eligibilityFilter,categoryFilter)
 
   return (
     <div className="searchholder">
@@ -124,12 +124,12 @@ var grantResults =[]
           handleOpen={handleOpen}
           updateStateFilter={updateStateFilter}
         />
-        <br />
+        {/* <br />
         <br />
         <CountiesComponent
           stateFilter={stateFilter}
           updateCountyFilter={updateCountyFilter}
-        />
+        /> */}
         <br />
         <br />
         <AmountComponent
@@ -150,8 +150,8 @@ var grantResults =[]
         <AlertDialog handleClose={handleClose} open={open} />
         {grants.map((items, i) => {
           return (
-            <Link key={i} style={{ textDecoration: 'none', color: '#000000'}}to={`/search/${items.id}`}>
-              <ResultCard  resultcard={items} />
+            <Link key={i} style={{ textDecoration: 'none', color: '#000000'}} to={`/search/${items.id}`}>
+              <ResultCard  resultcard={items} onClick={'something'}/>
             </Link>
           );
         })}
