@@ -95,7 +95,7 @@ const AccountProfile = props => {
   // console.log("first", first);
 
   if (first === undefined) {
-    return <h1>Loading...</h1>;
+    return null;
   } else {
     return (
       <Card {...rest} className={(classes.root, classes.card)}>
