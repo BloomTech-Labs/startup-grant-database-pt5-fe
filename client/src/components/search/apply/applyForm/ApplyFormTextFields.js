@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import ApplySuccessModal from "../applyForm/ApplySuccessModal";
+import ApplyFailModal from "../applyForm/ApplyFailModal";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,7 +22,7 @@ let ApplyFormTextFields = props => {
     spending_plans: "",
     mission_statement: ""
   });
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(0);
 
   const handleChange = event => {
     setValue({ ...value, [event.target.name]: event.target.value });
@@ -29,12 +30,13 @@ let ApplyFormTextFields = props => {
 
   // parseInt of grant id
 
+  let user_id = parseInt(localStorage.getItem("id"));
   let newGrantId = parseInt(props.grant_id);
 
   const handleSubmit = event => {
     event.preventDefault();
     const data = {
-      user_id: props.user_id,
+      user_id: user_id,
       grant_id: newGrantId,
       ...value,
       created_at: new Date(),
@@ -44,13 +46,14 @@ let ApplyFormTextFields = props => {
     axios
       .post(`${process.env.REACT_APP_API}/api/applications`, data)
       .then(res => {
-        setModal({ modal: true });
+        setModal(1);
       })
       .catch(err => {
+        setModal(2);
         console.log(err);
       });
 
-    console.log(data);
+    console.log(data, "data");
   };
 
   return (
@@ -107,7 +110,13 @@ let ApplyFormTextFields = props => {
           <Button type="submit" variant="contained" color="primary">
             Submit
           </Button>
-          {modal ? <ApplySuccessModal /> : ""}
+          {modal === 1 ? (
+            <ApplySuccessModal />
+          ) : modal === 2 ? (
+            <ApplyFailModal />
+          ) : (
+            ""
+          )}
         </div>
       </form>
     </div>
