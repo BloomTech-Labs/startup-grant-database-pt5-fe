@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Moment from "react-moment";
-import { makeStyles } from "@material-ui/styles";
+import React, { useState, useEffect } from 'react';
+import Moment from 'react-moment';
+import { makeStyles } from '@material-ui/styles';
 import {
   Card,
   CardActions,
@@ -9,42 +9,42 @@ import {
   Typography,
   Divider,
   Button
-} from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+} from '@material-ui/core';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-import axios from "axios";
-import DropZone from "./DropZone";
+import axios from 'axios';
+import DropZone from './DropZone';
 
-const firebase = require("firebase/app");
-require("firebase/auth");
+const firebase = require('firebase/app');
+require('firebase/auth');
 
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
-    width: "40%",
-    margin: "0 2%",
-    height: "30%"
+    width: '40%',
+    margin: '0 2%',
+    height: '30%'
   },
   details: {
-    display: "flex"
+    display: 'flex'
   },
   avatar: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
     height: 100,
     width: 100,
     flexShrink: 0,
     flexGrow: 0
   },
   progress: {
-    marginTop: "10px"
+    marginTop: '10px'
   },
   uploadButton: {
-    marginRight: "10px"
+    marginRight: '10px'
   },
   actions: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 }));
 
@@ -52,9 +52,9 @@ const AccountProfile = props => {
   const { className, files, ...rest } = props;
 
   const [values, setValues] = useState([]);
-  const [avartarURL, setavartarURL] = useState("");
+  const [avartarURL, setavartarURL] = useState('');
 
-  const id = localStorage.getItem("id");
+  const id = localStorage.getItem('id');
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -102,7 +102,7 @@ const AccountProfile = props => {
         <CardContent>
           <div className={classes.details}>
             <div>
-              <Typography gutterBottom variant="h2">
+              <Typography gutterBottom variant="h4">
                 {first.first_name} {first.last_name}
               </Typography>
               <Typography
@@ -118,7 +118,8 @@ const AccountProfile = props => {
               </Typography>
             </div>
 
-            <AccountCircleIcon className={classes.avatar} />
+            {/* <AccountCircleIcon className={classes.avatar} /> */}
+            <Avatar alt="avatar" src={avartarURL} className={classes.avatar} />
           </div>
         </CardContent>
         <Divider />
