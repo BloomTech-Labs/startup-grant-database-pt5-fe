@@ -28,9 +28,10 @@ const Applications = props => {
 
   const getGrants = async () => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_API}/api/grants`);
-      console.log(data);
-      return data;
+      const request = await axios.get(
+        `${process.env.REACT_APP_API}/api/grants`
+      );
+      return request.data;
     } catch (err) {
       console.error(err.message);
     }

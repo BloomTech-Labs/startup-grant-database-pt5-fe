@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-import { makeStyles } from '@material-ui/styles';
+import React, { useState, useEffect } from "react";
+import Moment from "react-moment";
+import { makeStyles } from "@material-ui/styles";
 import {
   Card,
   CardActions,
@@ -9,41 +9,42 @@ import {
   Typography,
   Divider,
   Button
-} from '@material-ui/core';
+} from "@material-ui/core";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-import axios from 'axios';
-import DropZone from './DropZone';
+import axios from "axios";
+import DropZone from "./DropZone";
 
-const firebase = require('firebase/app');
-require('firebase/auth');
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
-    width: '40%',
-    margin: '0 2%',
-    height: '30%'
+    width: "40%",
+    margin: "0 2%",
+    height: "30%"
   },
   details: {
-    display: 'flex'
+    display: "flex"
   },
   avatar: {
-    marginLeft: 'auto',
+    marginLeft: "auto",
     height: 100,
     width: 100,
     flexShrink: 0,
     flexGrow: 0
   },
   progress: {
-    marginTop: '10px'
+    marginTop: "10px"
   },
   uploadButton: {
-    marginRight: '10px'
+    marginRight: "10px"
   },
   actions: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around"
   }
 }));
 
@@ -51,9 +52,9 @@ const AccountProfile = props => {
   const { className, files, ...rest } = props;
 
   const [values, setValues] = useState([]);
-  const [avartarURL, setavartarURL] = useState('');
+  const [avartarURL, setavartarURL] = useState("");
 
-  const id = localStorage.getItem('id');
+  const id = localStorage.getItem("id");
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -63,13 +64,20 @@ const AccountProfile = props => {
       );
       let userdata = userResult.data.accountData;
       setValues(userdata);
-      //Get user profile pic
-      var currentUser = firebase.auth().currentUser;
-      if (currentUser != null) {
-        setavartarURL(currentUser.photoURL);
-      }
     };
 
+    const getAvatar = () => {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          let pic = user.photoURL;
+          // console.log('Avatar', user);
+          setavartarURL(pic);
+        } else {
+          console.log("Error setting profile pic", user);
+        }
+      });
+    };
+    getAvatar();
     fetchAll();
   }, []);
 
@@ -95,7 +103,7 @@ const AccountProfile = props => {
           <div className={classes.details}>
             <div>
               <Typography gutterBottom variant="h2">
-                {values.first_name} {values.last_name}
+                {first.first_name} {first.last_name}
               </Typography>
               <Typography
                 className={classes.locationText}
@@ -108,16 +116,9 @@ const AccountProfile = props => {
                 <br />
                 {first.zip_code}
               </Typography>
-              <Typography
-                className={classes.dateText}
-                color="textSecondary"
-                variant="body1"
-              >
-                {moment().format('hh:mm A')}
-              </Typography>
             </div>
 
-            <Avatar className={classes.avatar} src={avartarURL} />
+            <AccountCircleIcon className={classes.avatar} />
           </div>
         </CardContent>
         <Divider />

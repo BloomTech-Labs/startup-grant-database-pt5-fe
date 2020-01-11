@@ -27,19 +27,11 @@ const TopBar = () => {
       </div>
       <div className="nav-links">
         <NavLink to="/search">Search for Grants</NavLink>
-        <br />
         {isLogin ? (
-          <div>
-            <NavLink exact to="/applications">
-              Applications
-            </NavLink>
-            <br />
-            <NavLink exact to="/dashboard">
-              My Dashboard
-            </NavLink>
-          </div>
+          <NavLink exact to="/dashboard">
+            My Dashboard
+          </NavLink>
         ) : null}
-        <br />
         {isLogin ? (
           <NavLink
             onClick={e => {

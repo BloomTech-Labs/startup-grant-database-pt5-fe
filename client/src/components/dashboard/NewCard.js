@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "@material-ui/core";
-//import Moment from 'react-moment';
+import Moment from "react-moment";
 
 const NewCard = props => {
   return (

@@ -15,6 +15,9 @@ import GrantForm from "../../grant-forms/GrantForm";
 import ApplyForm from "../../search/apply/applyForm/applyForm";
 import EditGrantForm from "../../grant-forms/EditGrantForm";
 import Applications from "../../applications/Applications";
+import ApplicationsMain from "../../dashboard/Applications-Main";
+import GrantorDashBoard from "../../dashboard/GrantorDashBoard";
+import GrantsMain from "../../dashboard/Grants-Main";
 
 const PlayArea = () => {
   return (
@@ -42,13 +45,16 @@ const PlayArea = () => {
       <Route path="/Choose_Tags" component={Choose_Tags} />
       <Route path="/category-tags" component={CategoryTags} />
 
-      <Route path="/applications" component={Applications} />
+      {/* <Route path="/applications" component={GrantsMain} /> */}
 
       {/* PROTECTED ROUTES */}
 
       <PrivateRoute path="/settings" component={Settings} />
       <PrivateRoute path="/dashboard" component={DashBoard} />
       <PrivateRoute path="/new-grant" component={GrantForm} />
+      <PrivateRoute path="/grantordashboard" component={GrantorDashBoard} />
+      <PrivateRoute path="/applications" component={ApplicationsMain} />
+      <PrivateRoute path="/grants" component={GrantsMain} />
 
       {/* //TODO: Testing route to update grants */}
       <PrivateRoute path="/edit-grant/:id" component={EditGrantForm} />
