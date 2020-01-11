@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Card, CardContent, Typography, Avatar } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/styles';
+import { Card, CardContent, Typography, Avatar } from '@material-ui/core';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-import axios from "axios";
+import axios from 'axios';
+const firebase = require('firebase/app');
+require('firebase/auth');
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#C0F0F7",
-    boxShadow: "none"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#C0F0F7',
+    boxShadow: 'none'
   },
   avatar: {
     height: 100,
     width: 100
   },
   image: {
-    height: "80px",
-    width: "80px"
+    height: '80px',
+    width: '80px'
   },
   name: {
-    fontWeight: "bold"
+    fontWeight: 'bold'
   }
 }));
 
@@ -31,8 +33,9 @@ const ProfileBox = props => {
   const classes = useStyles();
 
   const [values, setValues] = useState([]);
+  const [avartarURL, setavartarURL] = useState('');
 
-  const id = localStorage.getItem("id");
+  const id = localStorage.getItem('id');
 
   useEffect(() => {
     axios
@@ -44,6 +47,19 @@ const ProfileBox = props => {
       .catch(err => {
         console.log(err);
       });
+
+    const getAvatar = () => {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          let pic = user.photoURL;
+          // console.log('Avatar', user);
+          setavartarURL(pic);
+        } else {
+          console.log('Error setting profile pic', user);
+        }
+      });
+    };
+    getAvatar();
   }, []);
   // setValues(userResult.data.accountData);
 
@@ -65,7 +81,9 @@ const ProfileBox = props => {
     return (
       <Card className={classes.root}>
         <CardContent>
-          <AccountCircleIcon className={classes.avatar} />
+          {/* <AccountCircleIcon className={classes.avatar} />
+           */}
+          <Avatar alt="avatar" src={avartarURL} className={classes.avatar} />
           <Typography className={classes.name}>
             {user.first_name} {user.last_name}
           </Typography>
