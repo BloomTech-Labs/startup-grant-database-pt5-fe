@@ -14,7 +14,6 @@ import PrivateRoute from "../../PrivateRoute";
 import GrantForm from "../../grant-forms/GrantForm";
 import ApplyForm from "../../search/apply/applyForm/applyForm";
 import EditGrantForm from "../../grant-forms/EditGrantForm";
-import Applications from "../../applications/Applications";
 import ApplicationsMain from "../../dashboard/Applications-Main";
 import GrantorDashBoard from "../../dashboard/GrantorDashBoard";
 import GrantsMain from "../../dashboard/Grants-Main";
