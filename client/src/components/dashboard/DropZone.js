@@ -61,7 +61,7 @@ const DropZone = props => {
             })
             .then(function() {
               console.log('User Profile Pic updated');
-              window.location.reload();
+              props.history.push('/dashboard');
             })
             .catch(function(error) {
               console.log('Error while updating user profile pic', error);

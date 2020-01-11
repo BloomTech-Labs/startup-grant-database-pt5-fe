@@ -125,7 +125,7 @@ const AccountProfile = props => {
         <Divider />
         <CardActions className={classes.actions}>
           {/* custom component to upload photos */}
-          <DropZone />
+          <DropZone history={props.history} />
           {/* <Button variant="text">Upload picture</Button> */}
           {/* <Button variant="text">Remove picture</Button> */}
         </CardActions>

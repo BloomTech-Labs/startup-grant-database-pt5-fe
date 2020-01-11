@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/styles";
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/styles';
 import {
   Card,
   CardHeader,
@@ -8,47 +8,45 @@ import {
   Divider,
   Grid,
   Button,
-  TextField
-} from "@material-ui/core";
+  TextField,
+  CircularProgress
+} from '@material-ui/core';
 
-import axios from "axios";
+import axios from 'axios';
 
 const useStyles = makeStyles(() => ({
   root: {},
   card: {
-    width: "50%",
-    margin: "0 2%"
+    width: '50%',
+    margin: '0 2%'
   },
   actions: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 }));
 
 const AccountDetails = props => {
   const { className, ...rest } = props;
 
-  const [values, setValues] = useState([]);
-  const[form, setForm] = useState({
-    first_name : '',
-    last_name : '',
-    organization_name :'',
+  const [form, setForm] = useState({
+    first_name: '',
+    last_name: '',
+    organization_name: '',
     email: ''
+  });
 
-})
   const classes = useStyles();
 
-  const id = localStorage.getItem("id");
+  const id = localStorage.getItem('id');
 
   useEffect(() => {
     axios
-      .get(
-        `${process.env.REACT_APP_API}/api/users/${id}`
-      )
+      .get(`${process.env.REACT_APP_API}/api/users/${id}`)
       .then(res => {
-        console.log(res);
-        setValues(res.data);
+        // console.log('User data', res.data.accountData[0]);
+        setForm(res.data.accountData[0]);
       })
       .catch(err => {
         console.error(err.message);
@@ -66,247 +64,249 @@ const AccountDetails = props => {
 
   const states = [
     {
-      value: "alabama",
-      label: "Alabama"
+      value: 'alabama',
+      label: 'Alabama'
     },
     {
-      value: "alaska",
-      label: "Alaska"
+      value: 'alaska',
+      label: 'Alaska'
     },
     {
-      value: "Arizona",
-      label: "Arizona"
+      value: 'Arizona',
+      label: 'Arizona'
     },
     {
-      value: "Arkansas",
-      label: "Arkansas"
+      value: 'Arkansas',
+      label: 'Arkansas'
     },
     {
-      value: "California",
-      label: "California"
+      value: 'California',
+      label: 'California'
     },
     {
-      value: "Colorado",
-      label: "Colorado"
+      value: 'Colorado',
+      label: 'Colorado'
     },
     {
-      value: "Connecticut",
-      label: "Connecticut"
+      value: 'Connecticut',
+      label: 'Connecticut'
     },
     {
-      value: "Delaware",
-      label: "Delaware"
+      value: 'Delaware',
+      label: 'Delaware'
     },
     {
-      value: "Florida",
-      label: "Florida"
+      value: 'Florida',
+      label: 'Florida'
     },
     {
-      value: "Georgia",
-      label: "Georgia"
+      value: 'Georgia',
+      label: 'Georgia'
     },
     {
       value: "Hawai'i",
       label: "Hawai'i"
     },
     {
-      value: "Idaho",
-      label: "Idaho"
+      value: 'Idaho',
+      label: 'Idaho'
     },
     {
-      value: "Illinois",
-      label: "Illinois"
+      value: 'Illinois',
+      label: 'Illinois'
     },
     {
-      value: "Indiana",
-      label: "Indiana"
+      value: 'Indiana',
+      label: 'Indiana'
     },
     {
-      value: "Iowa",
-      label: "Iowa"
+      value: 'Iowa',
+      label: 'Iowa'
     },
     {
-      value: "Kansas",
-      label: "Kansas"
+      value: 'Kansas',
+      label: 'Kansas'
     },
     {
-      value: "Kentucky",
-      label: "Kentucky"
+      value: 'Kentucky',
+      label: 'Kentucky'
     },
     {
-      value: "Louisiana",
-      label: "Louisiana"
+      value: 'Louisiana',
+      label: 'Louisiana'
     },
     {
-      value: "Maine",
-      label: "Maine"
+      value: 'Maine',
+      label: 'Maine'
     },
     {
-      value: "Maryland",
-      label: "Maryland"
+      value: 'Maryland',
+      label: 'Maryland'
     },
     {
-      value: "Massachusetts",
-      label: "Massachusetts"
+      value: 'Massachusetts',
+      label: 'Massachusetts'
     },
     {
-      value: "Michigan",
-      label: "Michigan"
+      value: 'Michigan',
+      label: 'Michigan'
     },
     {
-      value: "Minnesota",
-      label: "Minnesota"
+      value: 'Minnesota',
+      label: 'Minnesota'
     },
     {
-      value: "Mississippi",
-      label: "Mississippi"
+      value: 'Mississippi',
+      label: 'Mississippi'
     },
     {
-      value: "Missouri",
-      label: "Missouri"
+      value: 'Missouri',
+      label: 'Missouri'
     },
     {
-      value: "Montana",
-      label: "Montana"
+      value: 'Montana',
+      label: 'Montana'
     },
     {
-      value: "Nebraska",
-      label: "Nebraska"
+      value: 'Nebraska',
+      label: 'Nebraska'
     },
     {
-      value: "Nevada",
-      label: "Nevada"
+      value: 'Nevada',
+      label: 'Nevada'
     },
     {
-      value: "New Hampshire",
-      label: "New Hampshire"
+      value: 'New Hampshire',
+      label: 'New Hampshire'
     },
     {
-      value: "New Jersey",
-      label: "New Jersey"
+      value: 'New Jersey',
+      label: 'New Jersey'
     },
     {
-      value: "New Mexico",
-      label: "New Mexico"
+      value: 'New Mexico',
+      label: 'New Mexico'
     },
     {
-      value: "New York",
-      label: "New York"
+      value: 'New York',
+      label: 'New York'
     },
     {
-      value: "North Carolina",
-      label: "North Carolina"
+      value: 'North Carolina',
+      label: 'North Carolina'
     },
     {
-      value: "North Dakota",
-      label: "North Dakota"
+      value: 'North Dakota',
+      label: 'North Dakota'
     },
     {
-      value: "Ohio",
-      label: "Ohio"
+      value: 'Ohio',
+      label: 'Ohio'
     },
     {
-      value: "Oklahoma",
-      label: "Oklahoma"
+      value: 'Oklahoma',
+      label: 'Oklahoma'
     },
     {
-      value: "Oregon",
-      label: "Oregon"
+      value: 'Oregon',
+      label: 'Oregon'
     },
     {
-      value: "Pennsylvania",
-      label: "Pennsylvania"
+      value: 'Pennsylvania',
+      label: 'Pennsylvania'
     },
     {
-      value: "Rhode Island",
-      label: "Rhode Island"
+      value: 'Rhode Island',
+      label: 'Rhode Island'
     },
     {
-      value: "South Carolina",
-      label: "South Carolina"
+      value: 'South Carolina',
+      label: 'South Carolina'
     },
     {
-      value: "South Dakota",
-      label: "South Dakota"
+      value: 'South Dakota',
+      label: 'South Dakota'
     },
     {
-      value: "Tennessee",
-      label: "Tennessee"
+      value: 'Tennessee',
+      label: 'Tennessee'
     },
     {
-      value: "Texas",
-      label: "Texas"
+      value: 'Texas',
+      label: 'Texas'
     },
     {
-      value: "Utah",
-      label: "Utah"
+      value: 'Utah',
+      label: 'Utah'
     },
     {
-      value: "Vermont",
-      label: "Vermont"
+      value: 'Vermont',
+      label: 'Vermont'
     },
     {
-      value: "Virginia",
-      label: "Virginia"
+      value: 'Virginia',
+      label: 'Virginia'
     },
     {
-      value: "Washington",
-      label: "Washington"
+      value: 'Washington',
+      label: 'Washington'
     },
     {
-      value: "West Virginia",
-      label: "West Virginia"
+      value: 'West Virginia',
+      label: 'West Virginia'
     },
     {
-      value: "Wisconsin",
-      label: "Wisconsin"
+      value: 'Wisconsin',
+      label: 'Wisconsin'
     },
     {
-      value: "Wyoming",
-      label: "Wyoming"
+      value: 'Wyoming',
+      label: 'Wyoming'
     },
     {
-      value: "District of Columbia",
-      label: "District of Columbia"
+      value: 'District of Columbia',
+      label: 'District of Columbia'
     },
     {
-      value: "American Samoa",
-      label: "American Samoa"
+      value: 'American Samoa',
+      label: 'American Samoa'
     },
     {
-      value: "Guam",
-      label: "Guam"
+      value: 'Guam',
+      label: 'Guam'
     },
     {
-      value: "Northern Mariana Islands",
-      label: "Northern Mariana Islands"
+      value: 'Northern Mariana Islands',
+      label: 'Northern Mariana Islands'
     },
     {
-      value: "Puerto Rico",
-      label: "Puerto Rico"
+      value: 'Puerto Rico',
+      label: 'Puerto Rico'
     },
     {
-      value: "US Virgin Islands",
-      label: "US Virgin Islands"
+      value: 'US Virgin Islands',
+      label: 'US Virgin Islands'
     }
   ];
 
   onsubmit = e => {
-    axios.put(`${process.env.REACT_APP_API}/api/users/${id}`, form)
-.then(res => {
-  alert('your profile has been updated')
-  window.location.reload()
-    console.log(res.data)
-})
-.catch(err => {
-  console.log(err.message)
-})
-}
+    axios
+      .put(`${process.env.REACT_APP_API}/api/users/${id}`, form)
+      .then(res => {
+        // alert('your profile has been updated');
+        // window.location.reload();
+        console.log(res.data);
+        props.history.push('/dashboard');
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  };
 
   return (
     <Card {...rest} className={(classes.root, classes.card)}>
       <form autoComplete="off" noValidate>
-        <CardHeader subheader="The information can be edited" title="Profile" />
+        <CardHeader subheader="Edit current details:" title="My Profile" />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>
@@ -395,8 +395,9 @@ const AccountDetails = props => {
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <Button onClick={onsubmit}
-            style={{ backgroundColor: "#2a87af", color: "#FFF" }}
+          <Button
+            onClick={onsubmit}
+            style={{ backgroundColor: '#2a87af', color: '#FFF' }}
             variant="contained"
           >
             Save details
