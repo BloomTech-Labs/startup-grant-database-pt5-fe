@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Container } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import GrantorSideBar from "./GrantorSideBar";
-
 import GrantCard from "./GrantCard";
-
 import axios from "axios";
 
 //need endpoint to grab grants by grantor
@@ -23,22 +20,21 @@ const useStyles = makeStyles(theme => ({
 const GrantsMain = props => {
   const { className, ...rest } = props;
 
-  //add endpoints
   const [grants, setGrants] = useState([]);
-
-  //fix endpoint and setApplications
+  const userId = localStorage.getItem("id");
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/api/grants/:id`)
+      .get(`${process.env.REACT_APP_API}/api/applications/${userId}`)
       .then(res => {
-        console.log(res);
         setGrants(res.data);
       })
       .catch(err => {
         console.error(err.message);
       });
   }, []);
+
+  console.log(grants, "grants");
 
   const classes = useStyles();
   if (grants === undefined) {
@@ -48,7 +44,7 @@ const GrantsMain = props => {
       <div className={classes.root}>
         <GrantorSideBar />
         <Container className={classes.container}>
-          <h2>Your Grants</h2>
+          <h2>Your Applications</h2>
           <h3>You haven't created any grants!</h3>
         </Container>
       </div>
@@ -58,12 +54,12 @@ const GrantsMain = props => {
       <div className={classes.root}>
         <GrantorSideBar />
         <Container className={classes.container}>
-          <h2>Your Grants</h2>
+          <h2>Your Applications</h2>
           {grants.map(items => {
             return (
-              <Link to={`/grants/${items.id}`}>
-                <GrantCard key={items.id} grant={items} />
-              </Link>
+              // <Link to={`/grants/${items.id}`}>
+              <GrantCard key={items.id} grant={items} userId={items.user_id} />
+              /* </Link> */
             );
           })}
         </Container>

@@ -42,7 +42,7 @@ const pages = [
     icon: <DashboardIcon />
   },
   {
-    title: "Grants",
+    title: "Grants and Applicants",
     href: "/grants",
     icon: <FolderSpecialIcon />
   },

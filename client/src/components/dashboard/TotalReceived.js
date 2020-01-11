@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Container, Card } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-//import axios from 'axios';
+const useStyles2 = makeStyles(theme => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1)
+    }
+  }
+}));
 
-//Need logic for adding totals
-//Need endpoint to grab grant totals given to each user
+let ViewButton = props => {
+  const classes = useStyles2();
+  return (
+    <div className={classes.root}>
+      <Link to={`/grants`}>
+        <Button variant="contained" color="primary" style={{ margin: "20px" }}>
+          View applications
+        </Button>
+      </Link>
+    </div>
+  );
+};
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -25,44 +44,60 @@ const useStyles = makeStyles(theme => ({
 const TotalReceived = props => {
   const { className, ...rest } = props;
 
-  //Add logic/endpoints
   const [totalReceived, setTotalReceived] = useState([]);
 
-  //axios call
+  useEffect(() => {
+    axios
+      //hardcoding the number 2 so that people can see applications in the dashboard
+      .get(`${process.env.REACT_APP_API}/api/applications/12`)
+      .then(res => {
+        console.log(res);
+        setTotalReceived(res.data);
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  }, []);
 
-  //fix endpoint and setTotalReceived
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_API}/api/grants/`)
-  //     .then(res => {
-  //       console.log(res);
-  //       setTotalReceived(res.data);
-  //     })
-  //     .catch(err => {
-  //       console.error(err.message);
-  //     })
-  // }, [])
+  console.log(totalReceived);
 
   const classes = useStyles();
 
-  // if ((totalReceived = undefined)) {
-  //   return <h1>Loading...</h1>;
-  // } else {
-  return (
-    <Container className={classes.container}>
-      <Card>
-        <h2>Total Applications Received</h2>
-        <div className={classes.divide}>
-          <img src="images/icons/ClipBoardCheck.svg" alt="clipboard icon" />
-          <h2 className={classes.number}>
-            You haven't received any applications!
-          </h2>
-        </div>
-      </Card>
-    </Container>
-  );
+  if (totalReceived.length === 0) {
+    return (
+      <Container className={classes.container}>
+        <Card style={{ margin: "30px" }}>
+          <h2>Total Applications Received</h2>
+          <div className={classes.divide}>
+            <img src="images/icons/ClipBoardCheck.svg" alt="clipboard icon" />
+            <h2 className={classes.number}>
+              {/* You haven't received any applications! */}
+              You have received {totalReceived.length} applications!
+            </h2>
+          </div>
+        </Card>
+      </Container>
+    );
+  } else {
+    return (
+      <Container className={classes.container}>
+        <Card style={{ margin: "30px" }}>
+          <h2>Total Applications Received</h2>
+          <div className={classes.divide}>
+            <img src="images/icons/ClipBoardCheck.svg" alt="clipboard icon" />
+            <h2 className={classes.number}>
+              {/* You haven't received any applications! */}
+              You have received {totalReceived.length} applications!
+            </h2>
+          </div>
+          <div>
+            <ViewButton />
+          </div>
+        </Card>
+      </Container>
+    );
+  }
+  // };
 };
-// };
 
 export default TotalReceived;
