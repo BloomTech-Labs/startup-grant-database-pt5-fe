@@ -23,10 +23,7 @@ const Login = props => {
             // console.log('Token: ', idToken);
             const token = { idToken: idToken };
             axios
-              .post(
-                `${process.env.REACT_APP_API}/api/users/login`,
-                token
-              )
+              .post(`${process.env.REACT_APP_API}/api/users/login`, token)
               .then(res => {
                 //Succesful login
                 //SAVE USER ID TO LOCAL STORAGE
@@ -40,6 +37,7 @@ const Login = props => {
                 if (res.data.user_type === null) {
                   props.history.push('/welcome');
                 } else {
+                  localStorage.setItem('user_type', res.data.user_type);
                   props.history.push('/dashboard');
                 }
               })

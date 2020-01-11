@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
+import Moment from "react-moment";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -10,9 +10,13 @@ import {
   Divider,
   Button
 } from "@material-ui/core";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import axios from "axios";
-// import DropZone from "./DropZone";
+import DropZone from "./DropZone";
+
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -48,34 +52,36 @@ const AccountProfile = props => {
   const { className, files, ...rest } = props;
 
   const [values, setValues] = useState([]);
+  const [avartarURL, setavartarURL] = useState("");
 
   const id = localStorage.getItem("id");
 
   useEffect(() => {
-    // axios
-    //   .get("https://startup-grant-database-staging.herokuapp.com/api/users/1")
-    //   .then(res => {
-    //     console.log(res);
-    //     setValues(res.data);
-    //   })
-    //   .catch(err => {
-    //     console.error(err.message);
-    //   });
-
     const fetchAll = async () => {
       //Fetch
       const userResult = await axios(
         `${process.env.REACT_APP_API}/api/users/${id}`
       );
-      setValues(userResult.data.accountData);
+      let userdata = userResult.data.accountData;
+      setValues(userdata);
     };
+
+    const getAvatar = () => {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          let pic = user.photoURL;
+          // console.log('Avatar', user);
+          setavartarURL(pic);
+        } else {
+          console.log('Error setting profile pic', user);
+        }
+      });
+    };
+    getAvatar();
     fetchAll();
   }, []);
 
-  console.log("user", values);
-
   const classes = useStyles();
-
   // const user = {
   //   name: "Claire Sinozich",
   //   state: "Colorado",
@@ -97,7 +103,7 @@ const AccountProfile = props => {
           <div className={classes.details}>
             <div>
               <Typography gutterBottom variant="h2">
-                {values.first_name} {values.last_name}
+                {first.first_name} {first.last_name}
               </Typography>
               <Typography
                 className={classes.locationText}
@@ -110,21 +116,17 @@ const AccountProfile = props => {
                 <br />
                 {first.zip_code}
               </Typography>
-              <Typography
-                className={classes.dateText}
-                color="textSecondary"
-                variant="body1"
-              >
-                {moment().format("hh:mm A")}
-              </Typography>
             </div>
-            <Avatar className={classes.avatar} src={props.files} />
+
+            <AccountCircleIcon className={classes.avatar} />
           </div>
         </CardContent>
         <Divider />
         <CardActions className={classes.actions}>
-          <Button variant="text">Upload picture</Button>
-          <Button variant="text">Remove picture</Button>
+          {/* custom component to upload photos */}
+          <DropZone />
+          {/* <Button variant="text">Upload picture</Button> */}
+          {/* <Button variant="text">Remove picture</Button> */}
         </CardActions>
       </Card>
     );

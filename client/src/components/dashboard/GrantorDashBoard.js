@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import SideBar from "./SideBar";
-import Saved from "./Saved";
-import New from "./New";
-import TotalSubmitted from "./TotalSubmitted";
-import TotalAmountReceived from "./TotalAmountReceived";
+import GrantorSideBar from "./GrantorSideBar";
+import TotalAmountGiven from "./TotalAmountGiven";
+import TotalReceived from "./TotalReceived";
+import YourGrants from "./YourGrants";
+import ApplicationReceived from "./ApplicationReceived";
 import { makeStyles } from "@material-ui/core/styles";
 
 //Import firebase
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DashBoard = props => {
+const GrantorDashBoard = props => {
   //setting state for displaying username and loading
   const [currentUser, setCurrentUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -53,15 +53,15 @@ const DashBoard = props => {
       ) : (
         <div>
           <h1 className={classes.welcome}>Welcome {currentUser}!</h1>
-          <SideBar />
+          <GrantorSideBar />
           <div className={classes.boxes}>
             <div className={classes.sections}>
-              <TotalSubmitted />
-              <TotalAmountReceived />
+              <TotalReceived />
+              <TotalAmountGiven />
             </div>
             <div className={classes.sections}>
-              <Saved />
-              <New />
+              <YourGrants />
+              <ApplicationReceived />
             </div>
           </div>
         </div>
@@ -70,4 +70,4 @@ const DashBoard = props => {
   );
 };
 
-export default DashBoard;
+export default GrantorDashBoard;

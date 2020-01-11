@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Card, CardContent, Typography, Avatar } from "@material-ui/core";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import axios from "axios";
 
@@ -14,10 +15,8 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none"
   },
   avatar: {
-    width: "110px",
-    display: "flex",
-    justifyContent: "center",
-    paddingBottom: "20px"
+    height: 100,
+    width: 100
   },
   image: {
     height: "80px",
@@ -36,21 +35,19 @@ const ProfileBox = props => {
   const id = localStorage.getItem("id");
 
   useEffect(() => {
-     axios
-     .get(
-        `${process.env.REACT_APP_API}/api/users/${id}`
-      )
+    axios
+      .get(`${process.env.REACT_APP_API}/api/users/${id}`)
       .then(res => {
-        console.log(res.data)
-        setValues(res.data.accountData)
+        console.log(res.data);
+        setValues(res.data.accountData);
       })
       .catch(err => {
-        console.log(err)
-      })
-  },[])
-      // setValues(userResult.data.accountData);
+        console.log(err);
+      });
+  }, []);
+  // setValues(userResult.data.accountData);
 
-  console.log(values)
+  console.log(values);
 
   const user = values[0];
 
@@ -68,7 +65,7 @@ const ProfileBox = props => {
     return (
       <Card className={classes.root}>
         <CardContent>
-          <div className={classes.avatar}></div>
+          <AccountCircleIcon className={classes.avatar} />
           <Typography className={classes.name}>
             {user.first_name} {user.last_name}
           </Typography>

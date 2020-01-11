@@ -24,6 +24,8 @@ const InitialSignupForm = props => {
       .put(`${process.env.REACT_APP_API}/api/users/${userId}`, values)
       .then(res => {
         console.log('Success!', res);
+        //set user type to local storage to redirect user to correct dashboard
+        localStorage.setItem('user_type', values.user_type);
       })
       .catch(err => {
         //Invalid token or connection issue

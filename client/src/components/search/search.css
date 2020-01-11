@@ -50,11 +50,21 @@
   margin-bottom: 30px;
 }
 
+.top {
+  display: flex;
+  justify-content: space-around;
+}
+
 .title {
   font-family: "Lato";
   font-size: 24px;
   text-align: left;
   margin-left: 25px;
+
+}
+
+.apply-button {
+
 }
 
 .description {

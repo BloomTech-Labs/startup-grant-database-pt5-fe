@@ -1,50 +1,94 @@
-import React, { Component } from "react";
-import { DropzoneDialog } from "material-ui-dropzone";
-import Button from "@material-ui/core/Button";
+import React, { useState } from 'react';
+import { DropzoneDialog } from 'material-ui-dropzone';
+import { CircularProgress } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+const firebase = require('firebase/app');
+require('firebase/storage');
 
-export default class DropZone extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      files: []
-    };
-  }
+const DropZone = props => {
+  //state hooks
+  const [isOpen, setIsOpen] = useState(false);
+  const [files, setFiles] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  handleClose() {
-    this.setState({
-      open: false
-    });
-  }
+  const handleSave = data => {
+    //Get file
+    let file = data[0];
 
-  handleSave(files) {
-    //Saving files to state for further use and closing Modal.
-    this.setState({
-      files: files,
-      open: false
-    });
-  }
+    // Get current username
+    var user = firebase.auth().currentUser;
 
-  handleOpen() {
-    this.setState({
-      open: true
-    });
-  }
+    //close modal
+    setIsOpen(false);
 
-  render() {
-    return (
-      <div>
-        <Button onClick={this.handleOpen.bind(this)}>Upload Picture</Button>
-        <DropzoneDialog
-          open={this.state.open}
-          onSave={this.handleSave.bind(this)}
-          acceptedFiles={["image/jpeg", "image/png"]}
-          showPreviews={true}
-          maxFileSize={5000000}
-          onClose={this.handleClose.bind(this)}
-          file={this.state.files}
-        />
-      </div>
+    //Saving files to state for modal purposes
+    setFiles(file);
+
+    // 1. Create storage reference
+    // Create a Storage Ref w/ username
+    var storageRef = firebase
+      .storage()
+      .ref(user + '/profilePicture/' + file.name);
+
+    //2.Upload file to firebase
+    var task = storageRef.put(file);
+
+    //3.Update progress bar
+    task.on(
+      'state_changed',
+      function progress(snapshot) {
+        //loading
+        setIsLoading(true);
+        //create percentage to set progress bar
+        var percentage =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgress(percentage);
+      },
+      function erro(error) {
+        setIsLoading(false);
+        console.log(error);
+      },
+
+      function() {
+        setIsLoading(false);
+        // Upload completed successfully, now we can get the download URL
+        task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+          //update user profile picture
+          user
+            .updateProfile({
+              photoURL: downloadURL
+            })
+            .then(function() {
+              console.log('User Profile Pic updated');
+              window.location.reload();
+            })
+            .catch(function(error) {
+              console.log('Error while updating user profile pic', error);
+            });
+        });
+      }
     );
-  }
-}
+  };
+
+  return (
+    <div>
+      {isLoading ? (
+        <CircularProgress variant="static" value={progress} />
+      ) : (
+        <Button onClick={() => setIsOpen(true)}>Upload Picture</Button>
+      )}
+      <DropzoneDialog
+        open={isOpen}
+        onSave={handleSave}
+        acceptedFiles={['image/jpeg', 'image/png']}
+        showPreviews={true}
+        maxFileSize={5000000}
+        onClose={() => setIsOpen(false)}
+        file={files}
+      />
+    </div>
+  );
+};
+
+export default DropZone;

@@ -8,9 +8,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import SettingsIcon from "@material-ui/icons/Settings";
+import FolderSpecialIcon from "@material-ui/icons/FolderSpecial";
 import ProfileBox from "./ProfileBox";
-import ApplicationsMain from "./Applications-Main";
-import PostAddIcon from "@material-ui/icons/PostAdd";
 
 const drawerWidth = 240;
 
@@ -39,13 +38,13 @@ const useStyles = makeStyles(theme => ({
 const pages = [
   {
     title: "Dashboard",
-    href: "/dashboard",
+    href: "/grantordashboard",
     icon: <DashboardIcon />
   },
   {
-    title: "Applications",
-    href: "/applications",
-    icon: <PostAddIcon />
+    title: "Grants",
+    href: "/grants",
+    icon: <FolderSpecialIcon />
   },
   {
     title: "Settings",
