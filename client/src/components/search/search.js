@@ -150,9 +150,9 @@ var grantResults =[]
         <AlertDialog handleClose={handleClose} open={open} />
         {grants.map((items, i) => {
           return (
-            <Link key={i} style={{ textDecoration: 'none', color: '#000000'}} to={`/search/${items.id}`}>
+            //<Link key={i} style={{ textDecoration: 'none', color: '#000000'}} to={`/search/${items.id}`}>
               <ResultCard  resultcard={items} onClick={'something'}/>
-            </Link>
+            //</Link>
           );
         })}
       </div>
