@@ -44,6 +44,8 @@ const PlayArea = () => {
       <Route path="/Choose_Tags" component={Choose_Tags} />
       <Route path="/category-tags" component={CategoryTags} />
 
+      {/* <Route path="/applications" component={GrantsMain} /> */}
+
       {/* PROTECTED ROUTES */}
 
       <PrivateRoute path="/settings" component={Settings} />

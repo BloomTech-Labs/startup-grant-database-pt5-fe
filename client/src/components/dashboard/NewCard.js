@@ -9,7 +9,7 @@ const NewCard = props => {
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <div style={{ display: "flex" }}>
           <p>
-            Due : <Moment format="YYYY/MM/DD">{props.grant.due_date}</Moment>
+            {/* Due : <Moment format="YYYY/MM/DD">{props.grant.due_date}</Moment> */}
           </p>
         </div>
         <div style={{ display: "flex" }}>

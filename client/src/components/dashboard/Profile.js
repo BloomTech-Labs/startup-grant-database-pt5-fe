@@ -73,7 +73,7 @@ const AccountProfile = props => {
           // console.log('Avatar', user);
           setavartarURL(pic);
         } else {
-          console.log('Error setting profile pic', user);
+          console.log("Error setting profile pic", user);
         }
       });
     };
