@@ -10,18 +10,11 @@ let ApplyForm = props => {
     props.history.push("/search");
   }
 
-  const stringUser_id = localStorage.getItem("id");
-  const user_id = parseInt(stringUser_id);
-
   return (
     <div className="applyFormContainer">
       <div className="applyFormBackground">
         <ApplyFormBackground>
-          <ApplyFormTextFields
-            grant_id={grant_id}
-            user_id={user_id}
-            // grant_title={props.grant_title}
-          />
+          <ApplyFormTextFields grant_id={grant_id} />
         </ApplyFormBackground>
       </div>
     </div>
