@@ -17,6 +17,8 @@ import EditGrantForm from "../../grant-forms/EditGrantForm";
 import ApplicationsMain from "../../dashboard/Applications-Main";
 import GrantorDashBoard from "../../dashboard/GrantorDashBoard";
 import GrantsMain from "../../dashboard/Grants-Main";
+import GrantCats from '../../grant-forms/GrantCats';
+import GrantElis from '../../grant-forms/GrantElis';
 
 const PlayArea = () => {
   return (
@@ -54,6 +56,8 @@ const PlayArea = () => {
       <PrivateRoute path="/grantordashboard" component={GrantorDashBoard} />
       <PrivateRoute path="/applications" component={ApplicationsMain} />
       <PrivateRoute path="/grants" component={GrantsMain} />
+      <PrivateRoute path ='/grant-elis' component={GrantElis} />
+      <PrivateRoute path ='/grant-cats' component={GrantCats} />
 
       {/* //TODO: Testing route to update grants */}
       <PrivateRoute path="/edit-grant/:id" component={EditGrantForm} />

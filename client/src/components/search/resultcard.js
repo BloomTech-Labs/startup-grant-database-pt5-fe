@@ -1,17 +1,18 @@
 import React from "react";
 import ApplyButton from "../search/apply/applyButton";
 import "./search.css";
+import Moment from "react-moment";
+
 
 const ResultCard = props => {
   console.log(props);
-  const dueDate = props.resultcard.due_date.slice(0, 10);
   return (
     <div className="card-holder">
         <h3 className="title">{props.resultcard.grant_title}</h3>
       <p className="description">{props.resultcard.grant_description}</p>
       <div className="due-amount">
         <label className="due-label">Due:</label>
-        <p className="due">{dueDate}</p>
+        <p><Moment format="MM/DD/YYYY">{props.resultcard.due_date }</Moment></p>
         <label className="amount-label">Amount:</label>
         <p className="amount">${props.resultcard.grant_amount}</p>
       </div>
