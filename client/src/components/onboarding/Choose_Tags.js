@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Paper, makeStyles, CircularProgress, Button } from '@material-ui/core';
-import SingleTag from '../onboarding/SingleTag';
-import '../onboarding/onboarding.css';
+import React, { useState, useEffect } from "react";
+import { Paper, makeStyles, CircularProgress, Button } from "@material-ui/core";
+import SingleTag from "../onboarding/SingleTag";
+import "../onboarding/onboarding.css";
 
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 //Styles
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
     padding: theme.spacing(0.5)
   },
   chip: {
@@ -26,6 +26,7 @@ const Choose_Tags = props => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Use Effect to load initial data for the tags
+
   useEffect(() => {
     const fetchAll = async () => {
       //Fetch Categories
@@ -34,13 +35,14 @@ const Choose_Tags = props => {
       );
       //Prevent user from continue onboarding if DB is not returning tags
       // console.log('Array', companyTags.count == undefined);
-      if (categoryResult.data.count == undefined) {
+      if (categoryResult.data === undefined) {
         setIsLoading(true);
-        props.history.push('/dashboard');
       } else {
         setCompanyTags(categoryResult.data);
         setIsLoading(false);
+        // props.history.push("/grantordashboard");
       }
+      console.log(categoryResult);
     };
     fetchAll();
   }, []);
@@ -50,7 +52,7 @@ const Choose_Tags = props => {
     setCompanyTags(founderTags =>
       founderTags.map(chip => {
         if (chip.id === chipToSelect) {
-          let style = chip.style === 'secondary' ? '' : 'secondary';
+          let style = chip.style === "secondary" ? "" : "secondary";
           return {
             ...chip,
             selected: !chip,
@@ -63,18 +65,18 @@ const Choose_Tags = props => {
   };
 
   const handleSubmit = () => {
-    const result = [...companyTags.filter(chip => chip.style === 'secondary')];
-    const userId = localStorage.getItem('id');
+    const result = [...companyTags.filter(chip => chip.style === "secondary")];
+    const userId = localStorage.getItem("id");
     result.map(selection => {
       const data = { user_id: userId, category_id: selection.id };
       axios
         .post(`${process.env.REACT_APP_API}/api/users/cat`, data)
         .then(res => {
-          console.log('Success!', res);
+          console.log("Success!", res);
         })
         .catch(err => {
           //Invalid token or connection issue
-          console.log('Error', err);
+          console.log("Error", err);
         });
     });
   };

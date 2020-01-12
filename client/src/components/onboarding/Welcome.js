@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Paper,
   Button,
@@ -7,10 +7,10 @@ import {
   InputLabel,
   Select,
   MenuItem
-} from '@material-ui/core';
-import '../onboarding/onboarding.css';
-import { useForm } from './useInput';
-import axios from 'axios';
+} from "@material-ui/core";
+import "../onboarding/onboarding.css";
+import { useForm } from "./useInput";
+import axios from "axios";
 
 const InitialSignupForm = props => {
   //Call back for form submit must be declare before the custom hook
@@ -18,33 +18,38 @@ const InitialSignupForm = props => {
     //Api call logic to send or use the form data being submited
     // console.log('Submit clicked!', values);
     //get user ID to pass in the URL
-    const userId = localStorage.getItem('id');
-    props.history.push('/Choose_Tags');
+    const userId = localStorage.getItem("id");
+
     axios
       .put(`${process.env.REACT_APP_API}/api/users/${userId}`, values)
       .then(res => {
-        console.log('Success!', res);
+        console.log("Success!", res);
         //set user type to local storage to redirect user to correct dashboard
-        localStorage.setItem('user_type', values.user_type);
+        localStorage.setItem("user_type", values.user_type);
+        if (values.user_type === "1") {
+          props.history.push("/grantordashboard");
+        } else {
+          props.history.push("/Choose_Tags");
+        }
       })
       .catch(err => {
         //Invalid token or connection issue
-        console.log('Error', err);
+        console.log("Error", err);
       });
   };
 
   //Custom hook
   const [values, handleChanges, handleSubmit] = useForm(
     {
-      user_type: '',
-      first_name: '',
-      last_name: '',
-      telephone: '',
-      department: '',
-      organization_name: '',
-      address_one: '',
-      address_two: '',
-      zip_code: ''
+      user_type: "",
+      first_name: "",
+      last_name: "",
+      telephone: "",
+      department: "",
+      organization_name: "",
+      address_one: "",
+      address_two: "",
+      zip_code: ""
     },
     submitCallBack
   );
