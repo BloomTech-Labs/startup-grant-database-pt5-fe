@@ -36,6 +36,7 @@ const InitialSignupForm = props => {
         //Invalid token or connection issue
         console.log("Error", err);
       });
+    console.log(values);
   };
 
   //Custom hook
