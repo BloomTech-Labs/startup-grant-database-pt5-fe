@@ -45,11 +45,13 @@ const TotalReceived = props => {
   const { className, ...rest } = props;
 
   const [totalReceived, setTotalReceived] = useState([]);
+  const userId = localStorage.getItem("id");
+  console.log(userId, "userId");
 
   useEffect(() => {
     axios
-      //hardcoding the number 2 so that people can see applications in the dashboard
-      .get(`${process.env.REACT_APP_API}/api/applications/12`)
+      // get applications received based on grantorID
+      .get(`${process.env.REACT_APP_API}/api/applications/${userId}`)
       .then(res => {
         console.log(res);
         setTotalReceived(res.data);
