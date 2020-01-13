@@ -51,7 +51,7 @@ const TotalReceived = props => {
   useEffect(() => {
     axios
       // get applications received based on grantorID
-      .get(`${process.env.REACT_APP_API}/api/applications/${userId}`)
+      .get(`${process.env.REACT_APP_API}/api/applications/grantor/${userId}`)
       .then(res => {
         console.log(res);
         setTotalReceived(res.data);

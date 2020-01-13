@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
-import './Grantify.png';
-import './topbar.css';
+import "./Grantify.png";
+import "./topbar.css";
 
-const firebase = require('firebase/app');
-require('firebase/auth');
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 const TopBar = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -26,7 +26,7 @@ const TopBar = () => {
         <a href="/">
           <img
             alt="Where startups find grants"
-            src={require('./Grantify.png')}
+            src={require("./Grantify.png")}
           />
         </a>
       </div>
@@ -47,12 +47,12 @@ const TopBar = () => {
                 .signOut()
                 .then(function() {
                   // Sign-out successful.
-                  console.log('Successful Loged out!');
+                  console.log("Successful Loged out!");
                   setIsLogin(false);
                 })
                 .catch(error => {
                   // An error happened.
-                  console.log('There was an issue while signing out!', error);
+                  console.log("There was an issue while signing out!", error);
                 });
             }}
             to="/login"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Container, Card } from "@material-ui/core";
+import axios from "axios";
 
 //import axios from 'axios';
 
@@ -27,21 +28,19 @@ const TotalSubmitted = props => {
   //Add logic/endpoints
   const [grantTotal, setGrantTotal] = useState([]);
 
-  //axios call
+  const userId = localStorage.getItem("id");
 
-  //fix endpoint and setGrantTotal
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_API}/api/grants/`)
-  //     .then(res => {
-  //       console.log(res);
-  //       setGrantTotal(res.data);
-  //     })
-  //     .catch(err => {
-  //       console.error(err.message);
-  //     })
-  // }, [])
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API}/api/applications/recipient/${userId}`)
+      .then(res => {
+        console.log(res);
+        setGrantTotal(res.data);
+      })
+      .catch(err => {
+        console.error(err.message);
+      });
+  }, []);
 
   const classes = useStyles();
 
@@ -55,7 +54,7 @@ const TotalSubmitted = props => {
         <div className={classes.divide}>
           <img src="images/icons/ClipBoardCheck.svg" alt="clipboard icon" />
           <h2 className={classes.number}>
-            You haven't submitted any applications!
+            You have submitted {grantTotal.length} applications!
           </h2>
         </div>
       </Card>

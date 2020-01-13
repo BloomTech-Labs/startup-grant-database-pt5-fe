@@ -27,10 +27,11 @@ const ApplicationsMain = props => {
   const [applications, setApplications] = useState([]);
 
   //fix endpoint and setApplications
+  const userId = localStorage.getItem("id");
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/api/applications/:id`)
+      .get(`${process.env.REACT_APP_API}/api/applications/recipient/${userId}`)
       .then(res => {
         console.log(res);
         setApplications(res.data);
