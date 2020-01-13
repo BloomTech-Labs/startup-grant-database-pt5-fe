@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { firebase } from '../helpers/index';
+import React, { useEffect, useState } from "react";
+import { firebase } from "../helpers/index";
 //importing axios for http request to api
-import axios from 'axios';
+import axios from "axios";
 //Requiring only the packages
-const firebaseUser = require('firebase/app');
-require('firebase/auth');
+const firebaseUser = require("firebase/app");
+require("firebase/auth");
 
 //TODO:
 // 1.IF user completed the on-boarding fields then redirect to dashboard
@@ -29,22 +29,22 @@ const Login = props => {
                 //SAVE USER ID TO LOCAL STORAGE
                 const id = res.data.id;
                 // console.log(‘User ID’, id);
-                localStorage.setItem('id', id);
+                localStorage.setItem("id", id);
                 // SAVE TOKEN TO LOCAL STORAGE FOR PRIVATE ROUTE
 
-                localStorage.setItem('authorization', idToken);
+                localStorage.setItem("authorization", idToken);
                 // console.log('User Data Test: ', res.data);
                 if (res.data.user_type === null) {
-                  props.history.push('/welcome');
+                  props.history.push("/welcome");
                 } else {
-                  localStorage.setItem('user_type', res.data.user_type);
-                  props.history.push('/dashboard');
+                  localStorage.setItem("user_type", res.data.user_type);
+                  props.history.push("/dashboard");
                 }
               })
               .catch(err => {
                 //Invalid token or connection issue
                 console.log(
-                  'Cannot connect to server or local server not running '
+                  "Cannot connect to server or local server not running "
                 );
                 //If our server cannot be reach sign out user from firebase side
                 setRequestError(500);
@@ -53,12 +53,12 @@ const Login = props => {
           })
           .catch(function(error) {
             // Handle error
-            console.log('Firebase login error', error);
+            console.log("Firebase login error", error);
             setRequestError(401);
           });
       } else {
         //User is currently logged out.
-        console.log('You are currently logged out');
+        console.log("You are currently logged out");
         //Clear local storage after sign out
         localStorage.clear();
       }

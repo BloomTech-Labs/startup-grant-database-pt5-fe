@@ -25,7 +25,7 @@ const GrantsMain = props => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/api/applications/${userId}`)
+      .get(`${process.env.REACT_APP_API}/api/applications/grantor/${userId}`)
       .then(res => {
         setGrants(res.data);
       })
