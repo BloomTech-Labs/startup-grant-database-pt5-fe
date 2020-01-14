@@ -43,9 +43,9 @@ const PlayArea = () => {
         )}
       />
 
-      <Route path="/welcome" component={InitialSignupForm} />
-      <Route path="/Choose_Tags" component={Choose_Tags} />
-      <Route path="/category-tags" component={CategoryTags} />
+      <PrivateRoute path="/welcome" component={InitialSignupForm} />
+      <PrivateRoute path="/Choose_Tags" component={Choose_Tags} />
+      <PrivateRoute path="/category-tags" component={CategoryTags} />
 
       {/* <Route path="/applications" component={GrantsMain} /> */}
 

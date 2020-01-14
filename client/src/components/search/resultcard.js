@@ -8,7 +8,7 @@ const ResultCard = props => {
   console.log(props);
   return (
     <div className="card-holder">
-        <h3 className="title">{props.resultcard.grant_title}</h3>
+      <h3 className="title">{props.resultcard.grant_title}</h3>
       <p className="description">{props.resultcard.grant_description}</p>
       <div className="due-amount">
         <label className="due-label">Due:</label>
@@ -42,7 +42,7 @@ const ResultCard = props => {
         </div>
       </div>
       <div className="apply-button">
-          <ApplyButton grant_id={props.resultcard.id} />
+        <ApplyButton grant_id={props.resultcard.id} />
       </div>
     </div>
   );

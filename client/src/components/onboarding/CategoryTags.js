@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Paper, makeStyles, CircularProgress, Button } from '@material-ui/core';
-import SingleTag from '../onboarding/SingleTag';
-import '../onboarding/onboarding.css';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Paper, makeStyles, CircularProgress, Button } from "@material-ui/core";
+import SingleTag from "../onboarding/SingleTag";
+import "../onboarding/onboarding.css";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
     padding: theme.spacing(0.5)
   },
   chip: {
@@ -33,9 +33,9 @@ const CategoryTags = props => {
 
       //Prevent user from continue onboarding if DB is not returning tags
       // console.log('Array', companyTags.count == undefined);
-      if (elegibilityResult.data.count == undefined) {
+      if (elegibilityResult.data === undefined) {
         setIsLoading(true);
-        props.history.push('/dashboard');
+        props.history.push("/dashboard");
       } else {
         setElegibilityTags(elegibilityResult.data);
         setIsLoading(false);
@@ -48,7 +48,7 @@ const CategoryTags = props => {
     setElegibilityTags(companyTags =>
       elegibilityTags.map(chip => {
         if (chip.id === chipToSelect) {
-          let style = chip.style === 'secondary' ? '' : 'secondary';
+          let style = chip.style === "secondary" ? "" : "secondary";
           return {
             ...chip,
             selected: !chip,
@@ -63,21 +63,21 @@ const CategoryTags = props => {
   const handleSubmit = props => {
     setIsSubmited(true);
     const result = [
-      ...elegibilityTags.filter(chip => chip.style === 'secondary')
+      ...elegibilityTags.filter(chip => chip.style === "secondary")
     ];
-    const userId = localStorage.getItem('id');
+    const userId = localStorage.getItem("id");
     result.map(selection => {
       const data = { user_id: userId, eligibility_id: selection.id };
       axios
         .post(`${process.env.REACT_APP_API}/api/users/eli`, data)
         .then(res => {
-          console.log('Success!', res);
+          console.log("Success!", res);
           setIsSubmited(false);
-          props.history.push('/dashboard');
+          props.history.push("/dashboard");
         })
         .catch(err => {
           //Invalid token or connection issue
-          console.log('Error', err);
+          console.log("Error", err);
         });
     });
   };
