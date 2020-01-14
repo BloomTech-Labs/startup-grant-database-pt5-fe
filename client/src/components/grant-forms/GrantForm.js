@@ -27,7 +27,7 @@ const GrantForm = props => {
       .post(`${process.env.REACT_APP_API}/api/grants`, form)
       .then(res => {
         console.log(res);
-        props.history.push('grant-cats')
+        props.history.push('grant-states')
         localStorage.setItem('grant_id', res.data[0].id)
       })
       .catch(err => {
