@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Paper, Button, Input } from '@material-ui/core';
 import axios from 'axios';
 
-const GrantForm = () => {
+const GrantForm = props => {
   const id = localStorage.getItem('id');
 
   const [form, setForm] = useState({
@@ -13,7 +13,8 @@ const GrantForm = () => {
     grant_description: '',
     grant_amount: null,
     grant_type: '',
-    created_at: new Date()
+    created_at: new Date(),
+    due_date:null
   });
 
   const handleChange = name => event => {
@@ -26,6 +27,8 @@ const GrantForm = () => {
       .post(`${process.env.REACT_APP_API}/api/grants`, form)
       .then(res => {
         console.log(res);
+        props.history.push('grant-states')
+        localStorage.setItem('grant_id', res.data[0].id)
       })
       .catch(err => {
         console.log(err);
@@ -63,6 +66,15 @@ const GrantForm = () => {
             value={form.grant_type}
             onChange={handleChange('grant_type')}
             className="input-field"
+          />
+          <p>due date</p>
+          <Input 
+          id="date"
+          label="due date"
+          type='date'
+          value={form.due_date}
+          onChange={handleChange("due_date")}
+          className="input-field"
           />
 
           <Button
