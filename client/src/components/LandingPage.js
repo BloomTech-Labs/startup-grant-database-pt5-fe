@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   // pageContainer: {
   //   [theme.breakpoints.down("md")]: {
   //     backgroundColor: "black"
@@ -11,39 +11,45 @@ const useStyles = makeStyles(theme => ({
   // },
   anyContainer: {
     marginBottom: "3%",
-    justifyContent: "center"
+    justifyContent: "center",
+    border: "3",
+    borderColor: "red",
   },
   banner: {
     display: "flex",
     flexFlow: "row no wrap",
     justifyContent: "center",
-    margin: "auto",
-    width: "51%",
-    maxHeight: "200px",
+    margin: "3rem auto",
+    width: "48%",
+    maxHeight: "258px",
+    padding: "1.5%",
+    borderRadius: 16,
+    backgroundColor: "white",
     [theme.breakpoints.down("md")]: {
       width: "75%",
-      justifyContent: "space evenly"
-    }
+      justifyContent: "space evenly",
+    },
   },
   bannerImg: {
     width: "20%",
-    height: "inherit"
+    height: "222px",
   },
   img: {
-    // cannot use 'inherit' value for some reason. 100% of the parent div resolves
-    // the height issue
-    height: "100%"
+    width: "150%",
+    height: "100%",
   },
   bannerText: {
     width: "80%",
+    display: "flex",
+    flexDirection: "column",
     height: "inherit",
-    marginBottom: "3%"
+    paddingRight: "8rem",
   },
   cardsContainer: {
     display: "flex",
     flexFlow: "row wrap",
     width: "100%",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   card: {
     width: "51%",
@@ -52,29 +58,33 @@ const useStyles = makeStyles(theme => ({
     boxSizing: "border-box",
     padding: "1.5%",
     backgroundColor: "white",
+    borderRadius: 16,
     [theme.breakpoints.down("md")]: {
-      width: "70%"
-    }
+      width: "70%",
+    },
   },
   cardDetails: {
-    padding: "3.5%"
+    padding: "3.5%",
   },
   subtitle: {
-    width: "100%"
+    width: "100%",
   },
   stepsContainer: {
     width: "51%",
     display: "flex",
     flexFlow: "row wrap",
     justifyContent: "space between",
-    margin: "auto",
-    backgroundColor: "white"
+    margin: "70px auto",
+    borderRadius: 16,
+    backgroundColor: "white",
   },
   stepsImgContainer: {
     display: "flex",
     flexFlow: "row wrap",
     width: "35%",
-    height: "inherit"
+    height: "inherit",
+    margin: "41px auto",
+    paddingBottom: "11px",
   },
   stepsImg: {
     height: "100%",
@@ -82,38 +92,55 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("md")]: {},
     [theme.breakpoints.down("sm")]: {
       // backgroundColor: "black"
-      display: "none"
-    }
+      display: "none",
+    },
   },
   listSteps: {
-    display: "flex",
-    flexFlow: "row wrap",
-    width: "64%"
-    // justifyContent: "center"
+    paddingLeft: "6%",
   },
   step: {
-    width: "100%"
+    width: "92%",
   },
   signupLink: {
     textDecoration: "none",
-    textDecorationLine: "underline",
-    padding: "1.5% 2.5% 1.5% 2.5%",
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    border: 0,
+    borderRadius: 3,
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     color: "white",
-    backgroundColor: "#00A8A8"
+    height: 48,
+    padding: "22px 73px",
+    marginBottom: "20px",
   },
-  searchLinkContainer: {
-    display: "flex",
-    flexFlow: "column wrap",
-    justifyContent: "center",
+
+  button: {
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     textDecoration: "none",
-    backgroundColor: "#f0fdfd"
-  },
-  searchLink: {
-    backgroundColor: "#00A8A8",
+    marginLeft: "27%",
+    width: "35%",
+    border: 0,
+    borderRadius: 3,
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     color: "white",
-    textDecorationLine: "underline",
-    padding: "8%"
-  }
+    height: 48,
+    padding: "18px 22px",
+    marginBottom: "5%",
+  },
+  // searchLinkContainer: {
+  //   display: "flex",
+  //   flexFlow: "column wrap",
+  //   justifyContent: "center",
+  //   textDecoration: "none",
+  //   // backgroundColor: "#f0fdfd",
+  //   backgroundColor: "red",
+  // },
+  // searchLink: {
+  //   // backgroundColor: "#00A8A8",
+  //   backgroundColor: "green",
+  //   color: "white",
+  //   textDecorationLine: "underline",
+  //   padding: "8%",
+  // },
 }));
 
 const LandingPage = () => {
@@ -132,64 +159,63 @@ const LandingPage = () => {
         </Box>
         {/* IMAGE ABOVE */}
         <Box className={classes.bannerText}>
-          <h2>Welcome to Grantlify!</h2>
-          <p>We know how hard it is to get help for your startup.</p>
-          <p>We're here to help.</p>
+          <h1>Welcome to Grantlify!</h1>
+          <h3>We know how hard it is to get help for your startup.</h3>
+          <h3>We're here to help.</h3>
+          <Link to="/search" className={classes.button}>
+            Start Searching
+          </Link>
         </Box>
-
-        <Link to="/search" className={classes.searchLinkContainer}>
-          <div className={classes.searchLink}>Start Searching</div>
-        </Link>
       </Box>
 
       <Box className={classes.cardsContainer && classes.anyContainer}>
         <Box className={classes.card}>
-          <h3>Our Goal</h3>
-          <p>
+          <h1>Our Goal</h1>
+          <h3>
             Hundreds and thousands of dollars worth of unused grant money is
             thrown away annually. Our Goal is to take all of the grants that are
             somehow overlooked and put them in one central location... for you.
-          </p>
+          </h3>
         </Box>
         <div>
           <Box className={classes.stepsContainer}>
-            <h3 className={classes.subtitle}>How It Works</h3>
+            <h1 className={classes.subtitle}>How It Works</h1>
 
-            <Box className={classes.stepsImgContainer}>
+            {/* <Box className={classes.stepsImgContainer}>
               <img
                 alt="steps"
                 src="/images/logo/grantlifySteps.png"
                 className={classes.stepsImg}
               />
-            </Box>
+            </Box> */}
 
             <Box className={classes.listSteps}>
               <Box className={classes.step}>
-                <p>Create your account</p>
+                <h2>1. Create your account</h2>
               </Box>
               <Box className={classes.step}>
-                <p>
-                  Complete short survey about your startup company and its
+                <h2>
+                  2. Complete short survey about your startup company and its
                   founders
-                </p>
+                </h2>
               </Box>
               <Box className={classes.step}>
-                <p>
-                  Receive personalized recommendations and apply infinitely to
-                  grants
-                </p>
+                <h2>
+                  3. Receive personalized recommendations and apply infinitely
+                  to grants
+                </h2>
               </Box>
               <Box className={classes.step}>
-                <p>Get funded!</p>
+                <h2>4. Get funded!</h2>
               </Box>
             </Box>
           </Box>
         </div>
-      </Box>
-      <Box name="sign-up">
-        <Link to="/welcome" className={classes.signupLink}>
-          Sign Up!
-        </Link>
+        <Box>
+          <Link to="/welcome" className={classes.signupLink}>
+            Sign Up!
+          </Link>
+        </Box>
       </Box>
     </div>
   );
